@@ -5,20 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Science Roadmap Index</title>
     <style>
+        /* Base styles */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
             color: #333;
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 80px 20px 20px 20px; /* Top padding leaves room for fixed navbar */
             background-color: #f9f9f9;
         }
+        
+        /* Navigation Bar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #fff;
+            padding: 12px 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 0.95rem;
+        }
+        .navbar-links a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        /* Content Styles */
         h1 {
             color: #24292e;
             border-bottom: 2px solid #eaecef;
             padding-bottom: 10px;
             text-align: center;
+            margin-top: 10px;
         }
         .module-card {
             background: #fff;
@@ -43,16 +82,29 @@
         li {
             margin: 8px 0;
         }
-        a {
+        .module-card a {
             color: #0366d6;
             text-decoration: none;
         }
-        a:hover {
+        .module-card a:hover {
             text-decoration: underline;
         }
     </style>
 </head>
 <body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="#">DSRoadmap</a>
+            <div class="navbar-links">
+                <a href="#">Home Index</a>
+                <!-- Link to the raw markdown file rendered on GitHub or target your repository homepage -->
+                <a href="https://github.com/gitmystuff/DSRoadmap/blob/main/README.md" target="_blank">README.md</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
 
     <h1>Data Science Roadmap</h1>
 
