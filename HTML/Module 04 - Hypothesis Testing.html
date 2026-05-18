@@ -1,1 +1,262 @@
-<p>The document &quot;Module 04 Hypothesis Testing.ipynb - Colab.pdf&quot; provides a comprehensive overview of hypothesis testing, a fundamental concept in inferential statistics. It covers a wide range of topics, from the historical development of statistical thinking to the practical application of various hypothesis tests.</p><p>Here's a detailed outline and summary of the key elements and terms:</p><ol><li><strong>Bernoulli's Fallacy<br /></strong><ul><li>Highlights the distinction between sampling probabilities (aleatory probabilities) and inferential probabilities (epistemic probabilities).</li><li>Emphasizes the importance of considering background information and assumptions in probabilistic inference.</li><li>Discusses the historical context of statistics and its use in political agendas, including eugenics.</li></ul></li><li><strong>Historical Figures and Concepts<br /></strong><ul><li><strong>Jacob Bernoulli (1655-1705)</strong>: Introduced the Law of Large Numbers and used urn drawing examples to illustrate probability concepts.</li><li><strong>John Arbuthnot (1667-1735)</strong>: Investigated the sex ratio at birth and argued for divine providence based on observed patterns.</li><li><strong>Abraham de Moivre (1667-1754)</strong>: Developed the Doctrine of Chances, contributed to the Central Limit Theorem, and introduced the normal distribution.</li><li><strong>Thomas Bayes (1702-1761)</strong>: Developed Bayes' theorem, a fundamental concept for conditional probability and updating beliefs based on new evidence.</li><li><strong>Pierre-Simon Laplace (1749-1827)</strong>: Promoted Bayes' theorem, contributed to celestial mechanics, and proved the Central Limit Theorem.</li><li><strong>Carl Friedrich Gauss (1777-1855)</strong>: Contributed to astronomy and developed the Gaussian (Normal) Distribution.</li><li><strong>Adolph Quetelet (1796-1874)</strong>: Introduced the concept of the &quot;Average Man&quot; and applied statistical methods to social sciences.</li><li><strong>Francis Galton (1822-1911)</strong>: Developed concepts of regression and correlation, and his work influenced the field of eugenics.</li><li><strong>Karl Pearson (1857-1936)</strong>: Developed Pearson's Correlation Coefficient (r) and contributed to the concept of the p-value.</li><li><strong>Ronald Fisher (1890-1962)</strong>: Formalized the p-value concept and contributed to statistical methods in various fields.</li></ul></li><li><strong>Hypothesis Testing<br /></strong><ul><li><strong>Null Hypothesis</strong>: The hypothesis that there is no significant difference between two groups or no effect of a treatment.</li><li><strong>Alternative Hypothesis</strong>: The hypothesis that contradicts the null hypothesis, suggesting a significant difference or effect.</li><li><strong>Confidence Intervals</strong>: A range of values within which the true population parameter is likely to fall with a certain level of confidence.</li><li><strong>P-value</strong>: The probability of obtaining results as extreme as the observed results, assuming the null hypothesis is true.</li><li><strong>Type I Error</strong>: Rejecting the null hypothesis when it is actually true (false positive).</li><li><strong>Type II Error</strong>: Failing to reject the null hypothesis when it is actually false (false negative).</li><li><strong>Test Statistic</strong>: A numerical value calculated from sample data that is used to test a hypothesis.</li><li><strong>Critical Value</strong>: A value that separates the rejection region from the non-rejection region in a hypothesis test.</li><li><strong>t-Test</strong>: A statistical test used to compare the means of two groups.</li><li><strong>ANOVA (Analysis of Variance)</strong>: A statistical test used to compare the means of three or more groups.</li></ul></li></ol><p>The document also includes various examples and code snippets to illustrate these concepts and their applications in data analysis and decision-making.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 04 - Hypothesis Testing</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #ffffff;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Core Typography Styles (GitHub Markdown Flavor) */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        ul, ol {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-top: 0.4em;
+            margin-bottom: 0.4em;
+        }
+        code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        }
+
+        /* Timeline / History Callout */
+        .history-card {
+            background-color: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        .history-meta {
+            font-size: 0.85rem;
+            color: #586069;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .history-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #24292e;
+            margin-bottom: 4px;
+        }
+        
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            color: #586069;
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../modules.html">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <a href="../modules.html" class="back-link">← Back to Modules Directory</a>
+
+    <!-- Main Content -->
+    <h1>Module 04 - Hypothesis Testing</h1>
+    <p class="intro-text">This study reference outlines the fundamental framework of inferential hypothesis testing. It tracks the discipline from its classical epistemological origins and historical figures to the explicit parametric calculations utilized to evaluate structural variance limits within empirical datasets.</p>
+
+    <h2>1. Epistemological Foundations &amp; Fallacies</h2>
+    <ul>
+        <li><strong>Bernoulli's Fallacy:</strong> Highlights the critical conceptual divide separating absolute physical sampling probabilities (aleatory probabilities) from cognitive, inferential belief distributions (epistemic probabilities). It emphasizes that sound probabilistic inference requires assessing baseline background context and structural assumptions rather than treating numbers as un-modeled standalone items.</li>
+        <li><strong>Socio-Political Context:</strong> Traces the historical implementation of early data aggregation and statistics, noting its usage within past socio-political movements, historical data collection frameworks, and the development of early tracking models like eugenics.</li>
+    </ul>
+
+    <h2>2. Historical Chronicle &amp; Intellectual Figures</h2>
+    <p>The mathematical architectures supporting modern data science pipelines evolved through an interconnected lineage of researchers:</p>
+
+    <!-- Jacob Bernoulli -->
+    <div class="history-card">
+        <div class="history-meta">1655 – 1705</div>
+        <div class="history-name">Jacob Bernoulli</div>
+        <p>Introduced the foundational Law of Large Numbers (LLN) and formulated axiomatic probability boundaries utilizing systematic combinatorial urn sampling mental models.</p>
+    </div>
+
+    <!-- John Arbuthnot -->
+    <div class="history-card">
+        <div class="history-meta">1667 – 1735</div>
+        <div class="history-name">John Arbuthnot</div>
+        <p>Executed some of the earliest structural statistical validation work by investigating human birth sex ratios, leveraging repeating biological patterns to make philosophical claims regarding divine providence.</p>
+    </div>
+
+    <!-- Abraham de Moivre -->
+    <div class="history-card">
+        <div class="history-meta">1667 – 1754</div>
+        <div class="history-name">Abraham de Moivre</div>
+        <p>Authored <em>The Doctrine of Chances</em>, pioneered foundational logic underlying the Central Limit Theorem (CLT), and mathematically formalized early properties of the normal distribution.</p>
+    </div>
+
+    <!-- Thomas Bayes -->
+    <div class="history-card">
+        <div class="history-meta">1702 – 1761</div>
+        <div class="history-name">Thomas Bayes</div>
+        <p>Developed the core mathematical mechanics of conditional inversion, giving rise to Bayes' Theorem as a framework for dynamically updating initial system probabilities when fresh data is captured.</p>
+    </div>
+
+    <!-- Pierre-Simon Laplace -->
+    <div class="history-card">
+        <div class="history-meta">1749 – 1827</div>
+        <div class="history-name">Pierre-Simon Laplace</div>
+        <p>Extensively expanded and promoted early Bayesian probability calculus, applied mathematical modeling to celestial mechanics, and provided the first rigorous proof of the Central Limit Theorem.</p>
+    </div>
+
+    <!-- Carl Friedrich Gauss -->
+    <div class="history-card">
+        <div class="history-meta">1777 – 1855</div>
+        <div class="history-name">Carl Friedrich Gauss</div>
+        <p>Advanced astronomical calculation metrics and mathematically refined the Gaussian (Normal) Distribution curve to handle observational measurement errors.</p>
+    </div>
+
+    <!-- Adolph Quetelet -->
+    <div class="history-card">
+        <div class="history-meta">1796 – 1874</div>
+        <div class="history-name">Adolph Quetelet</div>
+        <p>Introduced the sociology concept of the "Average Man" (<em>l'homme moyen</em>), becoming a pioneer in adapting formal statistical error distributions to measure macro trends inside social sciences.</p>
+    </div>
+
+    <!-- Francis Galton -->
+    <div class="history-card">
+        <div class="history-meta">1822 – 1911</div>
+        <div class="history-name">Francis Galton</div>
+        <p>Formulated the core geometric mechanics of statistical regression to the mean and general correlation, though his exploratory works heavily intersected with early eugenics movements.</p>
+    </div>
+
+    <!-- Karl Pearson -->
+    <div class="history-card">
+        <div class="history-meta">1857 – 1936</div>
+        <div class="history-name">Karl Pearson</div>
+        <p>Established the mathematical engine for the parametric product-moment Correlation Coefficient (<code>r</code>), built early frameworks for goodness-of-fit distributions, and formulated early concepts of p-value metrics.</p>
+    </div>
+
+    <!-- Ronald Fisher -->
+    <div class="history-card">
+        <div class="history-meta">1890 – 1962</div>
+        <div class="history-name">Ronald Fisher</div>
+        <p>Formalized the operational implementation of p-values, variance testing architectures (ANOVA), and maximum likelihood estimation routines within modern experimental design.</p>
+    </div>
+
+    <h2>3. Structural Inference &amp; Hypothesis Testing</h2>
+    <p>Modern inferential testing utilizes specific parameters to separate valid signal vectors from random ambient noise:</p>
+    
+    <ul>
+        <li><strong>Null Hypothesis (H₀):</strong> The baseline assumption stating that zero significant variation or treatment effect exists between targeted groups or parameters.</li>
+        <li><strong>Alternative Hypothesis (H₁):</strong> The contrasting statement asserting that a real statistical deviation, change, or treatment effect is actively present within the data.</li>
+        <li><strong>Confidence Intervals:</strong> An estimated range calculated from sample data that is highly likely to contain the true population parameter boundary at a pre-specified confidence percentage.</li>
+        <li><strong>P-value:</strong> The mathematical probability of obtaining an experimental test statistic score at least as extreme as the one empirically observed, assuming the null hypothesis is completely true.</li>
+        <li><strong>Type I Error (False Positive):</strong> Accidentally rejecting a true null hypothesis when no real effect exists. Controlled explicitly by setting the alpha threshold.</li>
+        <li><strong>Type II Error (False Negative):</strong> Erroneously failing to reject a false null hypothesis when a genuine treatment effect is present. Quantified via the beta boundary.</li>
+        <li><strong>Test Statistic:</strong> A standardized numerical value derived from an empirical sample matrix (such as a z-score or t-score) used to evaluate data against reference distributions.</li>
+        <li><strong>Critical Value:</strong> The precise geographical boundary line separating the distribution's rejection region from its non-rejection zone based on alpha limits.</li>
+        <li><strong>t-Test:</strong> An inferential routine comparing the mean scores of two distinct cohorts or paired vectors under sample constraints.</li>
+        <li><strong>ANOVA (Analysis of Variance):</strong> An omnibus statistical routine used to verify if significant variations exist across the mean parameters of three or more distinct population groups simultaneously.</li>
+    </ul>
+
+</body>
+</html>
