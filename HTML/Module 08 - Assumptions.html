@@ -1,1 +1,223 @@
-<p><strong>Linear Regression Assumptions</strong></p><p>The assumptions for linear regression are:</p><ul><li>There is a linear relationship between the dependent variable and the independent variable(s).</li><li>The residuals are normally distributed.</li><li>The variance of the residuals is constant over all values of the independent variable(s) (homoscedasticity).</li><li>The residuals are independent.</li></ul><p>These assumptions are important because they ensure that the results of the regression analysis are valid. If the assumptions are not met, the results of the analysis may be misleading.</p><p><strong>Logistic Regression Assumptions</strong></p><p>Assumptions for Binary Logistic Regression</p><ul><li>Binary Outcome: The dependent variable should be binary (i.e., having only two possible outcomes).</li><li>Linearity of Independent Variables and Log Odds: There should be a linear relationship between the independent variables and the log odds of the dependent variable.</li><li>No Multicollinearity: The independent variables should not be highly correlated with each other.</li><li>Large Sample Size: Logistic regression generally requires a larger sample size compared to linear regression for reliable results.</li><li>Independence of Observations: The observations in the dataset should be independent of each other.</li></ul><p>It's important to note that logistic regression is more robust to violations of some of these assumptions compared to linear regression. However, checking for and addressing potential violations can improve the accuracy and reliability of your results.</p><p><strong>Terms</strong></p><p><strong>General Linear Model</strong></p><ul><li>A statistical model that assumes a linear relationship between the dependent variable and one or more independent variables.<br /></li><li>The basic form is y=β0​+β1​X+e where:<br /><ul><li>y is the dependent variable.</li><li>X is the independent variable.</li><li>β0​ is the intercept.</li><li>β1​ is the slope.</li><li>e is the error term or residual.</li></ul></li></ul><p><strong>Residuals</strong></p><ul><li>The differences between the actual and predicted values of the dependent variable in a regression model.</li></ul><p><strong>Normally Distributed</strong></p><ul><li>A probability distribution that is symmetric and bell-shaped.</li></ul><p><strong>Homoscedasticity</strong></p><ul><li>The variance of the residuals is constant across all levels of the independent variable.</li></ul><p><strong>Independent</strong></p><ul><li>The residuals are not correlated with each other.</li></ul><p><strong>Skewed</strong></p><ul><li>A distribution that is not symmetric.</li></ul><p><strong>Linearity</strong></p><ul><li>A linear relationship between the dependent and independent variables.</li></ul><p><strong>Multi-Collinearity</strong></p><ul><li>Independent variables in a regression model are highly correlated with each other.</li></ul><p><strong>Hypothesis Testing</strong></p><ul><li>A statistical method used to determine whether there is enough evidence to support a claim about a population parameter.</li></ul><p><strong>Correlation</strong></p><ul><li>A statistical measure that describes the strength and direction of the linear relationship between two variables.</li></ul><p><strong>Python</strong></p><ul><li>A high-level, interpreted, general-purpose programming language.</li></ul><p><strong>Pandas</strong></p><ul><li>A Python library used for data manipulation and analysis.</li></ul><p><strong>Seaborn</strong></p><ul><li>A Python library used for data visualization.</li></ul><p><strong>Scikit-learn (sklearn)</strong></p><ul><li>A Python library used for machine learning.</li></ul><p><strong>Train-test Split</strong></p><ul><li>A technique used to split a dataset into training and testing sets.</li></ul><p><strong>Quantiles</strong></p><ul><li>Values that divide a distribution into equal-sized groups.</li></ul><p><strong>Theoretical Quantiles</strong></p><ul><li>Quantiles that are calculated from a theoretical distribution.</li></ul><p><strong>Sample Quantiles</strong></p><ul><li>Quantiles that are calculated from a sample of data.</li></ul><p><strong>Effective Rank</strong></p><ul><li>The number of independent variables in a regression model that are actually contributing to the prediction of the dependent variable.</li></ul><p><strong>Pairplot</strong></p><ul><li>A Seaborn function that creates a grid of scatterplots showing the relationship between all pairs of variables in a dataset. </li></ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 08 - Parametric Model Assumptions Diagnostics</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #ffffff;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Core Typography Styles (GitHub Markdown Flavor) */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        ul {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-top: 0.4em;
+            margin-bottom: 0.4em;
+        }
+        code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        }
+        
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Callout Block Formatting */
+        .assumption-box {
+            background-color: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 18px;
+            margin-bottom: 24px;
+        }
+        .assumption-box h3 {
+            margin-top: 0;
+            color: #24292e;
+            border-bottom: 1px solid #e1e4e8;
+            padding-bottom: 6px;
+        }
+        .equation-text {
+            font-family: SFMono-Regular, Consolas, monospace;
+            background-color: #e1e4e8;
+            padding: 8px 12px;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 8px 0;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../modules.html">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <a href="../modules.html" class="back-link">← Back to Modules Directory</a>
+
+    <!-- Main Content -->
+    <h1>Module 08 - Model Assumptions Diagnostics</h1>
+    <p>This reference guide outlines the structural mathematical assumptions underpinning ordinary least squares (OLS) linear regression and binary logistic regression frameworks. Validating these parameters via statistical diagnostics ensures that regression coefficients remain unbiased, consistent, and interpretable.</p>
+
+    <h2>1. Modeling Frameworks &amp; Core Assumptions</h2>
+
+    <!-- Linear Regression Box -->
+    <div class="assumption-box">
+        <h3>Ordinary Least Squares (OLS) Linear Regression Assumptions</h3>
+        <p>To ensure that the calculated coefficients are the Best Linear Unbiased Estimators (BLUE), a linear regression pipeline demands verification of the following boundary conditions:</p>
+        <ul>
+            <li><strong>Linearity:</strong> A structural linear relationship must link the dependent target variable to the individual independent predictor variables.</li>
+            <li><strong>Normality of Residuals:</strong> The calculation error terms (residuals) must adhere to a symmetrical normal distribution profile.</li>
+            <li><strong>Homoscedasticity:</strong> The variance of the error terms must remain uniform and constant across all predictor feature values.</li>
+            <li><strong>Independence of Errors:</strong> The residuals must be completely independent observations containing no auto-correlation or shared structural patterns.</li>
+        </ul>
+        <p style="margin-bottom: 0; font-style: italic; color: #586069;">Violations across these criteria skew standard errors, inflate uncertainty bounds, and lead to invalid or misleading hypothesis test inferences.</p>
+    </div>
+
+    <!-- Logistic Regression Box -->
+    <div class="assumption-box">
+        <h3>Binary Logistic Regression Assumptions</h3>
+        <p>While robust against homoscedasticity or target normality violations, maximum likelihood logistic models require specific design bounds:</p>
+        <ul>
+            <li><strong>Binary Outcome Structure:</strong> The dependent target feature must be classified strictly as a binary attribute (exactly two possible categorical state outcomes).</li>
+            <li><strong>Linearity of Log Odds:</strong> A linear mathematical relationship must exist between the independent input features and the calculated log odds of the target event.</li>
+            <li><strong>Absence of Multicollinearity:</strong> Predictor features cannot exhibit high cross-correlation metrics against each other.</li>
+            <li><strong>Independence of Observations:</strong> Every observational row instance inside the training matrix must track completely independently of other entries.</li>
+            <li><strong>Large Sample Size Margins:</strong> Requires a significantly larger sample volume compared to standard linear regression to ensure maximum likelihood optimization stability.</li>
+        </ul>
+    </div>
+
+    <h2>2. Statistical Property Glossary</h2>
+    <ul>
+        <li><strong>General Linear Model:</strong> A baseline statistical framework assuming a linear combination tracks input variables to a continuous target, represented algebraically as:
+            <br>
+            <div class="equation-text">y = b0 + b1*X + e</div>
+            <ul>
+                <li><code>y</code>: The continuous dependent target variable.</li>
+                <li><code>X</code>: The independent predictor input variable matrix.</li>
+                <li><code>b0</code>: The constant intercept coordinate.</li>
+                <li><code>b1</code>: The calculated linear coefficient slope.</li>
+                <li><code>e</code>: The unexplained residual error term.</li>
+            </ul>
+        </li>
+        <li><strong>Residuals:</strong> The calculated directional distance differences mapping actual observed empirical target values against values predicted by the model estimation engine.</li>
+        <li><strong>Homoscedasticity:</strong> The uniform distribution property where the variance of model residuals remains completely stable across all levels of the independent feature space.</li>
+        <li><strong>Independence:</strong> The absolute absence of joint tracking or structural correlation among individual calculated residual terms.</li>
+        <li><strong>Multicollinearity:</strong> A problematic data condition where independent input features capture overlapping systemic variation, rendering individual parameter weight extractions highly unstable.</li>
+        <li><strong>Effective Rank:</strong> The count of mathematically independent input attributes within a regression framework that actively contribute true informational value to target estimation.</li>
+        <li><strong>Hypothesis Testing:</strong> An inferential statistical technique applied to determine if empirical sample patterns contain sufficient mathematical evidence to reject a baseline null claim regarding a population parameter.</li>
+        <li><strong>Correlation:</strong> A standardized, linear bounding index mapping the structural tracking alignment and directional connection between two variables.</li>
+    </ul>
+
+    <h2>3. Programmatic &amp; Visual Diagnostic Diagnostics</h2>
+    <p>Verifying mathematical boundaries within Python pipelines utilizes standard computational packages:</p>
+    <ul>
+        <li><strong>Python Stack Foundations:</strong> Utilizing high-level, general-purpose interpreted syntax coupled with specialized packages including <code>pandas</code> for tabular matrix cleaning, <code>seaborn</code> for distribution plotting, and <code>scikit-learn</code> (<code>sklearn</code>) for pipeline modeling and validation mechanics.</li>
+        <li><strong>Train-Test Split:</strong> An evaluation technique dividing primary source data into separate optimization training matrices and validation test blocks to evaluate true generalized capability.</li>
+        <li><strong>Distribution Quantiles:</strong> Metric division values cutting a continuous distribution into equal-sized tracking percentiles. Diagnostic steps compare empirical <strong>Sample Quantiles</strong> directly against <strong>Theoretical Quantiles</strong> derived from idealized shapes (e.g., via QQ plots) to verify normality.</li>
+        <li><strong>Pairplot:</strong> A specialized <code>seaborn</code> matrix visualization technique generating a grid layout of multi-variant scatterplots to parse cross-correlations and linearity anomalies across the complete attribute list.</li>
+    </ul>
+
+</body>
+</html>
