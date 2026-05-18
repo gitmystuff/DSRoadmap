@@ -1,1 +1,245 @@
-<p>Module 13 - Statsmodels Time Series Complete</p><ol><li><strong>Time Series Data</strong>: This refers to data that is collected and organized in chronological order, typically over a period of time. This type of data is common in finance (stock prices, economic indicators), environmental monitoring (temperature, pollution levels), and various other fields.<br /></li><li><strong>Pandas</strong>: This is a popular Python library specifically designed for working with and analyzing data. It provides data structures like DataFrames that are highly efficient for manipulating and exploring time series data.<br /></li><li><strong>Statsmodels</strong>: Statsmodels is a Python module that provides classes and functions for the estimation of many different statistical models, as well as for conducting statistical tests, and statistical data exploration.<sup>1<br /></sup></li><li><strong>Autoregression</strong>: The nutshell - Uses observations from previous time steps as input to a regression equation to predict the value at the next time step. Autoregression<sup>2</sup> is a time series modeling technique that predicts future values based on past values of the same series. It's like saying, &quot;knowing what happened in the past can help us understand what might happen in the future.&quot;<br /></li><li><strong>Lagged Value</strong>: A lagged value is simply a previous value in the series.<br /></li><li><strong>Order of Autoregression (p)</strong>: The number of lagged values used in the model. For example, an autoregressive model of order 2 uses the two previous values to predict the current value.<br /></li><li><strong>Coefficient</strong>: Each lagged value is multiplied by a coefficient that determines its influence on the prediction. These coefficients are estimated from the data.<br /></li><li><strong>Error Term</strong>: The model also includes an error term to account for random fluctuations and unpredictable factors.<br /></li><li><strong>ETS</strong>: ETS decomposition is a time series analysis method that decomposes a time series into its error, trend, and seasonality components. It is used to understand the underlying patterns and dynamics of a time series and can be helpful for forecasting and anomaly detection.<br /></li><li><strong>Additive Models</strong>: Used when trend is linear and/or seasonal variations are constant.<br /></li><li><strong>Multiplicative</strong>: Used when the trend is non-linear (exponential) and/or seasonality varies proportionally to the level of the series.<br /></li><li><strong>Moving Average</strong>: The moving average is a simple but powerful technique used to smooth out fluctuations in time series data and highlight underlying trends. It works by calculating the average of a specified number of consecutive data points, creating a new series of averages.<br /></li><li><strong>EWMA</strong>: EWMA stands for Exponentially Weighted Moving Average. It's a way to smooth out data by giving more weight to recent observations and less weight to older observations. This makes it particularly useful for analyzing time series data where the most recent data points are often the most relevant.<br /></li><li><strong>Holt-Winters</strong>: EWMA has just one smoothing factor and doesn't account for trend, seasonality, etc. HW offers three smoothing factors for level, trend, and season and can adjust for divisions per cycle (L). Offers Single, Double (Holt and Trend), and Triple (Holt-Winters and Seasonality) Exponential Smoothing.<br /></li><li><strong>Stationary Time Series</strong>: A stationary time series is one whose statistical properties, such as mean, variance, and autocorrelation, remain constant<sup>3</sup> over time. This means that the data looks roughly the same no matter what period you examine.<br /></li><li><strong>ACF</strong>: ACF stands for Autocorrelation Function. It's a tool used in time series analysis to measure the correlation between a time series and lagged versions of itself. In simpler terms, it helps you understand how a data point at a particular time is related to data points that came before it.<br /></li><li><strong>PACF</strong>: PACF stands for Partial Autocorrelation Function. It's another important tool in time series analysis, and it's closely related to the ACF (Autocorrelation Function). However, there's a key difference: it measures the correlation between a time series and its lagged versions after removing the effect of intermediate lags.<br /></li><li><strong>ARIMA</strong>: ARIMA stands for Autoregressive Integrated Moving Average. It's a powerful statistical model used for analyzing and forecasting time series data. The AR part of the model uses past values to predict future values. The I part deals with making the time series stationary. The MA part of the model uses past forecast errors to predict future values.<br /></li><li><strong>SARIMAX</strong>: SARIMA (Seasonal ARIMA) is an extension of ARIMA that explicitly includes seasonal components. SARIMAX (Seasonal ARIMA with exogenous regressors) is an extension of SARIMA that allows you to include external variables (exogenous variables) in your model.<br /></li><li><strong>Forecasting</strong>: Predicting future values based on historical trends.<br /></li></ol>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 13 - Statsmodels Parametric Time Series</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #ffffff;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Core Typography Styles (GitHub Markdown Flavor) */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        ul {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-top: 0.4em;
+            margin-bottom: 0.4em;
+        }
+        code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        }
+        
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Framework Component Blocks */
+        .component-card {
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .component-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #0366d6;
+            margin-bottom: 6px;
+            border-bottom: 1px solid #f1f1f1;
+            padding-bottom: 4px;
+        }
+        .formula-display {
+            font-family: SFMono-Regular, Consolas, monospace;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 6px 0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../modules.html">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <a href="../modules.html" class="back-link">← Back to Modules Directory</a>
+
+    <!-- Main Content -->
+    <h1>Module 13 - Statsmodels Time Series Complete</h1>
+    <p class="intro-text">This study reference outlines advanced econometric modeling frameworks using Python's <code>statsmodels</code> ecosystem. It details stationarity validation metrics, exponential smoothing pipelines, and the mathematical implementation of parametric forecasting models.</p>
+
+    <h2>1. Stochastic Properties &amp; Diagnostic Correlation Tools</h2>
+    <ul>
+        <li><strong>Time Series Data:</strong> Chronological information tracked sequentially over time, critical across macro-finance and signal arrays.</li>
+        <li><strong>Pandas &amp; Statsmodels:</strong> <code>pandas</code> optimizes data structure vector frames, while <code>statsmodels</code> provides the statistical estimation algorithms, hypothesis tests, and exploratory modules.</li>
+        <li><strong>Stationary Time Series:</strong> A foundational data requirement where structural statistical properties—including the rolling mean, variance, and cross-lagged autocorrelation fields—remain entirely constant over time. Stationary profiles look identical regardless of the timeline segment examined.</li>
+        <li><strong>ACF (Autocorrelation Function):</strong> Measures the total linear correlation connecting an active time series directly to its own historical lagged intervals, mapping recurring cyclical behaviors.</li>
+        <li><strong>PACF (Partial Autocorrelation Function):</strong> Computes the specific correlation between a timeline point and an isolated historical lag segment after mathematically stripping away the confounding correlation effects introduced by all intermediate lags.</li>
+    </ul>
+
+    <h2>2. Classical Smoothing &amp; Multi-Factor Exponential Filtering</h2>
+    <p>Dampening volatile high-frequency random fluctuations to expose persistent structural behaviors utilizes progressive weighting matrices:</p>
+
+    <!-- Moving Average -->
+    <div class="component-card">
+        <div class="component-title">Simple Moving Average (SMA)</div>
+        <p>Smooths data paths by computing a uniform, unweighted arithmetic average across a specified window of consecutive chronological indices.</p>
+    </div>
+
+    <!-- EWMA -->
+    <div class="component-card">
+        <div class="component-title">Exponentially Weighted Moving Average (EWMA)</div>
+        <p>An adaptive smoothing framework that applies exponentially decaying weights across coordinates, prioritizing fresh observations while dampening old entries. Constrained via a singular smoothing parameter (alpha).</p>
+    </div>
+
+    <!-- Holt-Winters -->
+    <div class="component-card">
+        <div class="component-title">Holt-Winters Exponential Smoothing</div>
+        <p>Extends basic EWMA limits by incorporating up to three independent smoothing parameters to separately calibrate complex structural behaviors:</p>
+        <ul>
+            <li><strong>Single Exponential Smoothing:</strong> Isolates the fundamental base dataset level.</li>
+            <li><strong>Double Exponential Smoothing (Holt's Linear Trend):</strong> Adjusts parameters to capture continuous directional **Trend** drift.</li>
+            <li><strong>Triple Exponential Smoothing (Holt-Winters):</strong> Incorporates a third coefficient to adjust for cyclical **Seasonality** variations alongside period divisions per cycle (L).</li>
+        </ul>
+    </div>
+
+    <h2>3. Structural Space Decomposition: The ETS Framework</h2>
+    <p>An <strong>ETS Decomposition</strong> divides an empirical timeline into its underlying functional sub-components: Error (E), Trend (T), and Seasonality (S). Decompositions are evaluated through two primary structural types:</p>
+    <ul>
+        <li><strong>Additive Models:</strong> Deployed when the general trend trajectory tracks linearly and seasonal variance oscillations remain roughly constant and fixed across the dataset history.
+            <br><span class="formula-display">Identity: Value = Trend + Seasonal + Error</span>
+        </li>
+        <li><strong>Multiplicative Models:</strong> Deployed when the baseline trend displays non-linear exponential dynamics and seasonal variations expand or compress proportionally relative to the overall vertical magnitude of the series.
+            <br><span class="formula-display">Identity: Value = Trend * Seasonal * Error</span>
+        </li>
+    </ul>
+
+    <h2>4. Parametric Modeling &amp; Forecasting Engines</h2>
+    <p>Predicting downstream values based on historical trends leverages generative parametric frameworks:</p>
+
+    <!-- Autoregression -->
+    <div class="component-card">
+        <div class="component-title">Autoregression (AR)</div>
+        <p>A modeling technique that projects future outcomes by executing a linear regression equation over a sequence of a model's own historical observations.</p>
+        <ul>
+            <li><strong>Lagged Value:</strong> A historical value recorded at a previous step in the active chronological series.</li>
+            <li><strong>Order of Autoregression (p):</strong> The specific count of lagged historical values integrated into the active model equation (e.g., an <code>AR(2)</code> model utilizes the immediate two prior step values).</li>
+            <li><strong>Coefficients:</strong> Trainable numerical multipliers estimated from the empirical data that weigh the predictive influence of individual lags.</li>
+            <li><strong>Error Term (White Noise):</strong> A structural parameter capturing random, unpredictable real-world fluctuations.</li>
+        </ul>
+    </div>
+
+    <!-- ARIMA / SARIMAX -->
+    <div class="component-card">
+        <div class="component-title">Integrated Generative Pipelines</div>
+        <ul>
+            <li><strong>ARIMA (Autoregressive Integrated Moving Average):</strong> A comprehensive forecasting model configured via three core parameters: <code>(p, d, q)</code>.
+                <ul>
+                    <li><code>AR (p)</code>: The autoregressive order tracking relationship to past lag values.</li>
+                    <li><code>I (d)</code>: The integration difference degree used to strip out trend drift and force raw data into stationarity.</li>
+                    <li><code>MA (q)</code>: The moving average order modeling correlation to historical prediction error terms.</li>
+                </ul>
+            </li>
+            <li><strong>SARIMAX (Seasonal ARIMA with Exogenous Regressors):</strong> An advanced expansion of the ARIMA engine. The <code>S</code> component explicitly introduces seasonal parameter coefficients, while the <code>X</code> token integrates entirely independent external variables (exogenous factors) to augment prediction accuracy.</li>
+            <li><strong>Forecasting:</strong> The algorithmic generation of estimated future coordinate bounds extending beyond the edge of historical observations.</li>
+        </ul>
+    </div>
+
+</body>
+</html>
