@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Science Roadmap - Modules Directory</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #f9f9f9;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Header Configurations */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #24292e;
+            text-align: center;
+        }
+        .directory-desc {
+            text-align: center;
+            color: #586069;
+            font-size: 1.1rem;
+            margin-bottom: 32px;
+        }
+
+        /* Module Card Grid System */
+        .module-card {
+            background: #ffffff;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            margin-bottom: 24px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .module-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .module-header {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: #24292e;
+            margin-top: 0;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #f1f1f1;
+            padding-bottom: 6px;
+        }
+        
+        /* Inner Document Directory Links */
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 0;
+        }
+        li {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        li::before {
+            content: "📄";
+            margin-right: 8px;
+            font-size: 0.95rem;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="index.html">Home Overview</a>
+                <a href="modules.html" style="color: #fff; font-weight: 600;">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Block -->
+    <h1>Interactive Curriculum Modules</h1>
+    <p class="directory-desc">Select an individual module notebook guide below to access interactive notes, formulas, and concepts.</p>
+
+    <!-- Module 01 -->
+    <div class="module-card">
+        <h2 class="module-header">Module 01 - Foundations &amp; History</h2>
+        <ul>
+            <li><a href="HTML/Module%2001%20-%20Introduction.html">Module 01 - Introduction &amp; Epistemology Overview</a></li>
+        </ul>
+    </div>
+
+    <!-- Module 02 -->
+    <div class="module-card">
+        <h2 class="module-header">Module 02 - Data Architectures &amp; Descriptive Statistics</h2>
+        <ul>
+            <li><a href="HTML/Module%2002%20-%20Data.html">Module 02 - Core Data Modeling &amp; Typologies</a></li>
+            <li><a href="HTML/Module%2002%20-%20Descriptive%20Statistics.html">Module 02 - Descriptive Statistics, Shapes, &amp; Moments</a></li>
+            <li><a href="HTML/Module%2002%20-%20Miscellaneous.html">Module 02 - Miscellaneous Cleaning &amp; Boxplot Mechanics</a></li>
+        </ul>
+    </div>
+
+    <!-- Module 03 -->
+    <div class="module-card">
+        <h2 class="module-header">Module 03 - Probability Space &amp; Distribution Optimization</h2>
+        <ul>
+            <li><a href="HTML/Module%2003%20-%20Distributions%20Fitter.html">Module 03 - Automated Distribution Fitting Implementation</a></li>
+            <li><a href="HTML/Module%2003%20-%20Distributions.html">Module 03 - Parametric Distributions Suite</a></li>
+            <li><a href="HTML/Module%2003%20-%20Probability.html">Module 03 - Core Probability Foundations &amp; Fallacies</a></li>
+            <li><a href="HTML/Module%2003%20-%20Probability%20Complete.html">Module 03 - Unified Probability &amp; Sampling Complete</a></li>
+        </ul>
+    </div>
+
+    <!-- Module 04 -->
+    <div class="module-card">
+        <h2 class="module-header">Module 04 - Inferential Analysis &amp; A/B Experimentation</h2>
+        <ul>
+            <li><a href="HTML/Module%2004%20-%20Effect%20Size%20and%20Statistical%20Power.html">Module 04 - Effect Size &amp; Power Analysis Foundations</a></li>
+            <li><a href="HTML/Module%2004%20-%20Hypothesis%20Testing.html">Module 04 - Inferential Hypothesis Testing Chronology</a></li>
+            <li><a href="HTML/Module%2004%20-%20Hypothesis%20and%20AB%20Testing.html">Module 04 - Modern Industrial A/B Testing Systems</a></li>
+            <li><a href="HTML/Module%2004%20-%20The%20Tests.html">Module 04 - Statistical Test Selection Engine Catalog</a></li>
+        </ul>
+    </div>
+
+    <!-- Module 05 -->
+    <div class="module-card">
+        <h2 class="module-header">Module 05 - Exploratory Analysis</h2>
+        <ul>
+            <li><a href="HTML/Module%2005%20-%20EDA.html">Module 05 - EDA (Exploratory Data Analysis)</a></li>
+        </ul>
+    </div>
+
+    <!-- Module 06 -->
+    <div class="module-card">
+        <h2 class="module-header">Module 06 - Domain Applications</h2>
+        <ul>
+            <li><a href="HTML/Module%2006%20-%20Astronomy%20and%20Statistics.html">Module 06 - Astronomy and Statistics Case Studies</a></li>
+            <li><a href="HTML/Module%2006%20-%20Terms.html">Module 06 - Domain Terminology Index</a></li>
+        </ul>
+    </div>
+
+    <!-- Module 08 -->
+    <div class="module-card">
+        <h2 class="module-header">Module 08 - Classical Parametric Modeling</h2>
+        <ul>
+            <li><a href="HTML/Module%2008%20-%20Assumptions.html">Module 08 - Parametric Model Assumptions Diagnostics</a></li>
+            <li><a href="HTML/Module%2008%20-%20Coefficients%20and%20Metrics.html">Module 08 - Model Coefficients &amp; Performance Evaluations</a></li>
+            <li><a href="HTML/Module%2008%20-%20Linear%20Regression.html">Module 08 - Ordinary Least Squares Linear Regression</a></li>
+            <li><a href="HTML/Module%2008%20-%20Logistic%20Regression.html">Module 08 - Binary Logistic Regression Classifiers</a></li>
+            <li><a href="HTML/Module%2008%20-%20R-Squared%2C%20R%2C%20r%2C%20TSS%2C%20ESS%2C%20and%20RSS.html">Module 08 - Sum of Squares Framework (TSS, ESS, RSS, R²)</a></li>
+            <li><a href="HTML/Module%2008%20-%20Some%20More%20Types%20of%20Regression.html">Module 08 - Advanced Alternative Regression Structuring</a></li>
+        </ul>
+    </div>
+
+    <!-- Module 09 -->
+    <div class="module-card">
+        <h2 class="module-header">Module 09 - Dimensionality Optimization</h2>
+        <ul>
+            <li><a href="HTML/Module%2009%20-%20Feature%20Selection.html">Module 09 - Algorithmic Feature Selection Strategies</a></li>
+        </ul>
+    </div>
+
+    <!-- Module 10 -->
+    <div class="module-card">
+        <h2 class="module-header">Module 10 - Generalized Linear Frameworks</h2>
+        <ul>
+            <li><a href="HTML/Module%2010%20-%20GLM%20vs%20OLS.html">Module 10 - GLM vs OLS Comparative Frameworks</a></li>
+            <li><a href="HTML/Module%2010%20-%20GLMs.html">Module 10 - Generalized Linear Models Architecture</a></li>
+            <li><a href="HTML/Module%2010%20-%20Link%20Functions.html">Module 10 - Mathematical Link Functions</a></li>
+            <li><a href="HTML/Module%2010%20-%20Logarithms.html">Module 10 - Logarithm Mathematical Transformation Rules</a></li>
+        </ul>
+    </div>
+
+    <!-- Module 11 -->
+    <div class="module-card">
+        <h2 class="module-header">Module 11 - Non-Linear Classification &amp; Evaluation</h2>
+        <ul>
+            <li><a href="HTML/Module%2011%20%20-%20Trees.html">Module 11 - Decision Trees &amp; Ensembles</a></li>
+            <li><a href="HTML/Module%2011%20-%20Bias%20Variance%20Tradeoff.html">Module 11 - Bias-Variance Tradeoff Optimization</a></li>
+            <li><a href="HTML/Module%2011%20-%20Confusion%20Matrix%20Binary.html">Module 11 - Binary Evaluation Confusion Matrix</a></li>
+            <li><a href="HTML/Module%2011%20-%20Confusion%20Matrix%20Multilabel.html">Module 11 - Multi-Label Classification Diagnostics</a></li>
+            <li><a href="HTML/Module%2011%20-%20Cross%20Validation.html">Module 11 - Resampling &amp; Cross Validation Workflows</a></li>
+            <li><a href="HTML/Module%2011%20-%20Precision%20Recall.html">Module 11 - Precision, Recall, &amp; F-Beta Spaces</a></li>
+        </ul>
+    </div>
+
+    <!-- Module 12 -->
+    <div class="module-card">
+        <h2 class="module-header">Module 12 - Deep Network Topologies</h2>
+        <ul>
+            <li><a href="HTML/Module%2012%20-%20ANN.html">Module 12 - Feedforward Network Topologies (ANN)</a></li>
+            <li><a href="HTML/Module%2012%20-%20Basic%20Artificial%20Neural%20Net%20(ANN).html">Module 12 - Deep Learning Architecture Essentials</a></li>
+            <li><a href="HTML/Module%2012%20-%20Gradient%20Descent%20and%20Backpropagation.html">Module 12 - Gradient Descent &amp; Backpropagation Engine</a></li>
+            <li><a href="HTML/Module%2012%20-%20PyTorch.html">Module 12 - PyTorch Modeling Implementations</a></li>
+        </ul>
+    </div>
+
+    <!-- Module 13 -->
+    <div class="module-card">
+        <h2 class="module-header">Module 13 - Sequential Analysis</h2>
+        <ul>
+            <li><a href="HTML/Module%2013%20-%20Pandas%20Time%20Series%20Complete.html">Module 13 - Time Series Wrangling with Pandas</a></li>
+            <li><a href="HTML/Module%2013%20-%20Statsmodels%20Time%20Series%20Complete.html">Module 13 - Parametric Forecasting with Statsmodels</a></li>
+        </ul>
+    </div>
+
+</body>
+</html>
