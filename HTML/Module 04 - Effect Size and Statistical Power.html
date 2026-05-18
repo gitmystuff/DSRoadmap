@@ -1,1 +1,222 @@
-<p>Let’s get this done. Here are the explanations and definitions for the terms and concepts presented in the provided document:</p><h2><a id="_t9l1y598v9wn"></a><strong>Definitions and Explanations of Terms and Concepts</strong></h2><h3><a id="_rfpnva3bkn64"></a><strong>Effect Size</strong></h3><p><strong>Definition:</strong> A quantitative measure of the magnitude of a phenomenon or relationship between variables.</p><p><strong>Explanation:</strong> Effect size helps researchers understand the practical significance of their findings, going beyond just statistical significance. It indicates how much difference or relationship exists between groups or variables. For example, Cohen's d is used to measure the standardized difference between two means, while Pearson's correlation coefficient measures the strength and direction of a linear relationship between two variables.</p><h3><a id="_tksnd0tzchdl"></a><strong>Statistical Power</strong></h3><p><strong>Definition:</strong> The probability that a statistical test will correctly reject a false null hypothesis.</p><p><strong>Explanation:</strong> In other words, it's the likelihood of detecting a real effect if one exists. A higher statistical power means a lower chance of making a Type II error (failing to reject a false null hypothesis). Power is influenced by factors like sample size, effect size, and significance level.</p><h3><a id="_ih3he3ha25e1"></a><strong>Cohen's d</strong></h3><p><strong>Definition:</strong> A measure of effect size that assesses the standardized difference between two means.</p><p><strong>Explanation:</strong> It tells us how many standard deviations apart two means are. A larger d value indicates a greater difference between the groups.</p><h3><a id="_k5sfu3or58z6"></a><strong>Odds Ratio</strong></h3><p><strong>Definition:</strong> A measure of association between an exposure and an outcome.</p><p><strong>Explanation:</strong> It represents the odds of an outcome occurring in an exposed group compared to the odds of the same outcome occurring in an unexposed group. An odds ratio of 1 indicates no association, while values greater than 1 suggest a positive association and values less than 1 suggest a negative association.</p><h3><a id="_olv369pxw4zs"></a><strong>Relative Risk Ratio</strong></h3><p><strong>Definition:</strong> The ratio of the probability of an event occurring in an exposed group to the probability of the event occurring in a non-exposed group.</p><p><strong>Explanation:</strong> It's used to assess the risk of an outcome in one group compared to another. A relative risk ratio of 1 means no difference in risk between groups. Values greater than 1 indicate increased risk in the exposed group, while values less than 1 indicate decreased risk.</p><h3><a id="_md6weoycyy"></a><strong>Pearson's Correlation</strong></h3><p><strong>Definition:</strong> A statistical measure that quantifies the linear relationship between two continuous variables.</p><p><strong>Explanation:</strong> It ranges from -1 to +1, where -1 indicates a perfect negative linear relationship, +1 indicates a perfect positive linear relationship, and 0 indicates no linear relationship. [cite: 4]</p><h3><a id="_to8anz5hnrl1"></a><strong>Type II Error</strong></h3><p><strong>Definition:</strong> The incorrect acceptance of a false null hypothesis.</p><p><strong>Explanation:</strong> It means failing to detect a real effect when one exists. The probability of a Type II error is denoted by the Greek letter beta (β).</p><h3><a id="_oq2iv7crazf1"></a><strong>Sample Size</strong></h3><p><strong>Definition:</strong> The number of observations or participants included in a study.</p><p><strong>Explanation:</strong> A larger sample size generally increases the power of a statistical test and improves the precision of estimates.</p><h3><a id="_pc0yzg30kxrz"></a><strong>Significance Level (Alpha)</strong></h3><p><strong>Definition:</strong> The probability of rejecting a true null hypothesis.</p><p><strong>Explanation:</strong> It's the threshold set by researchers to determine statistical significance. A commonly used alpha level is 0.05, meaning there's a 5% chance of rejecting the null hypothesis when it's actually true.</p><h3><a id="_i2a6oyy4pp4b"></a><strong>Power Analysis</strong></h3><p><strong>Definition:</strong> A statistical method used to determine the minimum sample size needed to detect a statistically significant difference or relationship.</p><p><strong>Explanation:</strong> It helps researchers design studies with adequate power to avoid Type II errors. Power analysis can also be used to calculate the power of a test given the sample size, effect size, and significance level.</p><h3><a id="_o9p0ntif882a"></a><strong>t-Test</strong></h3><p><strong>Definition:</strong> A statistical test used to compare the means of two groups.</p><p><strong>Explanation:</strong> It determines if there's a statistically significant difference between the means of two independent groups or between paired observations. </p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 04 - Effect Size and Statistical Power</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #ffffff;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Core Typography Styles (GitHub Markdown Flavor) */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        
+        /* Concept Card Styles */
+        .concept-card {
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .concept-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0366d6;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #f1f1f1;
+            padding-bottom: 4px;
+        }
+        .def-label {
+            font-weight: 600;
+            color: #24292e;
+        }
+        .exp-label {
+            font-weight: 600;
+            color: #586069;
+            margin-top: 6px;
+        }
+        
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../modules.html">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <a href="../modules.html" class="back-link">← Back to Modules Directory</a>
+
+    <!-- Main Content -->
+    <h1>Module 04 - Effect Size &amp; Statistical Power</h1>
+    <p>A comprehensive breakdown of structural experiment design metrics, mathematical effect sizing parameters, error threshold definitions, and statistical significance analysis parameters.</p>
+
+    <h2>Definitions and Explanations of Core Concepts</h2>
+
+    <!-- Effect Size -->
+    <div class="concept-card">
+        <div class="concept-name">Effect Size</div>
+        <p><span class="def-label">Definition:</span> A quantitative measure of the magnitude of an observed phenomenon or structural relationship between variables.</p>
+        <p><span class="exp-label">Explanation:</span> Effect size helps analytical models evaluate the practical significance of experimental findings, reaching far beyond binary p-value statistical significance thresholds. It mathematically demonstrates exactly how much difference or relationship exists between isolated populations. Common parameters include standardized mean differences or foundational correlation coefficients.</p>
+    </div>
+
+    <!-- Statistical Power -->
+    <div class="concept-card">
+        <div class="concept-name">Statistical Power</div>
+        <p><span class="def-label">Definition:</span> The literal mathematical probability that a chosen statistical test framework will correctly reject a false null hypothesis.</p>
+        <p><span class="exp-label">Explanation:</span> This defines your system's underlying likelihood of successfully detecting a genuine treatment effect if one actually exists within the data matrix. Maximizing statistical power directly suppresses the mathematical likelihood of committing a Type II error. Total test power is structurally driven by sample sizes, target effect metrics, and chosen alpha criteria.</p>
+    </div>
+
+    <!-- Cohen's d -->
+    <div class="concept-card">
+        <div class="concept-name">Cohen's d</div>
+        <p><span class="def-label">Definition:</span> An effect size metric designed specifically to quantify the standardized distance between two population means.</p>
+        <p><span class="exp-label">Explanation:</span> It expresses the literal distance between two group averages in units of standard deviation. An escalating d-value indicates a wider, more distinct separation between the compared sample layers.</p>
+    </div>
+
+    <!-- Odds Ratio -->
+    <div class="concept-card">
+        <div class="concept-name">Odds Ratio</div>
+        <p><span class="def-label">Definition:</span> A measure of association tracking the relative odds of a specific outcome materializing between an exposed group versus an unexposed group.</p>
+        <p><span class="exp-label">Explanation:</span> A value of 1 indicates no operational association or shift in odds between variables. Values scaling higher than 1 establish a positive structural association, while fractional outcomes lower than 1 isolate a negative association.</p>
+    </div>
+
+    <!-- Relative Risk Ratio -->
+    <div class="concept-card">
+        <div class="concept-name">Relative Risk Ratio</div>
+        <p><span class="def-label">Definition:</span> The strict ratio comparing the raw probability of an event manifesting in an exposed group relative to the probability of that event occurring in a completely non-exposed cohort.</p>
+        <p><span class="exp-label">Explanation:</span> This parameter provides an explicit baseline risk comparison. A relative risk ratio matching 1 proves there is zero directional variation in event risk between groups; scaling above or dropping below 1 isolates increased or decreased group risk respectively.</p>
+    </div>
+
+    <!-- Pearson's Correlation -->
+    <div class="concept-card">
+        <div class="concept-name">Pearson's Correlation (r)</div>
+        <p><span class="def-label">Definition:</span> A standardized, parametric statistical measure designed to quantify the exact strength and direction of a linear relationship between two continuous variables.</p>
+        <p><span class="exp-label">Explanation:</span> The metric strictly limits its boundary output on a standardized scale from -1 to +1. An absolute value of -1 dictates a perfect inverse linear path, +1 isolates a perfect positive linear path, and a score of 0 confirms an absolute absence of linear relationship properties.</p>
+    </div>
+
+    <!-- Type II Error -->
+    <div class="concept-card">
+        <div class="concept-name">Type II Error (Beta)</div>
+        <p><span class="def-label">Definition:</span> The incorrect statistical acceptance of an un-updated, false null hypothesis.</p>
+        <p><span class="exp-label">Explanation:</span> Occurs when an analytical routine completely fails to extract or surface an active, genuine effect that truly exists in the source matrix. The explicit probability bounding a Type II error is represented in equations via the Greek letter beta (β).</p>
+    </div>
+
+    <!-- Sample Size -->
+    <div class="concept-card">
+        <div class="concept-name">Sample Size (n)</div>
+        <p><span class="def-label">Definition:</span> The total volume of discrete observations, rows, or target participants captured inside an active research study or evaluation pipeline.</p>
+        <p><span class="exp-label">Explanation:</span> Expanding sample size limits uncertainty, increases overall statistical power, and optimizes the structural precision of parameter estimation routines.</p>
+    </div>
+
+    <!-- Significance Level -->
+    <div class="concept-card">
+        <div class="concept-name">Significance Level (Alpha)</div>
+        <p><span class="def-label">Definition:</span> The calculated mathematical probability of committing a Type I error by incorrectly rejecting an absolute, true null hypothesis.</p>
+        <p><span class="exp-label">Explanation:</span> The explicit probabilistic threshold selected to establish structural significance before kicking off evaluation procedures. A baseline setting of alpha = 0.05 enforces that there is a maximum 5% chance of accidentally identifying an effect that does not truly exist.</p>
+    </div>
+
+    <!-- Power Analysis -->
+    <div class="concept-card">
+        <div class="concept-name">Power Analysis</div>
+        <p><span class="def-label">Definition:</span> A proactive statistical framework applied to solve for the absolute minimum sample size required to isolate a targeted relationship magnitude reliably.</p>
+        <p><span class="exp-label">Explanation:</span> Prevents experimental failure by ensuring data pipelines capture enough raw observations to eliminate beta risks. It can also reverse-engineer existing architectures to calculate the exact power threshold achieved given an existing fixed sample size, effect target, and alpha limit.</p>
+    </div>
+
+    <!-- t-Test -->
+    <div class="concept-card">
+        <div class="concept-name">t-Test</div>
+        <p><span class="def-label">Definition:</span> A foundational, parametric hypothesis test routine used to assess whether the calculated means of two separate cohorts vary significantly.</p>
+        <p><span class="exp-label">Explanation:</span> Mathematically evaluates the variance vectors of continuous data distributions to confirm if observed shifts between independent groups or paired samples are driven by genuine patterns or mere random sampling chance.</p>
+    </div>
+
+</body>
+</html>
