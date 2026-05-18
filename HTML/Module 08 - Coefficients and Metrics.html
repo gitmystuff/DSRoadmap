@@ -1,1 +1,256 @@
-<p>A glossary of terms and concepts from the document you provided is presented below.</p><ul><li><strong>Mean Squared Error (MSE)<br /></strong><ul><li>A measure of the average squared difference between the predicted values and the actual values in a regression model.</li></ul></li><li><strong>R-squared<br /></strong><ul><li>The proportion of the variation in the dependent variable predictable from the independent variable(s). It's a statistical measure that indicates how well a regression model fits the data.</li></ul></li><li><strong>Adjusted R-squared<br /></strong><ul><li>A modified version of R-squared that adjusts for the number of predictors in a regression model. It's used to compare models with different numbers of predictors.</li></ul></li><li><strong>Least Squares<br /></strong><ul><li>A standard approach in regression analysis for approximating the solution of overdetermined systems by minimizing the sum of the squares of the residuals. It's used to find the line of best fit in linear regression.</li></ul></li><li><strong>Statsmodels<br /></strong><ul><li>A Python module that provides tools for estimating different statistical models, conducting statistical tests, and statistical data exploration. It's used for in-depth statistical analysis.</li></ul></li><li><strong>Ordinary Least Squares (OLS)<br /></strong><ul><li>A type of linear least squares method for estimating the unknown parameters in a linear regression model. It's a common method for fitting linear regression models.</li></ul></li><li><strong>Sklearn Linear Regression Model<br /></strong><ul><li>A machine learning library that provides tools for building and training linear regression models. It's used for creating linear regression models in Python.</li></ul></li><li><strong>Standard Error of the Estimate<br /></strong><ul><li>The average distance that the observed values fall from the regression line. It's a measure of the accuracy of the regression model.</li></ul></li></ul><p>OLS Regression Results Explanation</p><p>Endog(enous): Similar to the dependent variable</p><p>Exog(enous): Similar to the independent variable</p><p>https://www.statisticshowto.com/endogenous-variable/</p><p>https://medium.com/swlh/interpreting-linear-regression-through-statsmodels-summary-4796d359035a</p><p>Model Info</p><ul><li>Dep. Varialble: the response variable, dependent, outcome, etc.</li><li>Model: what model are we using (ordinary least squares) for the training</li><li>Method: how the parameters (coefficients) were calculated</li><li>No. Observations: the number of observations, rows... (n)</li><li>DF Residuals: degrees of freedom of the residuals</li><li>DF Model: number of parameters in the model excluding the constant if present</li><li>Covariance Type: deals with violations of assumptions</li></ul><p>Goodness of Fit</p><ul><li>R-Squared: coefficient of determination, how well the regression fits the data</li><li>Adj R-Squared: R-squared adjustment based on number of parameters and df residuals</li><li>F statistic: a measure of how significant the fit is</li><li>Prop F statistic: the probability that you would get the F stat given the null hypothesis</li><li>Log-Liklihood: can be used to compare the fit of different coefficients, the higher value is better</li><li>AIC: Akaike Information Criterion is used to compare models, a lower score is better (doesn't address features, just the overall model)</li><li>BIC: Bayesian Information Criterion is similar to AIC but uses a higher penalty</li></ul><p>Coefficients</p><ul><li>coef: the estimated value of the coefficient</li><li>std error: the basic standard error of the estimate of the coefficient</li><li>t: the t-statistic value, how significant the coefficient is</li><li>P&gt;|t|: the p-value, indicates a statistically significant relationship to the dependent variable if less than the confidence level, usually 0.05</li><li>95% confidence interval: the lower and upper values</li></ul><p>Statistical Tests</p><ul><li>Skewness: A measure of the symmetry of the data about the mean</li><li>Kurtosis: A measure of the shape of the data</li><li>Omnibus: D'Angostino's test provides a combined test for the presence of skewness and kurtosis</li><li>Prob(Omnibus): probability of Omnibus</li><li>Jarque-Bera: Another test for skewness and kurtosis</li><li>Prob(Jarque-Bera): probability of Jarque-Bera</li><li>Durbin-Watson: A test for the presence of autocorrelation, if the errors aren't independent</li><li>Cond No: A test for multicollinearity</li></ul><p><strong>Understanding the Basics</strong></p><ul><li><strong>Coefficients:</strong> These are the 'weights' assigned to each feature variable (x1, x2, etc.) in your model. They determine the strength and direction of the relationship between a feature and the outcome.</li><li><strong>Standard Error:</strong> This measures the accuracy of your coefficient estimates. A smaller standard error means your coefficient estimate is likely more precise.</li><li><strong>t-statistic:</strong> This value helps determine the significance of your coefficients. It's calculated by dividing the coefficient by its standard error. A larger absolute t-value suggests the feature is a more significant predictor.</li><li><strong>p-value:</strong> This indicates the probability of observing the given t-value if there were no real relationship between the feature and the outcome. A small p-value (typically &lt; 0.05) suggests that the feature is statistically significant in predicting the outcome.</li><li><strong>Confidence Intervals:</strong> These provide a range within which the true population coefficient is likely to fall (with a certain level of confidence, e.g., 95%).<br /></li></ul><p><strong>How They Contribute to Predicting 'y'</strong></p><p>In a linear regression model, the outcome 'y' is predicted using an equation like this:</p><p>y = β0 + β1*x1 + β2*x2 + ... + βn*xn</p><ul><li>β0 is the intercept (the value of y when all features are 0)</li><li>β1, β2, ... βn are the coefficients for each feature</li><li>x1, x2, ... xn are the values of your features</li></ul><p>The coefficients, guided by their significance (t-value, p-value) and confidence intervals, determine how much each feature contributes to the final prediction of 'y'.</p><p><strong>Example</strong></p><p>Let's imagine a model predicting house prices ('y') based on features like size (x1) and location (x2):</p><ul><li>Coefficient for size (β1) = 1000</li><li>Coefficient for location (β2) = 50000</li></ul><p>This means that:</p><ul><li>For every 1 unit increase in size, the house price is predicted to increase by 1000 units (holding location constant).</li><li>For a 1 unit increase in the location's desirability score, the house price is predicted to increase by 50000 units (holding size constant).</li></ul><p>The standard error, t-value, p-value, and confidence intervals would further refine these estimates, indicating the precision and significance of these relationships.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 08 - Model Coefficients &amp; Performance Evaluations</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #ffffff;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Core Typography Styles (GitHub Markdown Flavor) */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        ul, ol {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-top: 0.4em;
+            margin-bottom: 0.4em;
+        }
+        code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        }
+
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Section Blocks */
+        .report-section {
+            background-color: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 18px;
+            margin-bottom: 24px;
+        }
+        .report-section h3 {
+            margin-top: 0;
+            color: #24292e;
+            border-bottom: 1px solid #e1e4e8;
+            padding-bottom: 6px;
+        }
+        .equation-box {
+            font-family: SFMono-Regular, Consolas, monospace;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../modules.html">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <a href="../modules.html" class="back-link">← Back to Modules Directory</a>
+
+    <!-- Main Content -->
+    <h1>Module 08 - Model Coefficients &amp; Metrics</h1>
+    <p>This study document outlines core performance error metrics and provides an analytical blueprint for decoding Ordinary Least Squares (OLS) regression summaries generated by Python packages like <code>statsmodels</code> or <code>scikit-learn</code>.</p>
+
+    <h2>1. Computational Libraries &amp; Base Estimators</h2>
+    <ul>
+        <li><strong>Least Squares:</strong> A standard algebraic optimization approach used in regression analysis to approximate parameters in overdetermined systems by minimizing the residual sum of squares (RSS).</li>
+        <li><strong>Ordinary Least Squares (OLS):</strong> A classical, parametric linear least squares method optimized to extract unknown parameter coefficients from empirical data.</li>
+        <li><strong>Statsmodels:</strong> A specialized Python library offering comprehensive tools for estimating descriptive statistical models, generating regression summaries, and running diagnostics tests.</li>
+        <li><strong>Sklearn Linear Regression Model:</strong> A production-oriented machine learning implementation in <code>scikit-learn</code> focused on fast prediction, inference splitting, and scaling workflows.</li>
+    </ul>
+
+    <h2>2. Global Performance Errors</h2>
+    <ul>
+        <li><strong>Mean Squared Error (MSE):</strong> The absolute arithmetic average of the squared errors computed between your model's target projections and the true baseline observations. Highly sensitive to outlier spikes.</li>
+        <li><strong>Standard Error of the Estimate:</strong> The average vertical distance that observed data plots fall from the optimized regression line, functioning as a real-world unit accuracy score.</li>
+    </ul>
+
+    <h2>3. Blueprint: Decoding the <code>statsmodels</code> OLS Summary</h2>
+    <p>The OLS summary panel splits metadata into distinct diagnostic quadrants:</p>
+
+    <!-- Model Metadata -->
+    <div class="report-section">
+        <h3>Block I: Model Information &amp; Matrix Dimensions</h3>
+        <ul>
+            <li><strong>Dep. Variable (Endogenous):</strong> The structural target vector, response variable, or dependent parameter being tracked.</li>
+            <li><strong>Model &amp; Method:</strong> Confirms the calculation method, standardly displaying Ordinary Least Squares parameters.</li>
+            <li><strong>No. Observations (n):</strong> The absolute count of valid, non-null data rows processed inside the data pipeline.</li>
+            <li><strong>DF Residuals:</strong> Degrees of freedom remaining for the error metrics, calculated as observations minus parameters (<code>n - k</code>).</li>
+            <li><strong>DF Model:</strong> The total number of model parameters or independent features configured, excluding the intercept constant.</li>
+            <li><strong>Covariance Type:</strong> Details the specific robust covariance calculations deployed to check for core assumption violations.</li>
+        </ul>
+    </div>
+
+    <!-- Goodness of Fit -->
+    <div class="report-section">
+        <h3>Block II: Global Goodness of Fit</h3>
+        <ul>
+            <li><strong>R-Squared (Coefficient of Determination):</strong> The exact proportion of variance inside the dependent variable that is predictable from the independent input features, describing total fit.</li>
+            <li><strong>Adj. R-Squared:</strong> A modified version of R-squared penalizing the entry of useless features based on residual degrees of freedom. Essential for multi-variant feature space comparisons.</li>
+            <li><strong>F-statistic &amp; Prob (F-statistic):</strong> An omnibus variance test checking if the model parameters collectively out-perform a flat intercept model. The probability indicates significance against a null baseline.</li>
+            <li><strong>Log-Likelihood:</strong> An optimized parametric metric tracking model coefficient fit probability; higher values indicate better parameter positioning.</li>
+            <li><strong>AIC (Akaike Information Criterion):</strong> A structural model selection score balancing log-likelihood against feature penalties. Lower scores reveal optimized designs without addressing standalone features.</li>
+            <li><strong>BIC (Bayesian Information Criterion):</strong> Similar to AIC but enforces stricter, log-proportional mathematical penalties for added feature overhead.</li>
+        </ul>
+    </div>
+
+    <!-- Coefficients -->
+    <div class="report-section">
+        <h3>Block III: Feature Coefficients &amp; Local Inferential Signatures</h3>
+        <ul>
+            <li><strong>coef (Weights):</strong> The estimated numeric parameter values assigned to individual features. They establish the strength and directional vector link to the output variable.</li>
+            <li><strong>std error:</strong> The calculated standard error of the localized coefficient estimation. Smaller bounds reveal more precision.</li>
+            <li><strong>t (t-statistic):</strong> The local feature significance index computed by dividing the coefficient value by its standard error (<code>coef / std error</code>). High absolute metrics flag important predictors.</li>
+            <li><strong>P &gt; |t| (p-value):</strong> The probability score of extracting this localized t-statistic if zero true structural connection existed between features. Threshold values tracking below alpha (typically 0.05) establish statistical significance.</li>
+            <li><strong>[0.025 \ 0.975] (95% Confidence Interval):</strong> The statistical boundary range highly likely to encapsulate the true parent feature parameter vector. If this range crosses <code>0</code>, the feature cannot be assumed significant.</li>
+        </ul>
+    </div>
+
+    <!-- Statistical Tests -->
+    <div class="report-section">
+        <h3>Block IV: Residual Diagnostic Tests</h3>
+        <ul>
+            <li><strong>Skewness &amp; Kurtosis:</strong> Tail parameters measuring the asymmetry and peak tailedness profiles of the error distribution.</li>
+            <li><strong>Omnibus &amp; Prob(Omnibus):</strong> D'Agostino's combined geometric normality test scoring the composite presence of error skewness and kurtosis.</li>
+            <li><strong>Jarque-Bera &amp; Prob(JB):</strong> An alternative structural normality check testing whether residual metrics match a normal distribution profile.</li>
+            <li><strong>Durbin-Watson:</strong> A diagnostic test analyzing sequential error patterns to check for auto-correlation violations. Scores tracking near 2 indicate zero correlation.</li>
+            <li><strong>Cond. No. (Condition Number):</strong> A rigorous numerical diagnostic test checking for multicollinearity. Inflated metrics alert that your input space contains highly correlated features.</li>
+        </ul>
+    </div>
+
+    <h2>4. Prediction Mechanics: Calculating Target 'y'</h2>
+    <p>In a parametric linear regression framework, target predictions are extracted using a linear combination formula across weights and features:</p>
+    
+    <div class="equation-text">y_pred = b0 + b1*x1 + b2*x2 + ... + bn*xn</div>
+    
+    <ul>
+        <li><code>b0</code>: The constant intercept boundary (the expected base value of <code>y</code> when all feature vectors equal 0).</li>
+        <li><code>b1, b2, ... bn</code>: The calibrated local coefficients extracted for each item.</li>
+        <li><code>x1, x2, ... xn</code>: The real empirical input tracking values of those features.</li>
+    </ul>
+
+    <div class="report-section" style="background-color: #ffffff;">
+        <h4 style="margin-top: 0; color: #24292e;">Applied Operational Example: Real Estate Valuations</h4>
+        <p>Imagine an optimized multivariable OLS pipeline designed to predict housing market listings (<code>y</code>) based on square footage (<code>x1</code>) and location desirability score (<code>x2</code>):</p>
+        <ul>
+            <li><strong>Calculated Square Footage Weight (b1):</strong> 1,000</li>
+            <li><strong>Calculated Desirability Weight (b2):</strong> 50,000</li>
+        </ul>
+        <p><strong>Downstream Interpretation Metrics:</strong></p>
+        <ol>
+            <li>For every single standalone unit increase in square footage (<code>x1</code>), the listing price is estimated to expand by exactly 1,000 pricing units, assuming location parameters are held constant.</li>
+            <li>For every 1 unit change along the location desirability indexing axis (<code>x2</code>), the listing price is estimated to surge by 50,000 pricing units, assuming dimension variables are held constant.</li>
+        </ol>
+    </div>
+
+</body>
+</html>
