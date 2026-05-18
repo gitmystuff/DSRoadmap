@@ -1,1 +1,204 @@
-<p>Module 13 - Pandas Time Series Complete</p><ol><li><strong>Time Series Data</strong>: This refers to data that is collected and organized in chronological order, typically over a period of time. This type of data is common in finance (stock prices, economic indicators), environmental monitoring (temperature, pollution levels), and various other fields.<br /></li><li><strong>Pandas</strong>: This is a popular Python library specifically designed for working with and analyzing data. It provides data structures like DataFrames that are highly efficient for manipulating and exploring time series data.<br /></li><li><strong>DateTime Index</strong>: In Pandas, the DateTime Index is a way to store and access time series data where the index of the DataFrame is a series of dates or timestamps. This allows for easy and efficient date-based operations and analysis.<br /></li><li><strong>Market Indices</strong>: These are indicators that track the performance of a group of stocks, bonds, or other assets. Common examples include the Dow Jones Industrial Average (DOW), S&amp;amp;P 500, and NASDAQ Composite. They provide insights into overall market trends.<br /></li><li><strong>Adjusted Closing Price</strong>: The closing price of a stock or asset on a particular trading day, but adjusted for any corporate actions like stock splits or dividends. This provides a more accurate representation of the asset's value over time.<br /></li><li><strong>yfinance</strong>: A Python library that allows you to download historical market data from Yahoo Finance. This is commonly used to get stock prices, index values, and other financial data for analysis.<br /></li><li><strong>Plotly</strong>: A library that creates interactive and visually appealing plots and charts. It's often used to visualize time series data in an engaging way.<br /></li><li><strong>Colab (Google Colaboratory)</strong>: A free cloud-based platform provided by Google for working with Jupyter notebooks. It's a popular choice for data analysis and machine learning tasks.<br /></li><li><strong>Normalization</strong>: The process of scaling data to a specific range, often between 0 and 1. In the context of the document, it's used to compare the growth of different market indices from a common starting point.<br /></li><li><strong>Bulls and Bears</strong>: Terms used to describe general market trends. A &quot;bull market&quot; is characterized by rising prices and optimism, while a &quot;bear market&quot; indicates falling prices and pessimism.<br /></li><li><strong>Boxplot</strong>: A way to visually represent the distribution of data, showing the median, quartiles, and potential outliers. In the document, it's used to analyze the distribution of the DOW Jones Industrial Average values in 2020, grouped by month.<br /></li><li><strong>Percent Change</strong>: A way to express the change in value as a percentage of the original value. The document uses it to calculate the percentage decrease in the DOW from 2008 to 2009 and the increase from 2020 to 2024.<br /></li><li><strong>Rolling Mean</strong>: Also known as a moving average, it calculates the average of data points within a specific sliding window. This smooths out short-term fluctuations in time series data, making it easier to see long-term trends.<br /></li><li><strong>Hodrick-Prescott (HP) Filter</strong>: A mathematical technique used to separate the trend from the cyclical component in time series data. It helps to identify the underlying long-term direction of the data. The document provides a clear explanation of this filter and its applications.<br /></li><li><strong>statsmodels</strong>: A Python library for statistical modeling and analysis. The document uses it to apply the HP filter to the DOW Jones Industrial Average data.<br /></li></ol>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 13 - Pandas Time Series Complete</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #ffffff;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Core Typography Styles (GitHub Markdown Flavor) */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        ul, ol {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-top: 0.4em;
+            margin-bottom: 0.4em;
+        }
+        code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        }
+        
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Group Containers */
+        .framework-section {
+            background-color: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        .framework-title {
+            margin-top: 0;
+            font-weight: 600;
+            color: #24292e;
+            border-bottom: 1px solid #e1e4e8;
+            padding-bottom: 6px;
+            margin-bottom: 10px;
+        }
+        .code-token {
+            font-family: SFMono-Regular, Consolas, monospace;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../modules.html">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <a href="../modules.html" class="back-link">← Back to Modules Directory</a>
+
+    <!-- Main Content -->
+    <h1>Module 13 - Pandas Time Series Complete</h1>
+    <p class="intro-text">This comprehensive reference guide details data manipulation and decomposition strategies optimized for chronological time series records. It covers index structures, financial return metrics, moving window aggregations, and parametric filtering models.</p>
+
+    <h2>1. Foundational Time Series Environments</h2>
+    <ul>
+        <li><strong>Time Series Data:</strong> Any dataset collected, indexed, and organized sequentially in chronological order over discrete or continuous intervals. Foundational across macro-finance forecasting, econometrics, and sensor arrays.</li>
+        <li><strong>Pandas:</strong> The primary open-source Python data manipulation framework. It implements memory-optimized data structures like Series and DataFrames to accelerate vector calculations and date alignment checks.</li>
+        <li><strong>DateTime Index:</strong> A specialized high-performance Pandas index type that stores continuous timestamps or absolute calendar dates. Configuring a <code>DatetimeIndex</code> optimizes sequential operations, boolean date-slicing queries, and time-zone conversions.</li>
+        <li><strong>Google Colab (Colaboratory):</strong> A cloud-hosted, notebook execution environment optimized for building machine learning applications and performing data analysis.</li>
+    </ul>
+
+    <h2>2. Financial Aggregations &amp; Market Mechanics</h2>
+    <p>Chronological modeling in finance utilizes specific pricing transformations to ensure comparative stability:</p>
+    <ul>
+        <li><strong>Market Indices:</strong> Consolidated statistical indicators built to track the aggregated performance of a basket of structural underlying assets (e.g., the Dow Jones Industrial Average, S&amp;P 500, or NASDAQ Composite).</li>
+        <li><strong>Adjusted Closing Price:</strong> The closing valuation price of an asset normalized to reflect all historical corporate distribution adjustments (such as cash dividends and stock splits). Essential for backtesting pipelines to prevent artificial variance jumps.</li>
+        <li><strong>yfinance:</strong> An open-source Python library wrapped to download programmatic historical market metrics and security prices directly from the Yahoo Finance API endpoints.</li>
+        <li><strong>Bulls and Bears:</strong> Industry metaphors tracking market momentum. A **Bull Market** signifies persistent upward baseline trend movements driven by systemic expansion and investor optimism, while a **Bear Market** maps sustained price declines and structural contraction loops.</li>
+    </ul>
+
+    <h2>3. Descriptive Analytics &amp; Signal Extraction</h2>
+    <p>Isolating underlying patterns from volatile raw signals requires localized normalization and structural smoothing transformations:</p>
+
+    <div class="framework-section">
+        <div class="framework-title">Signal Inversion &amp; Comparison Operators</div>
+        <ul>
+            <li><strong>Normalization:</strong> The process of re-scaling disparate data paths onto a uniform, comparable metric scale. In time series workflows, anchoring baseline prices to a starting coordinate value enables direct growth comparison across highly mismatched market indices.</li>
+            <li><strong>Percent Change:</strong> Expresses price adjustments relative to a baseline origin point. Deployed to measure peak-to-trough drawdowns (such as the DOW contraction tracking from 2008 to 2009) or multi-year expansion trajectories.</li>
+            <li><strong>Rolling Mean (Moving Average):</strong> A spatial smoothing calculation that evaluates sequential window averages along a sliding calendar track. This process dampens short-term high-frequency noise elements to uncover low-frequency structural cycles.</li>
+            <li><strong>Boxplot Analytics:</strong> A graphical five-number summary mapping the median, lower/upper quartiles, and explicit statistical outlier flags across a continuous field. Useful for diagnosing seasonal variations or volatility clusters when cross-tabulating time series entries by fixed intervals (e.g., grouping index values by calendar months).</li>
+            <li><strong>Plotly:</strong> A visualization library optimized for rendering interactive, browser-native timeline figures with integrated zoom and inspect operations.</li>
+        </ul>
+    </div>
+
+    <h2>4. Advanced Mathematical Signal Filtering</h2>
+    <p>Decomposing an active empirical time series requires separating low-frequency global trends from high-frequency stationary fluctuations:</p>
+    <ul>
+        <li><strong>statsmodels:</strong> A specialized Python analytics package providing rigorous classes and functions for time series exploration, structural decomposition, and regression testing.</li>
+        <li><strong>Hodrick-Prescott (HP) Filter:</strong> A mathematical optimization technique deployed to decompose an observed time series into an overarching long-term macroeconomic trend component and a short-term cyclical component. It minimizes an explicit objective function balancing tracking proximity against trend smoothness parameters.</li>
+    </ul>
+
+</body>
+</html>
