@@ -1,1 +1,250 @@
-<p>Generalized Linear Models (GLMs) extend the traditional linear regression model to accommodate a wider range of response variables beyond continuous data. A key component of a GLM is the <strong>link function</strong>, which establishes a relationship between the linear predictor (a linear combination of predictor variables) and the expected value of the response variable.</p><p>Here's a list of common link functions and their purposes:</p><p><strong>1. Identity Link:</strong></p><ul><li><strong>Purpose:</strong> Models the expected value of the response variable directly as the linear predictor.</li><li><strong>Common Use:</strong> Used for continuous response variables with a normal distribution, essentially making the GLM equivalent to ordinary least squares regression.</li><li><strong>Mathematical Form:</strong> g(μ) = μ</li></ul><p><strong>2. Log Link:</strong></p><ul><li><strong>Purpose:</strong> Models the logarithm of the expected value of the response variable. This ensures the predicted values are always positive.</li><li><strong>Common Use:</strong> Often used for count data (Poisson regression) or continuous positive data with right-skewed distributions.</li><li><strong>Mathematical Form:</strong> g(μ) = log(μ)</li></ul><p><strong>3. Logit Link:</strong></p><ul><li><strong>Purpose:</strong> Models the log-odds (logit) of the probability of an event. This constrains the predicted probabilities to lie between 0 and 1.</li><li><strong>Common Use:</strong> The standard link function for binary response variables (logistic regression).</li><li><strong>Mathematical Form:</strong> g(μ) = log(μ / (1 - μ))</li></ul><p><strong>4. Probit Link:</strong></p><ul><li><strong>Purpose:</strong> Similar to the logit link, it models the inverse of the cumulative distribution function (CDF) of the standard normal distribution.</li><li><strong>Common Use:</strong> Also used for binary response variables, often when there's an underlying latent variable with a normal distribution.</li><li><strong>Mathematical Form:</strong> g(μ) = Φ⁻¹(μ), where Φ⁻¹ is the inverse of the standard normal CDF.</li></ul><p><strong>5. Complementary Log-Log Link:</strong></p><ul><li><strong>Purpose:</strong> Models the log of the negative log of the complementary probability (1 - probability of event).</li><li><strong>Common Use:</strong> Suitable for binary response data, particularly when the probability of an event is very low or very high. Also used in survival analysis.</li><li><strong>Mathematical Form:</strong> g(μ) = log(-log(1 - μ))</li></ul><p><strong>6. Inverse Link:</strong></p><ul><li><strong>Purpose:</strong> Models the inverse of the expected value of the response variable.</li><li><strong>Common Use:</strong> Often used for response variables with a gamma distribution.</li><li><strong>Mathematical Form:</strong> g(μ) = 1 / μ</li></ul><p><strong>7. Square Root Link:</strong></p><ul><li><strong>Purpose:</strong> Models the square root of the expected value of the response variable.</li><li><strong>Common Use:</strong> Can be used for count data with a Poisson distribution when variance increases faster than the mean.</li><li><strong>Mathematical Form:</strong> g(μ) = √μ</li></ul><p><strong>Choosing the Right Link Function:</strong></p><p>The choice of link function depends on:</p><ul><li><strong>The nature of the response variable:</strong> Whether it's continuous, binary, count, etc.</li><li><strong>The distribution of the response variable:</strong> Normal, Poisson, binomial, gamma, etc.</li><li><strong>The desired interpretation of the model coefficients:</strong> How changes in the predictor variables affect the response variable.</li></ul><p>It's important to note that the link function is a crucial part of the GLM specification. Choosing an inappropriate link function can lead to biased estimates and incorrect inferences.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 10 - Mathematical Link Functions</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #ffffff;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Core Typography Styles (GitHub Markdown Flavor) */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        ul {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-top: 0.4em;
+            margin-bottom: 0.4em;
+        }
+        code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        }
+        
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Link Function Cards Layout */
+        .link-card {
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .link-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0366d6;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #f1f1f1;
+            padding-bottom: 4px;
+        }
+        .field-label {
+            font-weight: 600;
+            color: #24292e;
+        }
+        .formula-display {
+            font-family: SFMono-Regular, Consolas, monospace;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 8px 0;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .selection-box {
+            background-color: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            margin-top: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../modules.html">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <a href="../modules.html" class="back-link">← Back to Modules Directory</a>
+
+    <!-- Main Content -->
+    <h1>Module 10 - Link Functions</h1>
+    <p class="intro-text">Generalized Linear Models (GLMs) extend the capabilities of traditional ordinary least squares architectures to accommodate non-normal, skewed, or discrete target variables. A foundational component of the GLM framework is the <strong>link function</strong>, which establishes a strict mathematical connection between the un-bounded linear predictor space and the bounded expected value of the target distribution.</p>
+
+    <h2>Common Link Functions and Target Mappings</h2>
+
+    <!-- Identity Link -->
+    <div class="link-card">
+        <div class="link-title">1. Identity Link</div>
+        <p><span class="field-label">Purpose:</span> Maps the expected value of the target response variable directly to the un-bounded linear combination of predictors without transformation.</p>
+        <p><span class="field-label">Primary Application:</span> Continuous response variables tracking a normal Gaussian error distribution, making the GLM equivalent to standard linear regression.</p>
+        <div class="formula-display">g(&mu;) = &mu;</div>
+    </div>
+
+    <!-- Log Link -->
+    <div class="link-card">
+        <div class="link-title">2. Log Link</div>
+        <p><span class="field-label">Purpose:</span> Models the natural logarithm of the expected target value. This transformation ensures that inverse projected model values always remain strictly positive numbers.</p>
+        <p><span class="field-label">Primary Application:</span> Open-ended count data pipelines (Poisson regression) or skewed continuous positive variables (Gamma distributions).</p>
+        <div class="formula-display">g(&mu;) = log(&mu;)</div>
+    </div>
+
+    <!-- Logit Link -->
+    <div class="link-card">
+        <div class="link-title">3. Logit Link</div>
+        <p><span class="field-label">Purpose:</span> Models the log-odds (logit transformation) of an event probability. This mathematical boundary constrains target probability predictions to map cleanly between 0 and 1.</p>
+        <p><span class="field-label">Primary Application:</span> The baseline standard link function used to optimize binary classification tasks (logistic regression models).</p>
+        <div class="formula-display">g(&mu;) = log(&mu; / (1 - &mu;))</div>
+    </div>
+
+    <!-- Probit Link -->
+    <div class="link-card">
+        <div class="link-title">4. Probit Link</div>
+        <p><span class="field-label">Purpose:</span> Models the inverse cumulative distribution function (CDF) of a standard normal distribution to map target probability limits.</p>
+        <p><span class="field-label">Primary Application:</span> Binary response classification models, frequently deployed in structural contexts where an unobserved latent variable follows a normal distribution shape.</p>
+        <div class="formula-display">g(&mu;) = &Phi;&minus;&sup1;(&mu;)</div>
+    </div>
+
+    <!-- Complementary Log-Log Link -->
+    <div class="link-card">
+        <div class="link-title">5. Complementary Log-Log Link (Clog-log)</div>
+        <p><span class="field-label">Purpose:</span> Models the natural logarithm of the negative log tracking the complementary probability of an event happening.</p>
+        <p><span class="field-label">Primary Application:</span> Asymmetrical binary datasets where target event probabilities track as extremely rare (near 0) or heavily ubiquitous (near 1), alongside specialized survival analysis models.</p>
+        <div class="formula-display">g(&mu;) = log(-log(1 - &mu;))</div>
+    </div>
+
+    <!-- Inverse Link -->
+    <div class="link-card">
+        <div class="link-title">6. Inverse Link</div>
+        <p><span class="field-label">Purpose:</span> Models the strict mathematical inverse of the expected value parameter of the response target.</p>
+        <p><span class="field-label">Primary Application:</span> Continuous positive variables displaying exponential skews, standardly acting as the canonical link function for Gamma distributions.</p>
+        <div class="formula-display">g(&mu;) = 1 / &mu;</div>
+    </div>
+
+    <!-- Square Root Link -->
+    <div class="link-card">
+        <div class="link-title">7. Square Root Link</div>
+        <p><span class="field-label">Purpose:</span> Models the precise square root parameter of the expected value of the target distribution.</p>
+        <p><span class="field-label">Primary Application:</span> Over-dispersed count data environments where local variance tracks and escalates faster than the baseline distribution mean.</p>
+        <div class="formula-display">g(&mu;) = &radic;&mu;</div>
+    </div>
+
+    <!-- Selection Criteria Box -->
+    <div class="selection-box">
+        <h3 style="margin-top: 0; color: #24292e;">Canonical Selection Criteria</h3>
+        <p>Isolating the appropriate link function parameter configuration depends on three architecture rules:</p>
+        <ul>
+            <li><strong>The Typology of the Target Variable:</strong> Evaluating whether the raw dependent variable tracks as a continuous decimal, binary category, integer count, or elapsed duration time.</li>
+            <li><strong>The Parametric Distribution Family:</strong> Matching the distribution variance shape of residuals to exponential families (Gaussian, Binomial, Poisson, or Gamma distributions).</li>
+            <li><strong>Coefficient Interpretation Goals:</strong> Calibrating how parameter weight shifts impact change vectors inside the final estimation output (e.g., additive shifts via Identity links versus multiplicative risk adjustments via Log links).</li>
+        </ul>
+        <p style="margin-bottom: 0; font-style: italic; color: #586069;">Selecting an inappropriate link function model specification introduces structural estimation bias and renders downstream hypothesis inferences invalid.</p>
+    </div>
+
+</body>
+</html>
