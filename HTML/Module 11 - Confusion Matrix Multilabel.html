@@ -1,1 +1,207 @@
-<ol><li><strong>Multinomial Logistic Regression:</strong> A statistical model used to predict the probability of an instance belonging to one of three or more classes.<br /></li><li><strong>Confusion Matrix:</strong> A table used to evaluate the performance of a classification model. For multinomial models, it shows the counts of true and predicted classes for each class.<br /></li><li><strong>Multilabel Confusion Matrix:</strong> A confusion matrix specifically designed for multilabel classification problems, where each instance can belong to multiple classes simultaneously.<br /></li><li><strong>Classification Report</strong>: A comprehensive evaluation metric that includes precision, recall, F1-score, and support for each class, as well as overall accuracy and averages.<br /></li><li><strong>Precision:</strong> The proportion of true positive predictions out of all positive predictions for a specific class.<br /></li><li><strong>Recall:</strong> The proportion of true positive predictions out of all actual positive instances for a specific class. Also known as sensitivity.<br /></li><li><strong>F1-Score:</strong> The harmonic mean of precision and recall, providing a balanced measure of a model's performance for a specific class.<br /></li><li><strong>TN (True Negative):</strong> The number of instances correctly predicted as not belonging to a specific class.<br /></li><li><strong>FP (False Positive):</strong> The number of instances incorrectly predicted as belonging to a specific class.<br /></li><li><strong>FN (False Negative):</strong> The number of instances incorrectly predicted as not belonging to a specific class.<br /></li><li><strong>TP (True Positive):</strong> The number of instances correctly predicted as belonging to a specific class.<br /></li><li><strong>Test Statistics:</strong> Evaluation metrics used to assess the performance of a classification model.<br /></li><li><strong>Support:</strong> The number of actual instances belonging to a specific class in the test set.<br /></li></ol>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 11 - Multi-Label Classification Diagnostics</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #ffffff;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Core Typography Styles (GitHub Markdown Flavor) */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        ul {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-top: 0.4em;
+            margin-bottom: 0.4em;
+        }
+        code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        }
+        
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Layout Architecture Panels */
+        .eval-section {
+            background-color: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        .eval-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #24292e;
+            margin-top: 0;
+            border-bottom: 1px solid #e1e4e8;
+            padding-bottom: 4px;
+            margin-bottom: 10px;
+        }
+        .formula-line {
+            font-family: SFMono-Regular, Consolas, monospace;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 4px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../modules.html">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <a href="../modules.html" class="back-link">← Back to Modules Directory</a>
+
+    <!-- Main Content -->
+    <h1>Module 11 - Multi-Label Classification Diagnostics</h1>
+    <p class="intro-text">This study reference evaluates diagnostic frameworks designed for high-dimensional multi-class and multi-label classification environments. It maps out how standard binary confusion matrices scale into isolated One-vs-Rest (OvR) sub-matrices and comprehensive evaluation summary sheets.</p>
+
+    <h2>1. Multi-Class vs. Multi-Label Model Spaces</h2>
+    <ul>
+        <li><strong>Multinomial Logistic Regression:</strong> An extension of classical binary logistic models used to predict the conditional probability distribution across three or more mutually exclusive target categories. Each row instance is restricted to a single class assignment.</li>
+        <li><strong>Multi-Class Confusion Matrix:</strong> A consolidated <code>C x C</code> contingency table (where <code>C</code> equals total target classes) cross-tabulating factual target categories against model projections, mapping directional misclassifications across classes.</li>
+        <li><strong>Multilabel Classification Space:</strong> An advanced environment where individual rows can belong to multiple distinct classes simultaneously, eliminating mutually exclusive constraints. Instead of a single model output, predictions track as an array of binary flags.</li>
+    </ul>
+
+    <h2>2. The Localized One-vs-Rest (OvR) Matrix Engine</h2>
+    <p>Evaluating multi-label frameworks requires decomposing the problem space. A <strong>Multilabel Confusion Matrix</strong> constructs an array of isolated 2x2 binary contingency matrices—one for each unique class—using a One-vs-Rest approach. For any single targeted class, test statistics are defined locally:</p>
+
+    <div class="eval-section">
+        <div class="eval-title">Class-Specific Cell Quantifiers</div>
+        <ul>
+            <li><strong>True Positive (TP):</strong> The count of instances correctly predicted by the model as belonging to the active target class.</li>
+            <li><strong>True Negative (TN):</strong> The count of instances correctly predicted by the model as <strong>not</strong> belonging to the active target class.</li>
+            <li><strong>False Positive (FP):</strong> The count of instances incorrectly predicted by the model as belonging to the active target class when the actual ground truth is negative.</li>
+            <li><strong>False Negative (FN):</strong> The count of instances incorrectly predicted by the model as <strong>not</strong> belonging to the active target class when the actual ground truth is positive.</li>
+        </ul>
+    </div>
+
+    <h2>3. The Comprehensive Classification Report Index</h2>
+    <p>A <strong>Classification Report</strong> is a structured diagnostic readout summarizing performance across high-dimensional target spaces, documenting local class statistics alongside global macro and weighted averages:</p>
+
+    <div class="eval-section">
+        <div class="eval-title">Local Class Metrics</div>
+        <ul>
+            <li><strong>Precision:</strong> The proportion of true positive predictions relative to all instances flagged by the model for that specific class:
+                <br><span class="formula-line">Precision = TP / (TP + FP)</span>
+            </li>
+            <li><strong>Recall (Sensitivity):</strong> The proportion of true positive predictions relative to the absolute universe of actual ground-truth members for that specific class:
+                <br><span class="formula-line">Recall = TP / (TP + FN)</span>
+            </li>
+            <li><strong>F1-Score:</strong> The harmonic mean balancing precision and recall for that specific class, providing a robust fit measure independent of sample size:
+                <br><span class="formula-line">F1-Score = 2 * ((Precision * Recall) / (Precision + Recall))</span>
+            </li>
+            <li><strong>Support:</strong> The baseline count of factual ground-truth instances belonging to that specific class within the active test dataset, serving as a sample volume contextual anchor.</li>
+        </ul>
+    </div>
+
+</body>
+</html>
