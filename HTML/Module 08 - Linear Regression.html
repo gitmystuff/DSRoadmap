@@ -1,1 +1,194 @@
-<p><strong>Linear Regression Concepts</strong></p><ul><li><strong>Correlation vs Simple Linear Regression<br /></strong><ul><li>Correlation analysis shows the strength and direction of the linear relationship between two variables. Simple linear regression analysis estimates parameters in a linear equation to predict values of one variable from another.</li></ul></li><li><strong>The Dependent Variable<br /></strong><ul><li>In linear regression, the dependent variable (y) is continuous and numerical. It's the variable being predicted.</li></ul></li><li><strong>Linear Regression<br /></strong><ul><li>A linear approach to modeling the relationship between a scalar response (dependent variable) and one or more explanatory variables (independent variables). It's used to predict a continuous outcome based on one or more predictor variables.</li></ul></li><li><strong>Scalar<br /></strong><ul><li>A physical quantity that is completely described by its magnitude (e.g., volume, density, speed, energy, mass, and time). It's a single number, as opposed to a vector, which has both magnitude and direction.</li></ul></li><li><strong>Simple Linear Regression<br /></strong><ul><li>A type of linear regression where there's only one explanatory (independent) variable used to predict a single scalar response (dependent variable).</li></ul></li><li><strong>Line of Best Fit<br /></strong><ul><li>A straight line drawn through a scatter plot of data points that best represents the relationship between those points. It's often determined using the least squares method.</li></ul></li><li><strong>Residuals<br /></strong><ul><li>The vertical distance between a data point and the regression line (line of best fit). It represents the error in the prediction made by the regression model for that specific data point.</li></ul></li><li><strong>Mean Squared Error (MSE)<br /></strong><ul><li>A measure of the average squared difference between the predicted values and the actual values in a regression model. It's commonly used to evaluate the performance of a regression model.</li></ul></li><li><strong>Linear Regression with Scikit-learn<br /></strong><ul><li>Scikit-learn is a Python library that provides tools for machine learning, including linear regression. It can be used to build and train linear regression models.</li></ul></li><li><strong>Assumptions of Linear Regression<br /></strong><ul><li>Linear regression models have several assumptions that should be met for the model to be reliable, including linearity, no multicollinearity, normality of residuals, homoscedasticity, and independence of residuals.</li></ul></li><li><strong>Multiple Linear Regression<br /></strong><ul><li>A type of linear regression where there are two or more explanatory (independent) variables used to predict a single scalar response (dependent variable).</li></ul></li><li><strong>Confidence Intervals<br /></strong><ul><li>A range of values within which it is estimated that a population parameter (like a regression coefficient) lies, with a certain level of confidence (e.g., 95%). It's used to express the uncertainty associated with an estimate.</li></ul></li><li><strong>Types of Regression<br /></strong><ul><li>There are various types of regression analysis beyond simple and multiple linear regression, including polynomial regression, support vector regression, decision tree regression, and random forest regression, each with its own approach to modeling relationships between variables.</li></ul></li></ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 08 - Ordinary Least Squares Linear Regression</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #ffffff;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Core Typography Styles (GitHub Markdown Flavor) */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        ul {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-top: 0.4em;
+            margin-bottom: 0.4em;
+        }
+        code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        }
+        
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Group Containers */
+        .framework-box {
+            background-color: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        .framework-title {
+            margin-top: 0;
+            font-weight: 600;
+            color: #24292e;
+            border-bottom: 1px solid #e1e4e8;
+            padding-bottom: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../modules.html">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <a href="../modules.html" class="back-link">← Back to Modules Directory</a>
+
+    <!-- Main Content -->
+    <h1>Module 08 - Linear Regression</h1>
+    <p class="intro-text">This study reference outlines classical parametric linear modeling foundations. It maps the geometric transitions separating joint variance correlations from directional predictive estimation, tracking calculation boundaries across simple and multiple regression matrices.</p>
+
+    <h2>1. Theoretical Foundations &amp; Target Scaling</h2>
+    
+    <div class="framework-box">
+        <h3 class="framework-title">Correlation vs. Simple Linear Regression</h3>
+        <p>While often used together during exploratory modeling, these analytical approaches answer fundamentally different structural questions:</p>
+        <ul>
+            <li><strong>Correlation Analysis:</strong> A non-directional statistical measure quantifying the relative linear strength and vector orientation linking two variables. It makes no causal assumptions and does not designate an independent vs. dependent parameter.</li>
+            <li><strong>Simple Linear Regression:</strong> A directional estimation framework that maps parameter weights inside a linear equation to actively estimate or project values of a target outcome variable based on the variance shifts of an input predictor.</li>
+        </ul>
+    </div>
+
+    <ul>
+        <li><strong>Linear Regression:</strong> A parametric approach to modeling the relationship between a continuous scalar response variable and one or more explanatory independent features to project unobserved numeric targets.</li>
+        <li><strong>The Dependent Variable (y):</strong> The numerical, continuous response variable tracking along the vertical axis of a coordinate plane. It is the core operational metric being modeled and predicted by the regression engine.</li>
+        <li><strong>Scalar:</strong> A physical or mathematical quantity completely described by a single numeric magnitude score (e.g., volume, mass, or time vectors), as opposed to a spatial vector containing both a magnitude scale and geometric direction.</li>
+    </ul>
+
+    <h2>2. The Geometry of Error Minimization</h2>
+    <ul>
+        <li><strong>Line of Best Fit:</strong> The single idealized straight trajectory drawn across an empirical scatter plot configuration that minimizes global prediction variance. It is calculated by optimizing intercept and slope coefficients using ordinary least squares.</li>
+        <li><strong>Residuals (Prediction Errors):</strong> The localized vertical distance tracking from an individual empirical data point coordinate directly to the calculated line of best fit. It quantifies the raw estimation error introduced by the model for that exact record.</li>
+        <li><strong>Mean Squared Error (MSE):</strong> A fundamental cost function evaluating a regression model's accuracy. Calculated by squaring all individual residual vectors and taking their arithmetic average, making it highly sensitive to major outlier variances.</li>
+    </ul>
+
+    <h2>3. Structural Model Dimensions</h2>
+    <ul>
+        <li><strong>Simple Linear Regression:</strong> A narrow baseline implementation of linear modeling where exactly one explanatory, scalar independent variable is leveraged to approximate the trajectory of a continuous scalar target.</li>
+        <li><strong>Multiple Linear Regression:</strong> An expanded modeling structure where an array of two or more independent predictor features are combined inside a unified matrix equation to project a single scalar output variable.</li>
+        <li><strong>Alternative Regression Families:</strong> Parametric modeling expands beyond classical straight-line constraints to map non-linear data boundaries. Alternative variants include polynomial regression, support vector regression (SVR), decision tree regression, and random forest ensembles.</li>
+    </ul>
+
+    <h2>4. Downstream Inference &amp; Validation</h2>
+    <ul>
+        <li><strong>Assumptions of Linear Regression:</strong> Rigorous boundary requirements that must be met to ensure ordinary least squares estimators remain statistically valid. These dictate verifying data linearity, an absence of multicollinearity across variables, residual normality shapes, homoscedasticity, and zero autocorrelation among error entries.</li>
+        <li><strong>Confidence Intervals:</strong> An inferential range computed around calculated regression coefficients to reveal parameter estimation volatility. A standard 95% threshold establishes the exact boundary zone likely to contain the true population slope vector.</li>
+        <li><strong>Linear Regression with Scikit-learn:</strong> Implementing regression architectures within a modular machine learning pipeline using Python's <code>scikit-learn</code> package to initialize estimators, fit weight coefficients, and generate test set target evaluations.</li>
+    </ul>
+
+</body>
+</html>
