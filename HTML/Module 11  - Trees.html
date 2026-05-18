@@ -1,1 +1,197 @@
-<p>There are several terms and concepts explained throughout the document you provided. Here is a brief definition and explanation for each:</p><p><strong>Intercept</strong> In linear regression, the intercept is the value of the dependent variable when all independent variables are zero. It can be thought of as the starting point of the regression line.</p><p><strong>Classification (Logistic Regression)</strong> A statistical method used to predict the probability of a binary outcome (yes or no, true or false).</p><p><strong>Decision Tree</strong> A decision support tool that uses a tree-like model to map decisions and their possible consequences.</p><p><strong>Decision Tree Terms</strong></p><ul><li>Root Node: The initial node in the decision tree.</li><li>Decision Node: A node in a decision tree where a decision is made based on a feature.</li><li>Splitting: Dividing a node into sub-nodes based on a decision rule.</li><li>Leaf/Terminal Node: A node with no children or sub-nodes.</li><li>Branch: A section of a decision tree connecting nodes.</li><li>Pruning: Eliminating branches and nodes to simplify the tree.</li><li>Parent / Children: The relationship between nodes and their sub-nodes.</li></ul><p><strong>Splitting Trees</strong> The process of dividing a node in a decision tree into two or more sub-nodes based on a feature, aiming to increase information gain or reduce uncertainty.</p><p><strong>Information Gain</strong> A metric used to measure the reduction in entropy (uncertainty) achieved by splitting a dataset based on a specific feature.</p><p><strong>Gini Impurity</strong> A measure of the probability of misclassifying a randomly chosen element from a set.</p><p><strong>Entropy</strong> A measure of uncertainty or disorder in a dataset. In decision trees, it is used to determine the optimal splits.</p><p><strong>Gain Ratio</strong> A modification of information gain used in decision trees to select the best feature to split on.</p><p><strong>Random Forests</strong> An ensemble learning method that combines multiple decision trees to improve prediction accuracy and reduce overfitting.</p><p><strong>Ensemble Learning</strong> A machine-learning approach where multiple models are combined to solve a problem.</p><p><strong>Hyperparameters</strong> Parameters used to control the learning process of a machine learning model, typically set before training begins.</p><p><strong>Grid Search</strong> A method for hyperparameter tuning where different combinations of hyperparameters are tested, and the combination with the best performance is selected.</p><p><strong>Cross-Validation</strong> A technique used to evaluate the performance of a machine learning model on unseen data by partitioning the data into subsets for training and testing. </p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 11 - Decision Trees &amp; Ensembles</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #ffffff;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Core Typography Styles (GitHub Markdown Flavor) */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        ul {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-top: 0.4em;
+            margin-bottom: 0.4em;
+        }
+        code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        }
+        
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Structural Block Layout */
+        .anatomy-box {
+            background-color: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+        .anatomy-box h3 {
+            margin-top: 0;
+            color: #24292e;
+            border-bottom: 1px solid #e1e4e8;
+            padding-bottom: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../modules.html">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <a href="../modules.html" class="back-link">← Back to Modules Directory</a>
+
+    <!-- Main Content -->
+    <h1>Module 11 - Decision Trees &amp; Ensembles</h1>
+    <p class="intro-text">This study reference evaluates non-parametric tree-based models and multi-estimator ensemble systems. It outlines structural branching logic, recursive data partitioning rules, variance reduction, and algorithmic hyperparameter optimization pipelines.</p>
+
+    <h2>1. Classification &amp; Baseline Models</h2>
+    <ul>
+        <li><strong>Intercept:</strong> In linear modeling architectures, the intercept represents the expected conditional value of the dependent variable when all fluid independent predictor features equal exactly zero. It establishes the baseline geometric origin of a regression hyperplane.</li>
+        <li><strong>Classification (Logistic Regression):</strong> A parametric statistical classification method used to estimate the categorical probability of a discrete binary outcome (e.g., matching true or false states).</li>
+        <li><strong>Decision Tree:</strong> A non-parametric supervised learning algorithm that maps analytical decisions and their subsequent downstream conditional consequences using a recursive, hierarchical tree architecture.</li>
+    </ul>
+
+    <h2>2. Decision Tree Anatomy &amp; Partitioning Logic</h2>
+    <p>Decision tree models segments input matrices into uniform neighborhood zones using explicit node relationships:</p>
+
+    <div class="anatomy-box">
+        <h3>Structural Nomenclature</h3>
+        <ul>
+            <li><strong>Root Node:</strong> The initial, top-level node in a tree model containing the entire un-partitioned data cohort before any splitting filters are introduced.</li>
+            <li><strong>Decision Node:</strong> An internal node where a feature variance evaluation occurs, branching data rows into downstream paths based on a specific threshold cutoff rule.</li>
+            <li><strong>Branch:</strong> A directional geometric connection line tracking the flow of data points between parent and child nodes.</li>
+            <li><strong>Leaf / Terminal Node:</strong> A final end-node containing no child sub-nodes; it assigns the final predictive classification label or numerical average to the instances captured inside its boundaries.</li>
+            <li><strong>Parent / Children Relationship:</strong> The hierarchical link defining a node (parent) and the subsequent sub-nodes (children) generated directly below it by a partitioning split.</li>
+            <li><strong>Splitting Trees:</strong> The recursive algorithmic task of dividing an active parent node into multiple distinct sub-nodes based on an optimized feature threshold rule, aiming to minimize regional error or maximize information gain.</li>
+            <li><strong>Pruning:</strong> The systematic removal of structural branches and internal nodes to simplify tree depth. This technique cuts back model complexity to mitigate overfitting on training noise.</li>
+        </ul>
+    </div>
+
+    <h2>3. Splitting Metrics &amp; Impurity Criteria</h2>
+    <p>To establish optimal split coordinates, classification tree routines evaluate mathematical disorder metrics across target classes:</p>
+    <ul>
+        <li><strong>Entropy:</strong> A measure of uncertainty or probabilistic disorder within a dataset slice. In tree construction, it evaluates class impurity to optimize split points, tracking from 0 (perfect homogeneity) to 1 (uniform dispersion across classes).</li>
+        <li><strong>Information Gain:</strong> The numerical reduction in entropy achieved across a dataset by partitioning instances along a targeted feature split boundary. Trees select the exact node split that maximizes this information yield.</li>
+        <li><strong>Gini Impurity:</strong> A structural alternative metric measuring the probability that a randomly selected element from a subset would be incorrectly labeled if categorized randomly according to the class distribution within that sub-zone. Often used as the default criterion in CART models.</li>
+        <li><strong>Gain Ratio:</strong> A modification of standard information gain that incorporates a split information penalty to compensate for feature bias. This prevents the selection engine from over-partitioning data based on high-cardinality attributes that feature too many unique discrete categories.</li>
+    </ul>
+
+    <h2>4. Ensemble Architectures &amp; Tuning Pipelines</h2>
+    <p>Ensemble systems combine multiple standalone models into a unified framework to overcome local instability and limit variance propagation:</p>
+    <ul>
+        <li><strong>Ensemble Learning:</strong> A meta-learning framework where multiple separate machine learning models (weak base estimators) are trained and aggregated into a single system to maximize prediction robustness and curb error margins.</li>
+        <li><strong>Random Forests:</strong> A powerful ensemble method applying bootstrap aggregation (bagging) over un-pruned decision trees. It reduces variance by creating hundreds of uncorrelated trees built on random data rows and random feature subsets, resolving the overfitting risks of single deep trees.</li>
+        <li><strong>Hyperparameters:</strong> External operational settings calibrated by an engineer prior to training loops (e.g., maximum tree depth limits, minimum leaf sample counts, or forest tree quantities) that dictate how the model extracts parameters.</li>
+        <li><strong>Grid Search:</strong> An exhaustive hyperparameter optimization strategy that trains models across every potential parameter combination defined along a configured grid space, selecting the array that maximizes cross-validation validation scores.</li>
+        <li><strong>Cross-Validation:</strong> A resampling validation technique that partitions input matrices into rotating training and testing folds, ensuring model performance metrics remain accurate, stable, and resilient against data leaks.</li>
+    </ul>
+
+</body>
+</html>
