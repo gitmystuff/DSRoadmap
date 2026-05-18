@@ -1,1 +1,175 @@
-<ol><li><strong>Cross Validation:</strong> A technique used to evaluate the performance of a machine learning model by partitioning data into training and testing sets multiple times. This helps assess how well the model generalizes to new, unseen data and avoids overfitting.<br /></li><li><strong>Overfitting:</strong> Occurs when a model learns the training data too well, including noise and irrelevant patterns, leading to poor performance on new data.<br /></li><li><strong>Underfitting:</strong> Occurs when a model is too simple to capture the underlying patterns in the data, resulting in poor performance on both training and test data.<br /></li><li><strong>Out-of-Sample Testing:</strong> Similar to cross-validation, it involves testing a model on data not used during training to estimate its real-world performance.<br /></li><li><strong>K-fold Cross-Validation:</strong> A specific cross-validation technique where data is divided into k equal-sized folds. The model is trained on k-1 folds and tested on the remaining fold. This process is repeated k times, with each fold used as the test set once.<br /></li><li><strong>Repeated Random Subsampling:</strong> A cross-validation method where data is randomly split into training and testing sets multiple times. It's less common than k-fold cross-validation because some data points might never be included in the test set, and others might be included more than once.<br /></li><li><strong>Decision Tree Classifier:</strong> A machine learning model that uses a tree-like structure to make decisions based on a series of rules inferred from the data. It's used as an example in the document to demonstrate cross-validation.<br /></li><li><strong>Supervised Learning:</strong> A type of machine learning where models learn from labeled data (input-output pairs) to predict outcomes for new, unseen data.<br /></li><li><strong>Unsupervised Learning:</strong> A type of machine learning where models learn from unlabeled data to discover patterns, structures, or relationships in the data. <br /></li></ol>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 11 - Resampling &amp; Cross Validation Workflows</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #ffffff;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Core Typography Styles (GitHub Markdown Flavor) */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        ul, ol {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-top: 0.4em;
+            margin-bottom: 0.4em;
+        }
+        
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Group Containers */
+        .paradox-box {
+            background-color: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        .paradox-title {
+            margin-top: 0;
+            font-weight: 600;
+            color: #24292e;
+            border-bottom: 1px solid #e1e4e8;
+            padding-bottom: 6px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../modules.html">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <a href="../modules.html" class="back-link">← Back to Modules Directory</a>
+
+    <!-- Main Content -->
+    <h1>Module 11 - Cross Validation</h1>
+    <p class="intro-text">This structural reference guide defines validation architectures engineered to secure model parsimony and map generalization capabilities across unobserved coordinate points.</p>
+
+    <h2>1. Learning Paradigms &amp; Estimator Topologies</h2>
+    <ul>
+        <li><strong>Supervised Learning:</strong> A structural machine learning paradigm where algorithmic estimators optimize parameter weights using explicitly labeled dataset matrices mapping paired historical inputs to known target outputs.</li>
+        <li><strong>Unsupervised Learning:</strong> A paradigm where algorithmic models parse unstructured, unlabeled datasets to natively discover intrinsic patterns, latent structures, cluster spaces, or joint probability distribution behaviors.</li>
+        <li><strong>Decision Tree Classifier:</strong> A non-parametric supervised learning algorithm that maps analytical decisions and their subsequent downstream conditional consequences using a recursive, hierarchical tree architecture. Often serving as the baseline algorithmic target when demonstrating validation performance workflows.</li>
+    </ul>
+
+    <h2>2. The Generalization Bounds Paradox</h2>
+    <p>Calibrating predictive architectures requires constant monitoring of the structural errors that skew model optimization:</p>
+
+    <div class="paradox-box">
+        <div class="paradox-title">Overfitting vs. Underfitting</div>
+        <ul>
+            <li><strong>Overfitting:</strong> Manifests when an estimator models training data nuances too deeply, encoding localized system noise, non-replicable outliers, and arbitrary training patterns. The model becomes overly complex, achieving perfect training error reduction at the cost of high variance and generalized collapse on fresh validation targets.</li>
+            <li><strong>Underfitting:</strong> Occurs when the configured algorithm structure is too simple to map the underlying patterns inside the data matrix. The model fails to adequately learn the training relationships, producing elevated error bounds across both its training and testing partitions.</li>
+        </ul>
+    </div>
+
+    <h2>3. Resampling &amp; Validation Architectures</h2>
+    <ul>
+        <li><strong>Cross Validation:</strong> A robust statistical evaluation technique deployed to approximate an estimator's genuine out-of-sample capability. By iteratively partitioning data rows into distinct training and testing blocks multiple times, it yields an unbiased estimation of real-world performance bounds and prevents data-leak overfitting.</li>
+        <li><strong>Out-of-Sample Testing:</strong> The programmatic task of evaluating an optimized model's predictive accuracy against validation data frames completely excluded during the parameter training phase.</li>
+        <li><strong>K-fold Cross-Validation:</strong> A rigorous cross-validation technique where the primary data array is divided into <code>k</code> equal-sized, contiguous partitions or folds. The model runs sequentially through <code>k</code> iterations, training across <code>k - 1</code> folds while reserving the remaining standalone fold to serve as the active validation testing set—ensuring every data point is tested exactly once.</li>
+        <li><strong>Repeated Random Subsampling:</strong> An alternative validation mechanism where data matrices are randomly split into arbitrary training and testing segments over independent iterations. It is structurally less common than standard K-fold methods because certain coordinate rows risk being completely excluded from the testing slice, while others are sampled multiple times.</li>
+    </ul>
+
+</body>
+</html>
