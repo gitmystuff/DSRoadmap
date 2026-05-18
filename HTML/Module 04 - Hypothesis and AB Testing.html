@@ -1,1 +1,199 @@
-<p>Here are brief definitions and explanations for the terms and concepts presented in the document:</p><p><strong>Hypothesis Testing</strong></p><ul><li><strong>A/B testing</strong> is a randomized experimentation process wherein two or more versions of a variable are shown to different segments of website visitors at the same time to determine which version drives business metrics best.</li><li><strong>Population</strong> is the entire group of individuals or objects that a study is interested in.</li><li><strong>Sample</strong> is a subset of the population that is selected for study.</li><li><strong>Sample mean</strong> is the average of the values in a sample.</li><li><strong>Sample variability</strong> is the degree to which the values in a sample differ from each other.</li><li><strong>Null hypothesis</strong> is a statement that there is no difference between two groups or that there is no relationship between two variables.</li><li><strong>Confidence interval</strong> is a range of values that is likely to contain the true population parameter.</li><li><strong>Type I error</strong> is the rejection of a true null hypothesis.</li><li><strong>Type II error</strong> is the failure to reject a false null hypothesis.</li><li><strong>P-value</strong> is the probability of obtaining a test statistic as extreme as or more extreme than the one observed, assuming that the null hypothesis is true.</li><li><strong>Statistical significance</strong> is a measure of how likely it is that an observed effect is due to chance.</li><li><strong>Statistical power</strong> is the probability that a test will correctly reject a false null hypothesis.</li><li><strong>Minimum detectable effect</strong> is the smallest effect size that a study is designed to detect.</li><li><strong>Practical significance</strong> is a measure of whether an effect is large enough to be meaningful in the real world.</li></ul><p><strong>Probability Density Function (PDF)</strong></p><ul><li>The PDF is a function that describes the probability of a random variable taking on a given value.</li></ul><p><strong>Cumulative Density Function (CDF)</strong></p><ul><li>The CDF is a function that describes the probability that a random variable will take on a value less than or equal to a given value.</li></ul><p><strong>Percent Point Function (PPF)</strong></p><ul><li>The PPF is the inverse of the CDF. It gives the value of the random variable for which the CDF has a given value.</li></ul><p><strong>Parametric and Non-Parametric Tests</strong></p><ul><li><strong>Parametric tests</strong> are statistical tests that make assumptions about the distribution of the data.</li><li><strong>Non-parametric tests</strong> are statistical tests that do not make assumptions about the distribution of the data.</li></ul><p><strong>t-Test</strong></p><ul><li><strong>Student's t-test</strong> is a statistical test used to determine if there is a significant difference between the means of two groups.</li><li><strong>One-sample t-test</strong> is used to test whether the mean of a single sample is equal to a specified value.</li><li><strong>Independent two-sample t-test</strong> is used to test whether the means of two independent samples are equal.</li></ul><p><strong>z-Test</strong></p><ul><li>A statistical test used to determine if there is a significant difference between the means of two groups when the variances are known.</li></ul><p><strong>Chi-Square Test</strong></p><ul><li>A statistical test used to determine if there is a significant association between two categorical variables.</li></ul><p><strong>ANOVA (Analysis of Variance)</strong></p><ul><li>A statistical test used to compare the means of two or more groups.</li></ul><p><strong>Kruskal-Wallis Test</strong></p><ul><li>A non-parametric test used to compare the distributions of two or more groups.</li></ul><p><strong>A/A Testing</strong></p><ul><li>A type of A/B testing where both groups are given the same treatment to validate the test setup.</li></ul><p><strong>AB Testing</strong></p><ul><li>A statistical method used to compare two or more versions of a webpage, app, or other product to see which one performs better.</li></ul><p><strong>Overall Evaluation Criterion (OEC)</strong></p><ul><li>A quantitative measure of the experiment's objective.</li></ul><p><strong>Gaurdrail Metrics</strong></p><ul><li>Business metrics designed to indirectly measure business value and provide alerts about any potentially misleading or erroneous results and analysis.</li></ul><p><strong>Randomization Unit</strong></p><ul><li>A who or what randomly assigned to a group.</li></ul><p><strong>Data Leakage (Interference)</strong></p><ul><li>The behavior of the control group is influenced by the treatment given to the test group.</li></ul><p><strong>SUTVA Assumptions</strong></p><ul><li>The Stable Unit Treatment Value Assumption (SUTVA) is a key assumption that is usually made in causal inference.</li></ul><p><strong>Minimum Detectable Effect (MDE)</strong></p><ul><li>The smallest improvement you are willing to be able to detect.</li></ul><p><strong>Practical, or Substantive, Significance</strong></p><ul><li>The importance, or meaningfulness, of a statistically significant result.</li></ul><p><strong>Significance Level</strong></p><ul><li>The probability of rejecting a null hypothesis when it is true.</li></ul><p><strong>Statistical Power</strong></p><ul><li>The probability of correctly identifying the effect when there is one.</li></ul><p><strong>Effect Size</strong></p><ul><li>A quantitative measure of the magnitude of a phenomenon.</li></ul><p><strong>Pooled Variance</strong></p><ul><li>A method for estimating the variance of a population when the variances of different samples from that population are assumed to be equal.</li></ul><p><strong>Conversion Rates</strong></p><ul><li>The percentage of users who take a desired action.</li></ul><p><strong>Lift</strong></p><ul><li>The percentage change in a metric between a test group and a control group.</li></ul><p><strong>Discrete Metrics</strong></p><ul><li>Metrics that can only take on a finite number of values.</li></ul><p><strong>Continuous Metrics</strong></p><ul><li>Metrics that can take on any value within a given range. </li></ul><p>You're absolutely correct! I apologize for missing those definitions in my previous response. Here are the definitions and explanations for the terms and concepts you pointed out:</p><p><strong>Kolmogorov-Smirnov Test for Normality</strong></p><ul><li>A statistical test used to determine if a dataset follows a normal distribution.</li></ul><p><strong>Chi-Square Test for Independence</strong></p><ul><li>A statistical test used to determine if there is a significant association between two categorical variables.</li></ul><p><strong>Sample Ratio Mismatch (SRM)</strong></p><ul><li>A phenomenon that can occur in A/B testing when the ratio of users in the control group to users in the treatment group is not what was intended.</li></ul><p><strong>Fisher's Exact Test</strong></p><ul><li>A statistical test used to determine if there is a significant association between two categorical variables when the sample size is small.</li></ul><p><strong>Welch's t-test</strong></p><ul><li>A statistical test used to compare the means of two groups when the variances of the two groups are not assumed to be equal.</li></ul><p><strong>OOP (Object-Oriented Programming)</strong></p><ul><li>A programming paradigm that is based on the concept of objects, which can contain data and code.</li></ul><p><strong>Python Builtins</strong></p><ul><li>Functions and constants that are available in Python without the need to import any modules. </li></ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 04 - Hypothesis and AB Testing</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #ffffff;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Core Typography Styles (GitHub Markdown Flavor) */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        ul {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-top: 0.4em;
+            margin-bottom: 0.4em;
+        }
+        code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        }
+        
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            color: #586069;
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../modules.html">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <a href="../modules.html" class="back-link">← Back to Modules Directory</a>
+
+    <!-- Main Content -->
+    <h1>Module 04 - Hypothesis and AB Testing</h1>
+    <p class="intro-text">This comprehensive study guide unifies theoretical inferential testing parameters with practical online experimentation systems, product metric definitions, causal inference rules, and standard statistical test selections.</p>
+
+    <h2>1. A/B Testing Frameworks &amp; Industrial Architecture</h2>
+    <ul>
+        <li><strong>A/B Testing:</strong> A randomized experimentation process wherein two or more versions of a structural variable (e.g., variant A and B) are shown to separate, isolated segments of website users concurrently to extract performance data and determine which setup optimizes core business metrics best.</li>
+        <li><strong>A/A Testing:</strong> An alternative deployment approach where both split cohorts are given the exact same treatment. Used as a structural baseline sanity verification to ensure the tracking pipelines, splitting hashes, and statistical tools match expected error rates before assigning treatments.</li>
+        <li><strong>Overall Evaluation Criterion (OEC):</strong> A balanced, continuous, or composite quantitative metric defining the primary objective parameter of an experiment.</li>
+        <li><strong>Guardrail Metrics:</strong> Secondary business metrics designed to track systemic health or organizational values (e.g., site latency, error pages). Used to trigger diagnostic alerts regarding misleading or broken analysis setups.</li>
+        <li><strong>Randomization Unit:</strong> The discrete entity or user ID randomly mapped to an experimental treatment or control bucket.</li>
+        <li><strong>Data Leakage (Interference):</strong> Systemic pollution occurring when the true behavior of the control pool is actively influenced or shifted by the treatment assigned to the test group.</li>
+        <li><strong>SUTVA Assumptions:</strong> The Stable Unit Treatment Value Assumption. A core pillar in causal inference requiring that the potential treatment outcome of any single experimental unit remains independent of the allocation mechanics of all other units.</li>
+        <li><strong>Conversion Rates:</strong> The specific percentage of targeted users who complete a desired down-funnel tracking event or macro action.</li>
+        <li><strong>Lift:</strong> The proportional percentage shift calculated in a targeted metric between the active treatment group and the baseline control group.</li>
+        <li><strong>Sample Ratio Mismatch (SRM):</strong> A critical mathematical discrepancy manifesting when the empirical ratio of observed user sample sizes across control and variant buckets varies significantly from the design target allocation, pointing to systemic pipeline bias.</li>
+    </ul>
+
+    <h2>2. Experimental Metrics &amp; Operational Thresholds</h2>
+    <ul>
+        <li><strong>Population:</strong> The theoretical entire universe of data rows, entities, or objects that a researcher desires to run inference against.</li>
+        <li><strong>Sample:</strong> A selected, mathematically small subset of a parent population captured to undergo active tracking.</li>
+        <li><strong>Sample Mean:</strong> The calculated average boundary tracking score of a sample matrix.</li>
+        <li><strong>Sample Variability:</strong> The structural degree to which discrete rows within a sample distribution diverge or spread away from each other.</li>
+        <li><strong>Discrete Metrics:</strong> Metrics bounded to capture only countable integer spaces or finite categorical flags.</li>
+        <li><strong>Continuous Metrics:</strong> Floating-point parameters capable of shifting to any infinite numerical decimal value within an active range.</li>
+        <li><strong>Null Hypothesis:</strong> The default baseline position dictating an absolute absence of a relationship shift or true difference between treatment buckets.</li>
+        <li><strong>P-value:</strong> The exact mathematical probability of observing sample outcomes at least as extreme as the empirical data gathered, given that the null hypothesis holds true.</li>
+        <li><strong>Confidence Interval:</strong> An inferential boundary range structured to encapsulate the true underlying population parameter with a chosen accuracy percentage.</li>
+        <li><strong>Type I Error:</strong> The incorrect rejection of a valid, true null hypothesis (False Positive). Controlled explicitly by the <strong>Significance Level</strong>.</li>
+        <li><strong>Type II Error:</strong> Failing to reject an invalid, false null hypothesis when a real effect exists (False Negative). Inverse parameter bounds control <strong>Statistical Power</strong> (the likelihood of correctly identifying a treatment effect).</li>
+        <li><strong>Effect Size:</strong> A standardized, quantitative score capturing the raw structural magnitude of a relationship between features.</li>
+        <li><strong>Minimum Detectable Effect (MDE):</strong> The absolute lowest, most sensitive threshold improvement or effect size an experiment is mathematically powered to capture.</li>
+        <li><strong>Practical or Substantive Significance:</strong> Evaluating whether an isolated statistically significant change is structurally large enough to justify the real-world operational or economic overhead of a project.</li>
+        <li><strong>Pooled Variance:</strong> A parametric optimization approach applied to combine separate sample standard deviations when the parent source parameters are assumed identical.</li>
+    </ul>
+
+    <h2>3. Statistical Engine &amp; Density Transformations</h2>
+    <ul>
+        <li><strong>Probability Density Function (PDF):</strong> A continuous function defining the relative probability density layer of a continuous random variable tracking near a targeted coordinate point.</li>
+        <li><strong>Cumulative Density Function (CDF):</strong> A function modeling the cumulative probability space that a random variable tracks less than or precisely equal to a targeted value.</li>
+        <li><strong>Percent Point Function (PPF):</strong> The inverse calculation of the standard CDF. Maps an array of targeted probability thresholds back to their coordinate location parameter on a random variable distribution.</li>
+    </ul>
+
+    <h2>4. Parametric vs. Non-Parametric Test Directories</h2>
+    <ul>
+        <li><strong>Parametric Tests:</strong> Statistical evaluation structures built on explicit structural assumptions regarding the shape and distribution of the source data layer (e.g., tracking a continuous normal shape).</li>
+        <li><strong>Non-Parametric Tests:</strong> Distribution-free algorithmic tests that execute validation comparisons without placing mathematical constraints or assumptions on raw data distributions.</li>
+        <li><strong>z-Test:</strong> A parametric test routine applied to gauge differences across sample means when the parent population variances are completely known.</li>
+        <li><strong>Student's t-test:</strong> An foundational parametric testing framework comparing means across two groups when population variances must be calculated from empirical data. Splits down into a <strong>One-sample t-test</strong> (matching an individual sample against a constant) and an <strong>Independent two-sample t-test</strong> (comparing two distinct user cohorts).</li>
+        <li><strong>Welch's t-test:</strong> An optimized parametric version of the two-sample t-test utilized when the compared user segments do not share equal variances.</li>
+        <li><strong>ANOVA (Analysis of Variance):</strong> A parametric framework used to compare mean parameters across three or more population groups simultaneously.</li>
+        <li><strong>Kruskal-Wallis Test:</strong> A distribution-free, non-parametric alternative to ANOVA used to compare the rank distributions across three or more cohorts without checking for normality.</li>
+        <li><strong>Chi-Square Test for Independence:</strong> A non-parametric test used to determine if a significant structural association exists between two categorical variables tracking inside a contingency matrix.</li>
+        <li><strong>Fisher's Exact Test:</strong> A specialized non-parametric routine used to parse associations within discrete categorical vectors when sample sizes drop too low to support Chi-Square approximations.</li>
+        <li><strong>Kolmogorov-Smirnov Test for Normality:</strong> A continuous non-parametric test tracking empirical distribution shapes against a reference distribution to check for general normality violations.</li>
+    </ul>
+
+    <h2>5. Software Engineering Foundations</h2>
+    <ul>
+        <li><strong>OOP (Object-Oriented Programming):</strong> A fundamental modular code layout paradigm mapping software logic into decoupled object classes that bundle relevant internal variables (data structures) and methods together.</li>
+        <li><strong>Python Builtins:</strong> The foundational array of structural functions, exceptions, and constants instantly exposed in memory by runtime interpreters without demanding external library imports or package declarations.</li>
+    </ul>
+
+</body>
+</html>
