@@ -1,1 +1,207 @@
-<p><strong>Weights</strong></p><ul><li>Weights are values that determine the strength of the connections between neurons in the network. During training, weights are adjusted to map input features to the desired output.</li></ul><p><strong>Biases</strong></p><ul><li>Each neuron has a bias, which is an offset that allows the neuron to activate even when the weighted sum of its inputs is zero. Biases provide flexibility, enhance representation capabilities, and improve learning efficiency.</li></ul><p><strong>Learning Rate</strong></p><ul><li>The learning rate controls how much the model's parameters (weights and biases) are adjusted during each iteration of the training process. Choosing the right learning rate is critical for successful training.</li></ul><p><strong>Forward Propagation</strong></p><ul><li>Forward propagation is the process of passing the input data through the neural network to get the output. The output of one layer becomes the input to the next layer.</li></ul><p><strong>Sigmoid Function</strong></p><ul><li>The sigmoid function is a mathematical function with an &quot;S&quot;-shaped curve, used as an activation function in neural networks to introduce non-linearity. The output of the sigmoid function is always between 0 and 1, making it useful for representing probabilities.</li></ul><p><strong>Backpropagation</strong></p><ul><li>Backpropagation is the algorithm used to train neural networks. It calculates how much each weight and bias contributes to the overall error and updates those parameters to improve the network's accuracy.</li></ul><p><strong>Sigmoid Derivative</strong></p><ul><li>The sigmoid derivative plays a crucial role in the backpropagation algorithm. It tells us how much the output of the sigmoid function changes with respect to a small change in its input.</li></ul><p><strong>Gradient Descent Update Formula</strong></p><ul><li>The gradient descent update formula represents the gradient descent update rule. It describes how the parameters (weights and biases) are adjusted based on the gradient of the error function.</li></ul><p><strong>Input Data (x)</strong></p><ul><li>The input data (x) contains the features that the neural network will use to learn and make predictions. Each row in x represents a different sample or data point, and each column represents a different feature.</li></ul><p><strong>Target Output (y)</strong></p><ul><li>The target output (y) contains the corresponding target output or labels for each sample in x. These labels represent the desired outcome or prediction that the neural network should learn to produce.</li></ul><p><strong>Training the Neural Network</strong></p><ul><li>The purpose of x and y is to train the neural network to learn a mapping between the input features and the target output.</li></ul><p><strong>Prediction</strong></p><ul><li>After training, the neural network can be used to predict the output for new input data.</li></ul><p><strong>CPUs, T4 GPUs, and TPU v2-8s</strong></p><ul><li>These are different types of processors with varying strengths and weaknesses. CPUs are general-purpose processors, T4 GPUs are parallel processors well-suited for deep learning, and TPU v2-8s are custom-designed processors specifically for machine learning and AI workloads. </li></ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 12 - Deep Learning &amp; Artificial Neural Networks</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #ffffff;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Core Typography Styles (GitHub Markdown Flavor) */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        ul {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-top: 0.4em;
+            margin-bottom: 0.4em;
+        }
+        code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        }
+        
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Group Containers */
+        .anatomy-box {
+            background-color: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        .anatomy-box h3 {
+            margin-top: 0;
+            font-weight: 600;
+            color: #24292e;
+            border-bottom: 1px solid #e1e4e8;
+            padding-bottom: 6px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../modules.html">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <a href="../modules.html" class="back-link">← Back to Modules Directory</a>
+
+    <!-- Main Content -->
+    <h1>Module 12 - Deep Learning Foundations</h1>
+    <p class="intro-text">This structural reference guide compiles core concepts spanning the architecture and training optimization loops of Artificial Neural Networks (ANNs).</p>
+
+    <h2>1. Data Matrix Definitions &amp; Pipelines</h2>
+    <ul>
+        <li><strong>Input Data (x):</strong> The design feature matrix used by the network to map structural variations. Each row corresponds to a separate independent observation instance sample, and each column translates to a unique feature attribute.</li>
+        <li><strong>Target Output (y):</strong> The companion vector containing ground-truth classification labels or true continuous target outcomes matching each sample record inside the input space <code>x</code>.</li>
+        <li><strong>Training the Network:</strong> The iterative optimization process of passing input pairs (<code>x</code> and <code>y</code>) into the computational stack to force the algorithm to establish a generalized mapping function between input features and desired outcomes.</li>
+        <li><strong>Prediction (Inference):</strong> Deploying a fully optimized, trained neural network architecture to estimate or classify outcomes for fresh, unobserved input data matrices.</li>
+    </ul>
+
+    <h2>2. Anatomy of an Artificial Neuron</h2>
+    <p>Neural networks stack layers of individual nodes (neurons) that use parameters to weigh features:</p>
+    
+    
+    
+    <div class="anatomy-box">
+        <h3>Parametric Elements</h3>
+        <ul>
+            <li><strong>Weights:</strong> Continuous numerical parameters that establish the transmission strength and scaling significance of connections passing between layer nodes. They function as feature weights, scaling the relative input values dynamically during training loops.</li>
+            <li><strong>Biases:</strong> An individual numeric offset tracking with each node, allowing the node to trigger an activated output even when the collective weighted sum of incoming signals evaluates to zero. This provides flexibility and shifts the activation curve along the input axis.</li>
+            <li><strong>Learning Rate (&alpha;):</strong> A critical hyperparameter controlling the exact step size magnitude used by optimization algorithms when adjusting internal weights and biases following error evaluations.</li>
+        </ul>
+    </div>
+
+    <h2>3. The Optimization Cycle: Forward &amp; Backward Propagation</h2>
+    <p>Network training operates as a continuous cyclic loop of forward mapping execution and backward parameter correction adjustments:</p>
+    
+    
+
+    <h3>Forward Propagation</h3>
+    <p>The forward computational pass where input vectors are propagated through successive layer transformations. The tensor outputs generated by one layer act as the immediate input vectors for the consecutive downstream layer until reaching the final prediction layer.</p>
+    <ul>
+        <li><strong>Sigmoid Function (Activation Function):</strong> A non-linear mathematical activation function that maps continuous un-bounded values into an S-shaped probability distribution bounded strictly between <code>0</code> and <code>1</code>. This introduces non-linearity to allow networks to map complex non-linear classification boundaries.</li>
+    </ul>
+
+    <h3>Backpropagation</h3>
+    <p>The backward-pass training algorithm that evaluates error performance metrics at the output layer and applies the calculus chain rule to calculate the precise partial derivative contribution of every internal weight and bias parameter to the total network error.</p>
+    <ul>
+        <li><strong>Sigmoid Derivative:</strong> A crucial calculus component used during backpropagation. It measures the instantaneous rate of change of the activation curve, indicating how much the sigmoid node output shifts relative to minor variations in its integrated linear inputs.</li>
+        <li><strong>Gradient Descent Update Formula:</strong> The optimization update rule that adjusts weights and biases in the inverse direction of the calculated error gradient to systematically minimize global cost. Represented as:
+            <br><code>Parameter = Parameter - (Learning_Rate * Gradient)</code>
+        </li>
+    </ul>
+
+    <h2>4. Hardware Acceleration Infrastructure</h2>
+    <p>Executing high-dimensional tensor matrix calculations requires matching workloads to specific silicon processing hardware units:</p>
+    <ul>
+        <li><strong>CPUs (Central Processing Units):</strong> General-purpose processors optimized for sequential, high-speed single-thread control logic and varied system software operations.</li>
+        <li><strong>T4 GPUs (Graphics Processing Units):</strong> Massively parallel computing processors featuring thousands of concurrent execution cores, making them well-suited for the matrix-matrix multiplication routines that define deep learning operations.</li>
+        <li><strong>TPU v2-8s (Tensor Processing Units):</strong> Custom application-specific integrated circuits (ASICs) engineered by Google exclusively to accelerate matrix operations in machine learning and AI workloads.</li>
+    </ul>
+
+</body>
+</html>
