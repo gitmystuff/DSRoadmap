@@ -1,1 +1,294 @@
-<p>The document &quot;Module 04 - The Tests.ipynb - Colab.pdf&quot; provides a comprehensive overview of various statistical tests used in hypothesis testing. These tests help determine if there are significant differences between groups or if observed patterns are likely due to chance.</p><p>Here's a breakdown of the tests covered in the document, along with their definitions and use cases:</p><p><strong>1. T-Test</strong></p><ul><li>Definition: A statistical test used to compare the means of two groups. It determines if the difference between the means is statistically significant or likely due to random variation.</li><li>Use Case:<ul><li>One-Sample t-Test: To test if a sample mean is significantly different from a known or hypothesized population mean.</li><li>Independent Two-Sample t-Test: To test if there is a significant difference between the means of two independent groups.</li><li>Paired t-Test: To test if there is a significant difference between the means of two dependent or related groups (not covered in the document).</li></ul></li></ul><p><strong>2. Levene's Test</strong></p><ul><li>Definition: A statistical test used to assess the equality of variances across different groups or samples. It helps determine if the assumption of equal variances is met for tests like ANOVA.</li><li>Use Case: To check the assumption of equal variances before performing tests like ANOVA or t-tests that assume equal variances.</li></ul><p><strong>3. Shapiro-Wilk Test</strong></p><ul><li>Definition: A statistical test used to assess if a dataset follows a normal distribution. It helps determine if the normality assumption is met for tests that require normally distributed data.</li><li>Use Case: To check the normality assumption before performing tests like t-tests or ANOVA that assume normality.</li></ul><p><strong>4. Kolmogorov-Smirnov Test</strong></p><ul><li>Definition: A non-parametric test used to compare a sample with a reference probability distribution (one-sample K-S test) or to compare two samples (two-sample K-S test). It assesses if the samples come from the same distribution.</li><li>Use Case: To test if a dataset follows a specific distribution or if two datasets come from the same distribution, especially when normality assumptions may not be met.</li></ul><p><strong>5. Chi-Square Test for Independence</strong></p><ul><li>Definition: A statistical test used to determine if there is a significant association between two categorical variables. It analyzes the frequencies in a contingency table to assess if the observed differences between groups are likely due to chance.</li><li>Use Case: To test relationships between categorical variables, such as the association between gender and political affiliation or between education level and product preference.</li></ul><p><strong>6. ANOVA (Analysis of Variance)</strong></p><ul><li>Definition: A statistical test used to compare the means of three or more groups. It assesses if there are statistically significant differences between the means of the groups or if the observed differences are due to random variation.</li><li>Use Case: To compare the effectiveness of different treatments, the performance of different groups on a test, or the impact of different factors on a response variable.</li></ul><p><strong>7. Kruskal-Wallis Test</strong></p><ul><li>Definition: A non-parametric test used to compare the distributions of three or more groups. It is an alternative to ANOVA when the data does not meet the assumptions of normality or equal variances.</li><li>Use Case: To compare groups when the data is ordinal or when the assumptions of ANOVA are violated.</li></ul><p><strong>8. Fisher's Exact Test</strong></p><ul><li>Definition: A statistical test used to determine if there are non-random associations between two categorical variables, especially when sample sizes are small. It calculates the exact probability of observing the data in a contingency table, assuming no association between the variables.</li><li>Use Case: To analyze contingency tables with small sample sizes where the chi-square test may not be appropriate.</li></ul><p><strong>9. Z-Test</strong></p><ul><li>Definition: A statistical test used to compare a sample mean to a known population mean when the population standard deviation is known and the data is normally distributed or the sample size is large.</li><li>Use Case: To test hypotheses about population means when the population standard deviation is known.</li></ul><p><strong>10. Welch's t-Test</strong></p><ul><li>Definition: A variation of the independent t-test used when the variances of the two groups being compared are not assumed to be equal. It adjusts the degrees of freedom and provides a more accurate test in cases of unequal variances.</li><li>Use Case: To compare the means of two independent groups when the assumption of equal variances is violated.</li></ul><p><strong>11. Mann-Whitney U Test</strong></p><ul><li>Definition: A non-parametric test used to compare the distributions of two independent groups. It assesses if one group tends to have larger or smaller values than the other.</li><li>Use Case: To compare groups when the data is ordinal or when the assumptions of the t-test are violated.</li></ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 04 - The Tests</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #ffffff;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Core Typography Styles (GitHub Markdown Flavor) */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        ul {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-top: 0.4em;
+            margin-bottom: 0.4em;
+        }
+
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            color: #586069;
+            margin-bottom: 24px;
+        }
+
+        /* Test Card Architecture */
+        .test-card {
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 18px;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .test-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f1f1f1;
+            padding-bottom: 6px;
+            margin-bottom: 12px;
+        }
+        .test-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #24292e;
+            margin: 0;
+        }
+        .badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+        .badge-parametric { background-color: #dbeddb; color: #1c3d1c; }
+        .badge-nonparametric { background-color: #d3e5ef; color: #183040; }
+        .badge-assumption { background-color: #fdecc8; color: #403010; }
+        
+        .field-label {
+            font-weight: 600;
+            color: #24292e;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../modules.html">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <a href="../modules.html" class="back-link">← Back to Modules Directory</a>
+
+    <!-- Main Content -->
+    <h1>Module 04 - The Tests</h1>
+    <p class="intro-text">This document serves as an operational reference directory for classical statistical tests. These frameworks are utilized within inferential pipelines to isolate structural patterns from ambient random variance and determine whether variations observed across samples hold true within the parent populations.</p>
+
+    <h2>1. Parametric Testing Suite</h2>
+    <p>Statistical routines that operate under the explicit assumption that the underlying parent population metrics follow a specified distribution structure.</p>
+
+    <!-- Z-Test -->
+    <div class="test-card">
+        <div class="test-header">
+            <h3 class="test-name">Z-Test</h3>
+            <span class="badge badge-parametric">Parametric</span>
+        </div>
+        <p><span class="field-label">Definition:</span> A statistical test used to compare a sample mean to a known population mean when the population standard deviation is fully known and the data tracks normally (or the sample size is sufficiently large via the CLT).</p>
+        <p><span class="field-label">Primary Use Case:</span> Evaluating hypothesis targets regarding population parameters when true parent variances are pre-calculated and constant.</p>
+    </div>
+
+    <!-- T-Test -->
+    <div class="test-card">
+        <div class="test-header">
+            <h3 class="test-name">T-Test (Student's t-Test)</h3>
+            <span class="badge badge-parametric">Parametric</span>
+        </div>
+        <p><span class="field-label">Definition:</span> A statistical test used to compare the means of two distinct groups to isolate whether calculated differences are statistically significant or driven by random sampling variation.</p>
+        <p><span class="field-label">Primary Use Cases:</span></p>
+        <ul>
+            <li><strong>One-Sample t-Test:</strong> Tests if an empirical sample mean deviates significantly from a specified target or hypothesized baseline parameter.</li>
+            <li><strong>Independent Two-Sample t-Test:</strong> Compares the mean scores of two entirely independent sample segments to verify a true distribution shift.</li>
+        </ul>
+    </div>
+
+    <!-- Welch's t-Test -->
+    <div class="test-card">
+        <div class="test-header">
+            <h3 class="test-name">Welch's t-Test</h3>
+            <span class="badge badge-parametric">Parametric</span>
+        </div>
+        <p><span class="field-label">Definition:</span> An optimized mathematical adaptation of the independent two-sample t-test that adjusts calculated degrees of freedom to account for groups with unequal sample lengths and unequal variances.</p>
+        <p><span class="field-label">Primary Use Case:</span> Comparing means across independent groups when the classic equal variance assumption is explicitly violated.</p>
+    </div>
+
+    <!-- ANOVA -->
+    <div class="test-card">
+        <div class="test-header">
+            <h3 class="test-name">ANOVA (Analysis of Variance)</h3>
+            <span class="badge badge-parametric">Parametric</span>
+        </div>
+        <p><span class="field-label">Definition:</span> An omnibus statistical framework applied to evaluate and compare the sample means of three or more continuous groups simultaneously to confirm whether observed variations stem from true grouping properties or random chance.</p>
+        <p><span class="field-label">Primary Use Case:</span> Evaluating multi-variant treatment arms, tracking multiple product features simultaneously, or assessing multi-class categorical effects on a continuous dependent variable.</p>
+    </div>
+
+    <h2>2. Statistical Assumption Validation Engine</h2>
+    <p>Diagnostic verification tests implemented ahead of parametric pipelines to confirm that distributional requirements are completely satisfied.</p>
+
+    <!-- Shapiro-Wilk Test -->
+    <div class="test-card">
+        <div class="test-header">
+            <h3 class="test-name">Shapiro-Wilk Test</h3>
+            <span class="badge badge-assumption">Assumption Check</span>
+        </div>
+        <p><span class="field-label">Definition:</span> A targeted statistical test used to assess if a continuous sample matrix follows a normal distribution pattern.</p>
+        <p><span class="field-label">Primary Use Case:</span> Running sanity validations on residuals or raw values before launching tests like Student's t-tests or classic ANOVA that assume underlying normality.</p>
+    </div>
+
+    <!-- Levene's Test -->
+    <div class="test-card">
+        <div class="test-header">
+            <h3 class="test-name">Levene's Test</h3>
+            <span class="badge badge-assumption">Assumption Check</span>
+        </div>
+        <p><span class="field-label">Definition:</span> A diagnostic test used to verify the homoscedasticity (equality of variances) across distinct population groups or samples.</p>
+        <p><span class="field-label">Primary Use Case:</span> Verifying the equal-variance assumption before kicking off classic pooled independent t-tests or ANOVA routines.</p>
+    </div>
+
+    <h2>3. Non-Parametric &amp; Distribution-Free Suite</h2>
+    <p>Robust alternative tests used when data scales are ordinal, categorical, or when parametric distribution shapes are completely violated.</p>
+
+    <!-- Kolmogorov-Smirnov Test -->
+    <div class="test-card">
+        <div class="test-header">
+            <h3 class="test-name">Kolmogorov-Smirnov (K-S) Test</h3>
+            <span class="badge badge-nonparametric">Non-Parametric</span>
+        </div>
+        <p><span class="field-label">Definition:</span> A distribution-free test that calculates the maximum empirical distance between a sample and a target reference cumulative distribution (One-Sample K-S) or between two separate sample cumulative distributions (Two-Sample K-S).</p>
+        <p><span class="field-label">Primary Use Case:</span> Testing if an empirical dataset maps cleanly to a known target function shape, or confirming if two source vectors originate from identical parent structures when normality assumptions fail.</p>
+    </div>
+
+    <!-- Mann-Whitney U Test -->
+    <div class="test-card">
+        <div class="test-header">
+            <h3 class="test-name">Mann-Whitney U Test</h3>
+            <span class="badge badge-nonparametric">Non-Parametric</span>
+        </div>
+        <p><span class="field-label">Definition:</span> A non-parametric rank-sum test evaluating whether the distribution scores of two independent groups vary significantly from each other.</p>
+        <p><span class="field-label">Primary Use Case:</span> Serving as a robust distribution-free alternative to the independent two-sample t-test when processing ranked ordinal data or highly skewed, non-normal numeric inputs.</p>
+    </div>
+
+    <!-- Kruskal-Wallis Test -->
+    <div class="test-card">
+        <div class="test-header">
+            <h3 class="test-name">Kruskal-Wallis Test</h3>
+            <span class="badge badge-nonparametric">Non-Parametric</span>
+        </div>
+        <p><span class="field-label">Definition:</span> A non-parametric alternative to one-way ANOVA used to evaluate and compare the overall median rank distributions of three or more independent groups.</p>
+        <p><span class="field-label">Primary Use Case:</span> Comparing multiple groups when data vectors violate normality parameters, variance boundaries, or are bound strictly to ordinal rankings.</p>
+    </div>
+
+    <!-- Chi-Square Test for Independence -->
+    <div class="test-card">
+        <div class="test-header">
+            <h3 class="test-name">Chi-Square Test for Independence</h3>
+            <span class="badge badge-nonparametric">Non-Parametric</span>
+        </div>
+        <p><span class="field-label">Definition:</span> A statistical test analyzing observation counts across an empirical contingency grid to identify if a significant non-random relationship links two discrete categorical features.</p>
+        <p><span class="field-label">Primary Use Case:</span> Testing operational connections between discrete categorical parameters, such as parsing associations between user demographic buckets and feature engagement preferences.</p>
+    </div>
+
+    <!-- Fisher's Exact Test -->
+    <div class="test-card">
+        <div class="test-header">
+            <h3 class="test-name">Fisher's Exact Test</h3>
+            <span class="badge badge-nonparametric">Non-Parametric</span>
+        </div>
+        <p><span class="field-label">Definition:</span> An exact probability calculator that maps out the true hypergeometric probability distribution of cell counts within small discrete contingency tables, removing approximation steps entirely.</p>
+        <p><span class="field-label">Primary Use Case:</span> Evaluating associations inside categorical matrices when dealing with extremely sparse datasets or small sample counts where Chi-Square frequency cell approximations drop below acceptable safety margins (e.g., cell counts less than 5).</p>
+    </div>
+
+</body>
+</html>
