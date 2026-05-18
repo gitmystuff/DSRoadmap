@@ -1,1 +1,199 @@
-<p>The document &quot;Module 02 - Statistics Complete.ipynb - Colab.pdf&quot; provides a comprehensive overview of essential statistical concepts and their applications in data science. It covers a wide range of topics, from basic descriptive statistics to more advanced concepts like skewness, kurtosis, and correlation.</p><p><strong>Here's a detailed outline and summary of key elements and terms:</strong></p><ol><li><strong>Descriptive Statistics<br /></strong><ul><li><strong>Measures of Center</strong>: Mean, median, and mode are used to describe the central tendency of a dataset.</li><li><strong>Normal Distribution</strong>: A bell-shaped probability distribution that is widely used in statistics.</li><li><strong>Measures of Spread</strong>: Variance, standard deviation, and quartiles are used to describe the spread or dispersion of data points around the mean.</li><li><strong>Measures of Shape</strong>: Skewness and kurtosis are used to describe the shape of a distribution.</li></ul></li><li><strong>Correlation<br /></strong><ul><li><strong>Covariance</strong>: A measure of how two variables change together.</li><li><strong>Pearson's r</strong>: A standardized measure of the linear relationship between two continuous variables, ranging from -1 to +1.</li></ul></li><li><strong>Other Important Concepts<br /></strong><ul><li><strong>Inference</strong>: The process of drawing conclusions about a population based on a sample of data.</li><li><strong>Variable</strong>: Any characteristic or attribute that can be measured or counted.</li><li><strong>Outliers</strong>: Data points that are significantly different from other observations in the dataset.</li><li><strong>Moments</strong>: Statistical measures that describe the shape of a distribution, including mean, variance, skewness, and kurtosis.</li><li><strong>Train-Test Split</strong>: A technique used to split a dataset into training and testing sets for machine learning model evaluation.</li></ul></li></ol><p>The document also includes various examples and visualizations to illustrate these concepts and their applications in data analysis.</p><p><strong>Skewness</strong></p><ul><li>A measure of the asymmetry of a probability distribution.</li><li>Indicates the direction and degree to which a distribution leans towards one side of the mean.</li><li>A symmetrical distribution has a skewness of zero.</li><li>A distribution skewed to the right (positive skew) has a longer tail on the right side.</li><li>A distribution skewed to the left (negative skew) has a longer tail on the left side.</li></ul><p><strong>Kurtosis</strong></p><ul><li>A measure of the &quot;tailedness&quot; of a probability distribution.</li><li>Describes how concentrated the data points are around the mean compared to the tails.</li><li>A mesokurtic distribution has a kurtosis similar to a normal distribution.</li><li>A leptokurtic distribution has a higher peak and fatter tails, indicating more extreme values.</li><li>A platykurtic distribution has a lower peak and thinner tails, indicating fewer extreme values. </li></ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 02 - Descriptive Statistics</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #ffffff;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Core Typography Styles (GitHub Markdown Flavor) */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        ul, ol {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-top: 0.4em;
+            margin-bottom: 0.4em;
+        }
+        code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        }
+        
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            color: #586069;
+            margin-bottom: 24px;
+        }
+        
+        .nested-details {
+            background-color: #f6f8fa;
+            border-left: 4px solid #e1e4e8;
+            padding: 10px 16px;
+            margin: 8px 0;
+            border-radius: 0 6px 6px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../modules.html">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <a href="../modules.html" class="back-link">← Back to Modules Directory</a>
+
+    <!-- Main Content -->
+    <h1>Module 02 - Descriptive Statistics</h1>
+    <p class="intro-text">This document provides a comprehensive overview of essential statistical concepts and their applications in data science. It covers a wide range of topics, from basic descriptive statistics to more advanced metrics like skewness, kurtosis, and correlation, complete with instructional visualizations.</p>
+
+    <ol>
+        <li>
+            <strong>Descriptive Statistics</strong>
+            <ul>
+                <li><strong>Measures of Center:</strong> Mean, median, and mode are used to describe the central tendency of a dataset.</li>
+                <li><strong>Normal Distribution:</strong> A bell-shaped probability distribution that is widely used in statistics.</li>
+                <li><strong>Measures of Spread:</strong> Variance, standard deviation, and quartiles are used to describe the spread or dispersion of data points around the mean.</li>
+                <li><strong>Measures of Shape:</strong> Skewness and kurtosis describe the overall topography of a distribution:
+                    <div class="nested-details">
+                        <strong>Skewness:</strong>
+                        <ul>
+                            <li>A measure of the asymmetry of a probability distribution.</li>
+                            <li>Indicates the direction and degree to which a distribution leans towards one side of the mean.</li>
+                            <li>A symmetrical distribution has a skewness of zero.</li>
+                            <li>A distribution skewed to the right (positive skew) has a longer tail on the right side.</li>
+                            <li>A distribution skewed to the left (negative skew) has a longer tail on the left side.</li>
+                        </ul>
+                    </div>
+                    <div class="nested-details">
+                        <strong>Kurtosis:</strong>
+                        <ul>
+                            <li>A measure of the "tailedness" of a probability distribution.</li>
+                            <li>Describes how concentrated the data points are around the mean compared to the tails.</li>
+                            <li>A <em>mesokurtic</em> distribution has a kurtosis similar to a normal distribution.</li>
+                            <li>A <em>leptokurtic</em> distribution has a higher peak and fatter tails, indicating more extreme values.</li>
+                            <li>A <em>platykurtic</em> distribution has a lower peak and thinner tails, indicating fewer extreme values.</li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <strong>Correlation</strong>
+            <ul>
+                <li><strong>Covariance:</strong> A measure of how two variables change together.</li>
+                <li><strong>Pearson's r:</strong> A standardized measure of the linear relationship between two continuous variables, ranging from -1 to +1.</li>
+            </ul>
+        </li>
+
+        <li>
+            <strong>Other Important Concepts</strong>
+            <ul>
+                <li><strong>Inference:</strong> The process of drawing conclusions about a population based on a sample of data.</li>
+                <li><strong>Variable:</strong> Any characteristic or attribute that can be measured or counted.</li>
+                <li><strong>Outliers:</strong> Data points that are significantly different from other observations in the dataset.</li>
+                <li><strong>Moments:</strong> Statistical measures that describe the shape of a distribution, including mean, variance, skewness, and kurtosis.</li>
+                <li><strong>Train-Test Split:</strong> A technique used to split a dataset into training and testing sets for machine learning model evaluation.</li>
+            </ul>
+        </li>
+    </ol>
+
+</body>
+</html>
