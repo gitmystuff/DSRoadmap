@@ -1,1 +1,224 @@
-<p>The Python fitter library is a handy tool for figuring out which probability distribution best matches your data. It does this by fitting various distributions to your data and comparing how well they match. This can be super useful in fields like statistics, data analysis, and machine learning where understanding the underlying distribution of your data is key.</p><p>Here's a breakdown of how it works:</p><p><strong>1. Installation:</strong></p><p>First things first, you need to install the fitter library. You can do this using pip:</p><p>Bash</p><p>pip install fitter</p><p><strong>2. Basic Usage:</strong></p><p>Here's a simple example to illustrate how to use the fitter library:</p><p>Python</p><p>from fitter import Fitter</p><p>import numpy as np</p><p># Generate some sample data</p><p>data = np.random.randn(1000)</p><p># Create a Fitter object</p><p>f = Fitter(data)</p><p># Fit the data to various distributions</p><p>f.fit()</p><p># Print the summary of the best fitting distributions</p><p>f.summary()</p><p>In this example, Fitter tries to fit various distributions to the provided data. The summary() method then shows you the top distributions that best fit your data, along with their parameters.</p><p><strong>3. Specifying Distributions:</strong></p><p>You can also specify which distributions you want fitter to try. This can save time if you have an idea of what kind of distribution your data might follow.</p><p>Python</p><p>f = Fitter(data, distributions=['norm', 'gamma', 't'])</p><p>f.fit()</p><p>f.summary()</p><p><strong>4. Visualizing the Fit:</strong></p><p>The fitter library also lets you visualize how well the distributions fit your data. You can use the hist() and plot_pdf() methods for this.</p><p>Python</p><p>f.hist()</p><p>f.plot_pdf()</p><p><strong>5. Accessing Best Parameters:</strong></p><p>You can get the parameters of the best fitting distribution using the get_best() method.</p><p>Python</p><p>best_params = f.get_best()</p><p>print(best_params)</p><p><strong>Different Ways </strong>fitter<strong> is Used:</strong></p><ul><li><strong>Data Exploration:</strong> When you have a new dataset, fitter can help you understand the underlying distribution of your data.</li><li><strong>Model Selection:</strong> In many statistical and machine learning models, you need to assume a certain distribution for your data. fitter can help you choose the most appropriate distribution.</li><li><strong>Goodness-of-Fit Testing:</strong> You can use fitter to formally test how well a particular distribution fits your data.</li><li><strong>Simulation:</strong> Once you know the best fitting distribution, you can use it to generate synthetic data for simulations or modeling.</li></ul><p><strong>Important Notes:</strong></p><ul><li>The fitter library uses the scipy.stats module under the hood, so it supports a wide range of distributions.</li><li>The fitting process can take some time, especially if you have a large dataset or are trying many distributions.</li><li>It's always a good idea to visually inspect the fit of the distributions to make sure they make sense for your data.</li></ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 03 - Distributions Fitter</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #ffffff;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Core Typography Styles (GitHub Markdown Flavor) */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        ul, ol {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-top: 0.4em;
+            margin-bottom: 0.4em;
+        }
+        
+        /* Code Block Styling */
+        pre {
+            background-color: #f6f8fa;
+            border-radius: 6px;
+            padding: 16px;
+            font-size: 85%;
+            line-height: 1.45;
+            overflow: auto;
+            border: 1px solid #e1e4e8;
+            margin-bottom: 16px;
+        }
+        code {
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 85%;
+            background-color: rgba(27,31,35,0.05);
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+            font-size: 100%;
+        }
+        .code-lang {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #6a737d;
+            font-weight: 600;
+            margin-bottom: 4px;
+            display: block;
+        }
+        
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            color: #586069;
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../modules.html">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <a href="../modules.html" class="back-link">← Back to Modules Directory</a>
+
+    <!-- Main Content -->
+    <h1>Module 03 - Distributions Fitter</h1>
+    <p class="intro-text">The Python <code>fitter</code> library is a robust tool designed to automatically determine which probability distribution best matches an experimental or empirical dataset. By fitting dozens of distributions from <code>scipy.stats</code> under the hood, it systematically compares goodness-of-fit to assist in exploration, pipeline modeling, and synthetic simulations.</p>
+
+    <h2>Implementation Breakdown</h2>
+
+    <p><strong>1. Installation</strong></p>
+    <p>Install the <code>fitter</code> library into your local environment using the <code>pip</code> package manager:</p>
+    <span class="code-lang">Bash</span>
+    <pre><code>pip install fitter</code></pre>
+
+    <p><strong>2. Basic Usage</strong></p>
+    <p>Instantiate the main <code>Fitter</code> object, apply optimization routines, and print out a parsed scoring dataframe via the <code>summary()</code> method:</p>
+    <span class="code-lang">Python</span>
+    <pre><code>from fitter import Fitter
+import numpy as np
+
+# Generate some sample data
+data = np.random.randn(1000)
+
+# Create a Fitter object
+f = Fitter(data)
+
+# Fit the data to various distributions
+f.fit()
+
+# Print the summary of the best fitting distributions
+f.summary()</code></pre>
+    <p>The <code>summary()</code> method displays the top candidate distributions ordered by fitness constraints along with their calculated parameter sets (shape, location, scale).</p>
+
+    <p><strong>3. Specifying Target Distributions</strong></p>
+    <p>To reduce computational overhead, pass an explicit subset array of target distributions to evaluate if the structural properties of your data bounds are already isolated:</p>
+    <span class="code-lang">Python</span>
+    <pre><code>f = Fitter(data, distributions=['norm', 'gamma', 't'])
+f.fit()
+f.summary()</code></pre>
+
+    <p><strong>4. Visualizing the Fit</strong></p>
+    <p>Generate overlay visualizations tracking your empirical histogram counts against the calculated PDFs:</p>
+    <span class="code-lang">Python</span>
+    <pre><code>f.hist()
+f.plot_pdf()</code></pre>
+
+    <p><strong>5. Accessing Optimal Parameters</strong></p>
+    <p>Extract the true optimal parameters dictionary using the <code>get_best()</code> method:</p>
+    <span class="code-lang">Python</span>
+    <pre><code>best_params = f.get_best()
+print(best_params)</code></pre>
+
+    <h2>Applications in Data Engineering</h2>
+    <ul>
+        <li><strong>Data Exploration:</strong> Quickly identify foundational patterns when diagnosing unverified incoming sensor features, target variables, or domain structures.</li>
+        <li><strong>Model Selection:</strong> Verify whether parametric distribution assumptions required by traditional downstream statistical models are satisfied.</li>
+        <li><strong>Goodness-of-Fit Testing:</strong> Serve as an automatic empirical validator before running complex hypothesis tests.</li>
+        <li><strong>Simulation &amp; Generative Testing:</strong> Extract optimal parameter boundaries to generate highly accurate synthetic data streams for validation suites.</li>
+    </ul>
+
+    <h2>Important Notes</h2>
+    <ul>
+        <li>The library calls <code>scipy.stats</code> for continuous and discrete metrics, importing extensive architectural coverage out of the box.</li>
+        <li>Evaluating the full universe of distributions can consume substantial compute cycles on heavy tabular matrices; filtering via a baseline target list is highly recommended.</li>
+        <li>Always couple summary analytics with visual PDF inspections to rule out parameter convergence errors.</li>
+    </ul>
+
+</body>
+</html>
