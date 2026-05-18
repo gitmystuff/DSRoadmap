@@ -1,1 +1,233 @@
-<h3><a id="_rk93jvfdvpkx"></a><strong>Fundamentals</strong></h3><ul><li><strong>Generalized Linear Models (GLMs)</strong>: GLMs are a flexible generalization of ordinary linear regression that allows for response variables that have error distribution models other than a normal distribution.</li></ul><h3><a id="_fcrlwvgqgzkd"></a><strong>Regression and Modeling</strong></h3><ul><li><strong>Polynomial Regression</strong>: Polynomial regression extends linear regression by adding polynomial terms (squared, cubed, etc.) to the model, allowing it to capture non-linear relationships.</li><li><strong>Step Function</strong>: A function that increases or decreases abruptly from one constant value to another.</li><li><strong>Basis Functions</strong>: Basis functions are a set of functions used to represent or approximate other functions. Examples include polynomials, splines, and wavelets.</li><li><strong>Splines</strong>: Splines are piecewise polynomial functions used to create smooth curves. They're useful for interpolating data and approximating complex relationships.</li><li><strong>Smoothing Splines</strong>: Smoothing splines are similar to splines, but they aim to approximate the data without necessarily passing through every data point, which is useful for noisy data.</li><li><strong>Local Regression (LOESS)</strong>: A method that fits a separate regression model to localized subsets of the data, creating a smooth curve by combining these local models.</li></ul><h3><a id="_t8fn2fqopeuh"></a><strong>Link Functions</strong></h3><ul><li><strong>Link Functions</strong>: A link function is a function that connects the linear predictor in a GLM to the expected value of the response variable. Examples include the identity link (for simple linear regression) and the logit link (for logistic regression).<ul><li><strong>Linear</strong>: η(μ)=μ.</li><li><strong>Logistic</strong>: η(μ)=log(μ/(1−μ)).</li><li><strong>Poisson</strong>: η(μ)=log(μ).</li></ul></li></ul><h3><a id="_lytgcx8ca4so"></a><strong>Families</strong></h3><ul><li><strong>Gaussian (Normal)</strong>: Used for continuous data that is normally distributed.</li><li><strong>Binomial</strong>: Used for binary data (e.g., success/failure, presence/absence) or count data where the number of trials is fixed.</li><li><strong>Poisson</strong>: Used for count data where the events occur independently at a constant rate (e.g., the number of customers arriving at a store per hour).</li><li><strong>Gamma</strong>: Used for continuous positive data that is skewed (e.g., income, waiting times).</li><li><strong>Inverse Gaussian</strong>: Used for continuous positive data with a specific type of skewness.</li></ul><h3><a id="_uvwhkm9v34u6"></a><strong>Other Important Concepts</strong></h3><ul><li><strong>Maximum Likelihood Estimation (MLE)</strong>: A method for estimating unknown parameters (like the probability of heads in a coin flip) by finding the parameter values that make the observed data most likely.</li><li><strong>Bayesian Approach</strong>: An alternative to MLE that incorporates prior knowledge or beliefs about the parameters being estimated.</li><li><strong>Local Minimum</strong>: A point in a function where the function has the lowest value in its immediate neighborhood.</li><li><strong>Global Minimum</strong>: The absolute lowest point in the entire function.</li></ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 10 - Generalized Linear Models Architecture</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #ffffff;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Core Typography Styles (GitHub Markdown Flavor) */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        ul {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-top: 0.4em;
+            margin-bottom: 0.4em;
+        }
+        code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        }
+        
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Architecture Elements */
+        .component-box {
+            background-color: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        .component-box h3 {
+            margin-top: 0;
+            font-weight: 600;
+            color: #24292e;
+            border-bottom: 1px solid #e1e4e8;
+            padding-bottom: 6px;
+        }
+        .formula-line {
+            font-family: SFMono-Regular, Consolas, monospace;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 4px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../modules.html">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <a href="../modules.html" class="back-link">← Back to Modules Directory</a>
+
+    <!-- Main Content -->
+    <h1>Module 10 - Generalized Linear Models Architecture</h1>
+    <p class="intro-text">This study reference evaluates the architecture of Generalized Linear Models (GLMs). It details how mathematical link functions map linear combinations of features to exponential family error distributions, alongside advanced non-linear regression curves, local smoothing estimators, and parameter optimization mechanics.</p>
+
+    <h2>1. Foundations of Generalized Linear Models</h2>
+    <ul>
+        <li><strong>Generalized Linear Models (GLMs):</strong> A powerful parametric generalization of classical ordinary linear regression. GLMs remove the constraint that residual errors must track a symmetric normal curve, expanding modeling capabilities to non-normal response variables by wrapping them in exponential distribution profiles.</li>
+    </ul>
+
+    <h2>2. Exponential Family &amp; Target Error Models</h2>
+    <p>GLM applications match explicit data typologies to specific probabilistic error structures:</p>
+
+    <div class="component-box">
+        <h3>Gaussian (Normal) Family</h3>
+        <p>Deployed for classic un-bounded continuous variables displaying symmetrical, normal error properties around the estimated line of best fit.</p>
+    </div>
+
+    <div class="component-box">
+        <h3>Binomial Family</h3>
+        <p>Deployed to model binary classification tasks (e.g., success or failure flags, classification presence checks) or discrete bounded counts where the total number of experimental trials is fixed.</p>
+    </div>
+
+    <div class="component-box">
+        <h3>Poisson Family</h3>
+        <p>Optimized for discrete, open-ended count parameters modeling independent events that manifest at a constant rate over a specified interval of time or space (e.g., tracking website click frequencies or retail visitor volume paths).</p>
+    </div>
+
+    <div class="component-box">
+        <h3>Gamma Family</h3>
+        <p>Deployed to model strictly continuous positive data vectors displaying a pronounced right-hand skewness profile, making it highly effective for asset income metrics or system time-to-failure waiting delays.</p>
+    </div>
+
+    <div class="component-box">
+        <h3>Inverse Gaussian Family</h3>
+        <p>A specialized alternative applied to continuous positive data structures displaying highly accelerated, steep right-skewed tail distributions.</p>
+    </div>
+
+    <h2>3. Link Functions: Connecting Covariates to Expected Values</h2>
+    <p>A link function defines the explicit mathematical transformation mapping the linear combination of predictor features (the linear predictor) to the true expected value of the response variable. Common variants include:</p>
+
+    <ul>
+        <li><strong>Identity Link (Linear Regression Baseline):</strong> Connects the expected value directly to the predictors without conversion. Maps continuous un-bounded targets.
+            <br><span class="formula-line">Link Equation: &eta;(&mu;) = &mu;</span>
+        </li>
+        <li><strong>Logit Link (Logistic Classification Link):</strong> The log-odds transformation function used to squeeze infinite linear combinations back into a bounded probability space between 0 and 1.
+            <br><span class="formula-line">Link Equation: &eta;(&mu;) = log(&mu; / (1 - &mu;))</span>
+        </li>
+        <li><strong>Log Link (Poisson Count Link):</strong> Converts expected value parameters into logarithmic structures. Essential for locking model projections to positive numeric spaces when evaluating rate variations.
+            <br><span class="formula-line">Link Equation: &eta;(&mu;) = log(&mu;)</span>
+        </li>
+    </ul>
+
+    <h2>4. Non-Linear Regression &amp; Curve Smoothing</h2>
+    <p>When modeling complex curvilinear boundaries without committing to a global parametric link structure, pipelines deploy local basis operations:</p>
+    <ul>
+        <li><strong>Polynomial Regression:</strong> Extends traditional linear modeling by incorporating higher-order feature powers (squared variables, cubed factors) into the matrix equation, allowing systems to capture non-linear paths.</li>
+        <li><strong>Step Function:</strong> A non-linear conversion method partitioning a continuous variable into isolated ordinal bins, creating a piecewise constant function that shifts abruptly at specific boundary thresholds.</li>
+        <li><strong>Basis Functions:</strong> An encompassing set of mathematical base operations used to approximate complex, non-linear curves by combining simpler independent sub-functions. Common variants include polynomials, splines, and wavelets.</li>
+        <li><strong>Splines:</strong> Piecewise polynomial functions fitted across data intervals that join smoothly at specific structural connection coordinates called knots. They are designed to interpolate complex curves without triggering polynomial oscillation anomalies.</li>
+        <li><strong>Smoothing Splines:</strong> An optimization approach that fits custom curves across noisy, scattered data points. It solves an explicit objective function that balances data approximation quality against a strict roughness penalty to prevent overfitting.</li>
+        <li><strong>Local Regression (LOESS / LOWESS):</strong> A non-parametric method that maps a smooth, localized curve by fitting individual, separate regression models over bounded sliding subsets of the coordinate plane, assigning higher weights to adjacent data plots.</li>
+    </ul>
+
+    <h2>5. Optimization Mechanics</h2>
+    <ul>
+        <li><strong>Maximum Likelihood Estimation (MLE):</strong> The underlying computational optimization engine used to fit GLM parameters. It works by locating the exact numeric weight values that maximize the mathematical likelihood of observing the historical target distribution.</li>
+        <li><strong>Bayesian Alternative:</strong> A comprehensive inference alternative to MLE that incorporates explicit prior beliefs or historic parameter distributions into the objective calculation before updating scores with fresh empirical evidence.</li>
+        <li><strong>Local Minimum:</strong> A coordinate point along an optimization loss function where the error value evaluates lower than all adjacent coordinates in its immediate neighborhood, risking premature gradient descent convergence.</li>
+        <li><strong>Global Minimum:</strong> The single, absolute lowest error point across the entire mathematical loss function, representing optimal parameter synchronization.</li>
+    </ul>
+
+</body>
+</html>
