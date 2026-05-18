@@ -1,1 +1,168 @@
-<p>Module 1 covers a wide range of topics, from the history of data science to the most recent advances in machine learning. The outline is organized into five main sections: Introduction, A Brief History, Data, Maths and Stats, and Examples. Here is a detailed summary of the key elements and terms in each section: </p><p>1. Introduction</p><ul><li><strong>Learn Anything:</strong> This section emphasizes the importance of continuous learning in data science, including consuming content, seeking mentorship, practicing skills, and teaching others.</li><li><strong>The Function:</strong> The concept of a function, represented as <em>f(x)</em>, is introduced as a fundamental building block in mathematics and data science.</li><li><strong>Ethics and Human Bias:</strong> This section highlights the ethical considerations and potential biases that can arise in data science projects.<br /></li></ul><p>2. A Brief History</p><ul><li><strong>Pythagorean Theorem:</strong> A fundamental geometric theorem that relates the sides of a right triangle: a2+b2=c2.</li><li><strong>Sum of Squares:</strong> A mathematical concept used to calculate the total squared deviation of data points from their mean.</li><li><strong>Variance:</strong> A statistical measure that quantifies the spread or dispersion of data points around the mean.</li><li><strong>Euclid Elements:</strong> The foundational text of geometry, introducing basic concepts like points, lines, planes, and angles.</li><li><strong>Presentism:</strong> The tendency to interpret past events through the lens of present-day values and knowledge, which can introduce bias in historical analysis.</li><li><strong>Binomial Theorem:</strong> A mathematical formula used to expand powers of binomials. It has applications in probability, statistics, and other fields.</li><li><strong>Probability:</strong> The measure of the likelihood that an event will occur.</li><li><strong>Expected Value:</strong> The average value that is expected to be obtained in a random experiment over a large number of trials.</li><li><strong>Law of Large Numbers:</strong> A statistical principle stating that as the number of trials increases, the sample average converges to the expected value.</li><li><strong>Hypothesis Testing:</strong> A statistical method used to make inferences about a population based on sample data.</li><li><strong>Average Man:</strong> A concept introduced by Adolphe Quetelet, representing the average characteristics of a population.</li><li><strong>Regression:</strong> A statistical method used to model the relationship between a dependent variable and one or more independent variables.</li><li><strong>Linear Regression:</strong> A type of regression model that assumes a linear relationship between the variables.</li><li><strong>Structural Equation Modeling:</strong> A statistical technique used to analyze complex relationships between multiple variables, including latent variables that cannot be directly observed.</li></ul><p>3. Data</p><ul><li><strong>Data vs Datum:</strong> The distinction between data (plural) and datum (singular).</li><li><strong>Population:</strong> The entire group of individuals or objects that are of interest in a study.</li><li><strong>Sample:</strong> A subset of the population that is selected for study.</li><li><strong>Variance:</strong> A measure of the spread or dispersion of data points around the mean.</li><li><strong>Covariance:</strong> A measure of how two variables change together.</li><li><strong>Correlation:</strong> A standardized measure of the relationship between two variables, ranging from -1 to +1.</li></ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 01 - Introduction</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #ffffff;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Core Typography Styles (GitHub Markdown Flavor) */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        ul {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-top: 0.4em;
+            margin-bottom: 0.4em;
+        }
+        code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        }
+        
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../modules.html">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <a href="../modules.html" class="back-link">← Back to Modules Directory</a>
+
+    <!-- Main Content -->
+    <h1>Module 01 - Introduction</h1>
+    <p>Module 1 covers a wide range of topics, from the history of data science to the most recent advances in machine learning. The outline is organized into five main sections: Introduction, A Brief History, Data, Maths and Stats, and Examples. Here is a detailed summary of the key elements and terms in each section:</p>
+
+    <h2>1. Introduction</h2>
+    <ul>
+        <li><strong>Learn Anything:</strong> This section emphasizes the importance of continuous learning in data science, including consuming content, seeking mentorship, practicing skills, and teaching others.</li>
+        <li><strong>The Function:</strong> The concept of a function, represented as <code>f(x)</code>, is introduced as a fundamental building block in mathematics and data science.</li>
+        <li><strong>Ethics and Human Bias:</strong> This section highlights the ethical considerations and potential biases that can arise in data science projects.</li>
+    </ul>
+
+    <h2>2. A Brief History</h2>
+    <ul>
+        <li><strong>Pythagorean Theorem:</strong> A fundamental geometric theorem that relates the sides of a right triangle: <code>a² + b² = c²</code>.</li>
+        <li><strong>Sum of Squares:</strong> A mathematical concept used to calculate the total squared deviation of data points from their mean.</li>
+        <li><strong>Variance:</strong> A statistical measure that quantifies the spread or dispersion of data points around the mean.</li>
+        <li><strong>Euclid Elements:</strong> The foundational text of geometry, introducing basic concepts like points, lines, planes, and angles.</li>
+        <li><strong>Presentism:</strong> The tendency to interpret past events through the lens of present-day values and knowledge, which can introduce bias in historical analysis.</li>
+        <li><strong>Binomial Theorem:</strong> A mathematical formula used to expand powers of binomials. It has applications in probability, statistics, and other fields.</li>
+        <li><strong>Probability:</strong> The measure of the likelihood that an event will occur.</li>
+        <li><strong>Expected Value:</strong> The average value that is expected to be obtained in a random experiment over a large number of trials.</li>
+        <li><strong>Law of Large Numbers:</strong> A statistical principle stating that as the number of trials increases, the sample average converges to the expected value.</li>
+        <li><strong>Hypothesis Testing:</strong> A statistical method used to make inferences about a population based on sample data.</li>
+        <li><strong>Average Man:</strong> A concept introduced by Adolphe Quetelet, representing the average characteristics of a population.</li>
+        <li><strong>Regression:</strong> A statistical method used to model the relationship between a dependent variable and one or more independent variables.</li>
+        <li><strong>Linear Regression:</strong> A type of regression model that assumes a linear relationship between the variables.</li>
+        <li><strong>Structural Equation Modeling:</strong> A statistical technique used to analyze complex relationships between multiple variables, including latent variables that cannot be directly observed.</li>
+    </ul>
+
+    <h2>3. Data</h2>
+    <ul>
+        <li><strong>Data vs Datum:</strong> The distinction between data (plural) and datum (singular).</li>
+        <li><strong>Population:</strong> The entire group of individuals or objects that are of interest in a study.</li>
+        <li><strong>Sample:</strong> A subset of the population that is selected for study.</li>
+        <li><strong>Variance:</strong> A measure of the spread or dispersion of data points around the mean.</li>
+        <li><strong>Covariance:</strong> A measure of how two variables change together.</li>
+        <li><strong>Correlation:</strong> A standardized measure of the relationship between two variables, ranging from -1 to +1.</li>
+    </ul>
+
+</body>
+</html>
