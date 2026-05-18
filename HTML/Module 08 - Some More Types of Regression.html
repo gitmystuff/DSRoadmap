@@ -1,1 +1,215 @@
-<p><strong>Some More Types of Regression</strong></p><ul><li><strong>Simple Linear Regression<br /></strong><ul><li>A type of linear regression with one explanatory or independent variable used to predict a scalar response or dependent variable.</li></ul></li><li><strong>Multiple Linear Regression<br /></strong><ul><li>A type of linear regression with two or more explanatory or independent variables used to predict a scalar response or dependent variable.</li></ul></li><li><strong>Polynomial Regression<br /></strong><ul><li>A type of regression used to describe how diseases spread, pandemics, or epidemics.</li></ul></li><li><strong>Support Vector Regression<br /></strong><ul><li>A type of regression that uses a margin that tries to capture as many of the plots as possible.</li></ul></li><li><strong>Decision Tree Regression<br /></strong><ul><li>A type of regression that uses splits to partition data points.</li></ul></li><li><strong>Random Forest Regression<br /></strong><ul><li>A type of regression that is a version of ensemble learning. Random forests pick random data points from a training set.</li></ul></li></ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 08 - Advanced Alternative Regression Structuring</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #ffffff;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Core Typography Styles (GitHub Markdown Flavor) */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        ul {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-top: 0.4em;
+            margin-bottom: 0.4em;
+        }
+        
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Concept Cards Layout */
+        .family-card {
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .family-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #24292e;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #f1f1f1;
+            padding-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+        .badge-parametric { background-color: #dbeddb; color: #1c3d1c; }
+        .badge-nonparametric { background-color: #d3e5ef; color: #183040; }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../modules.html">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <a href="../modules.html" class="back-link">← Back to Modules Directory</a>
+
+    <!-- Main Content -->
+    <h1>Some More Types of Regression</h1>
+    <p class="intro-text">This document serves as an expanding comparative index mapping alternative regression families used across machine learning. It spans classical straight-line estimators and non-linear, non-parametric tree partitioning architectures.</p>
+
+    <h2>1. Classical Linear Implementations</h2>
+    <p>Parametric modeling baselines utilizing straight ordinary least squares estimation lines to project a continuous scalar target variable.</p>
+
+    <!-- Simple Linear -->
+    <div class="family-card">
+        <div class="family-title">
+            <span>Simple Linear Regression</span>
+            <span class="badge badge-parametric">Parametric</span>
+        </div>
+        <p>A fundamental type of linear regression mapping exactly <strong>one</strong> explanatory or independent variable to predict a single continuous scalar response variable.</p>
+    </div>
+
+    <!-- Multiple Linear -->
+    <div class="family-card">
+        <div class="family-title">
+            <span>Multiple Linear Regression</span>
+            <span class="badge badge-parametric">Parametric</span>
+        </div>
+        <p>An expanded type of linear regression leveraging <strong>two or more</strong> independent input features simultaneously to approximate the continuous scale variance of a single scalar target variable.</p>
+    </div>
+
+    <h2>2. Curvilinear &amp; Machine Learning Alternatives</h2>
+    <p>Advanced algorithmic variants optimized to capture non-linear structures, conditional feature partitions, and multi-variable interaction boundaries.</p>
+
+    <!-- Polynomial Regression -->
+    <div class="family-card">
+        <div class="family-title">
+            <span>Polynomial Regression</span>
+            <span class="badge badge-parametric">Parametric</span>
+        </div>
+        <p>A type of regression modeling curvilinear relationships by raising independent input parameters to distinct mathematical powers. It is widely used to capture non-linear tracking dynamics, such as modeling how diseases spread, tracking pandemics, or forecasting epidemic velocity over time.</p>
+    </div>
+
+    <!-- Support Vector Regression -->
+    <div class="family-card">
+        <div class="family-title">
+            <span>Support Vector Regression (SVR)</span>
+            <span class="badge badge-nonparametric">Non-Parametric</span>
+        </div>
+        <p>An advanced algorithmic framework that utilizes a strict margin of tolerance (the epsilon-tube) wrapped around a centerline. The optimization engine focuses on capturing as many empirical data coordinates as possible inside this margin width while ignoring smaller residual variations.</p>
+    </div>
+
+    <!-- Decision Tree Regression -->
+    <div class="family-card">
+        <div class="family-title">
+            <span>Decision Tree Regression</span>
+            <span class="badge badge-nonparametric">Non-Parametric</span>
+        </div>
+        <p>A non-parametric machine learning algorithm that recursively implements explicit rule-based splits to partition multi-dimensional data plots into uniform, localized neighborhood subsets based on variance minimization benchmarks.</p>
+    </div>
+
+    <!-- Random Forest Regression -->
+    <div class="family-card">
+        <div class="family-title">
+            <span>Random Forest Regression</span>
+            <span class="badge badge-nonparametric">Non-Parametric</span>
+        </div>
+        <p>A robust version of ensemble machine learning utilizing bagging mechanics. It generates extensive collections of deep, un-pruned decision trees, building individual models by picking random data rows and random feature subsets from the primary training block, before aggregating their predictions into a unified final output.</p>
+    </div>
+
+</body>
+</html>
