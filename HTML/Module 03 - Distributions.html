@@ -1,1 +1,322 @@
-<h3><a id="_epi10myku6sb"></a><strong>Outline and Summary of Key Elements and Terms</strong></h3><ol><li><strong>Random Variables<br /></strong><ul><li>A random variable is a variable whose value is a numerical outcome of a random phenomenon.</li><li>Random variables can be discrete (e.g., the outcome of a die roll) or continuous (e.g., the height of a person).</li><li>Understanding random variables is essential for probability and statistical modeling.</li></ul></li><li><strong>IID: Independent and Identically Distributed<br /></strong><ul><li>A collection of random variables is independent and identically distributed (IID) if each variable has the same probability distribution as the others and all are mutually independent.</li><li>IID random variables are commonly assumed in many statistical analyses.</li><li>The IID assumption simplifies calculations and allows for the use of certain statistical methods.</li></ul></li><li><strong>Types of Distributions<br /></strong><ul><li>There are many different types of probability distributions, including normal, uniform, binomial, Bernoulli, Poisson, and others.</li><li>Each distribution has its own unique characteristics and parameters that define its shape and behavior.</li><li>Choosing the appropriate distribution is crucial for accurate statistical modeling and inference.</li></ul></li><li><strong>Probability Density Function (PDF)<br /></strong><ul><li>The PDF is a function that describes the relative likelihood of a continuous random variable taking on a given value.</li><li>The area under the PDF curve between two points represents the probability that the variable falls within that range.</li><li>The total area under the PDF curve is always equal to 1.</li></ul></li><li><strong>Cumulative Density Function (CDF)<br /></strong><ul><li>The CDF is a function that gives the probability that a random variable is less than or equal to a given value.</li><li>The CDF is the integral of the PDF.</li><li>The CDF is useful for calculating probabilities of events that fall within a certain range.</li></ul></li><li><strong>Percent Point Function (PPF)<br /></strong><ul><li>The PPF is the inverse of the CDF.</li><li>It gives the value of the random variable for which the CDF is equal to a given probability.</li><li>The PPF is useful for finding quantiles and percentiles of a distribution.</li></ul></li><li><strong>Kernel Density Estimation (KDE)<br /></strong><ul><li>KDE is a non-parametric method for estimating the PDF of a random variable.</li><li>It uses a kernel function to smooth the observed data and estimate the underlying distribution.</li><li>KDE is useful when the data does not fit a known parametric distribution.</li></ul></li><li><strong>Normal Distribution<br /></strong><ul><li>The normal distribution is a bell-shaped, symmetrical distribution that is widely used in statistics.</li><li>It is characterized by its mean (μ) and standard deviation (σ).</li><li>Many natural phenomena follow a normal distribution.</li></ul></li><li><strong>Z Distribution<br /></strong><ul><li>The Z distribution is a standard normal distribution with a mean of 0 and a standard deviation of 1.</li><li>It is used to standardize normal distributions and calculate probabilities.</li><li>Z-scores represent the number of standard deviations a data point is from the mean.</li></ul></li><li><strong>t Distribution<br /></strong><ul><li>The t-distribution is similar to the normal distribution but has heavier tails.</li><li>It is used when the sample size is small or the population standard deviation is unknown.</li><li>The t-distribution approaches the normal distribution as the sample size increases.</li></ul></li><li><strong>Uniform Distribution<br /></strong><ul><li>The uniform distribution is a distribution where all values within a given range are equally likely.</li><li>It is often used to model random events with no clear preference for any particular outcome.</li><li>The uniform distribution can be discrete or continuous.</li></ul></li><li><strong>Binomial Distribution<br /></strong><ul><li>The binomial distribution is a discrete distribution that models the probability of a certain number of successes in a sequence of independent trials.</li><li>Each trial has only two possible outcomes (success or failure).</li><li>The binomial distribution is characterized by the number of trials (n) and the probability of success on each trial (p).</li></ul></li><li><strong>Bernoulli Distribution<br /></strong><ul><li>The Bernoulli distribution is a special case of the binomial distribution with only one trial.</li><li>It models the probability of a single event with two possible outcomes (success or failure).</li><li>The Bernoulli distribution is characterized by the probability of success (p).</li></ul></li><li><strong>Multinomial Distribution<br /></strong><ul><li>The multinomial distribution is a generalization of the binomial distribution to more than two possible outcomes.</li><li>It models the probability of a certain number of occurrences of each outcome in a sequence of independent trials.</li><li>The multinomial distribution is characterized by the number of trials (n) and the probabilities of each outcome.</li></ul></li><li><strong>Poisson Distribution<br /></strong><ul><li>The Poisson distribution is a discrete distribution that models the probability of a certain number of events occurring in a fixed interval of time or space.</li><li>It is often used to model rare events.</li><li>The Poisson distribution is characterized by the average rate of events (λ). </li></ul></li></ol><p><strong>Chi-Squared Distribution</strong></p><p>The Chi-Squared distribution is a continuous probability distribution that is widely used in statistics. It is the distribution of the sum of squared standard normal deviates.</p><p><strong>Key properties:</strong></p><ul><li><strong>Shape:</strong> It is a right-skewed distribution. The shape of the distribution depends on the degrees of freedom (k). As k increases, the distribution becomes more symmetrical.</li><li><strong>Range:</strong> The range of the distribution is from 0 to infinity.</li><li><strong>Degrees of Freedom (k):</strong> The degrees of freedom determine the shape of the distribution. It is related to the number of independent standard normal deviates being summed.</li></ul><p><strong>Uses:</strong></p><ul><li><strong>Goodness of Fit Test:</strong> To test how well a theoretical distribution fits a set of observed data.</li><li><strong>Test of Independence:</strong> To test whether there is a significant association between two categorical variables.</li><li><strong>Confidence Intervals:</strong> To construct confidence intervals for the variance and standard deviation of a normal distribution.</li><li><strong>Hypothesis Testing:</strong> To test hypotheses about the variance and standard deviation of a normal distribution.</li></ul><p><strong>Example:</strong></p><p>Suppose you want to test whether a die is fair. You roll the die 60 times and record the number of times each face appears. You can use the Chi-Squared goodness of fit test to compare the observed frequencies with the expected frequencies for a fair die (10 for each face). If the test statistic is large, it suggests that the die may not be fair.</p><p><strong>Gamma Distribution</strong></p><p>The Gamma distribution is a continuous probability distribution that is widely used in statistics and various fields to model positive, skewed data. It's characterized by two parameters:</p><ul><li><strong>Shape parameter (α or k):</strong> Determines the shape of the distribution.</li><li><strong>Rate parameter (β):</strong> Determines how spread out the distribution is. (Sometimes an inverse scale parameter (θ = 1/β) is used instead.)</li></ul><p><strong>Key Properties:</strong></p><ul><li><strong>Flexibility:</strong> The Gamma distribution is very flexible and can take on a variety of shapes depending on the values of its parameters. This makes it suitable for modeling a wide range of phenomena.</li><li><strong>Relationship to other distributions:</strong> It's related to other important distributions. For example, the exponential distribution and the Chi-Squared distribution are special cases of the Gamma distribution.</li><li><strong>Memorylessness:</strong> For certain parameter values, the Gamma distribution exhibits a &quot;memoryless&quot; property, similar to the exponential distribution. This means that the probability of an event occurring in the future is independent of how much time has already elapsed.</li></ul><p><strong>Uses:</strong></p><ul><li><strong>Reliability analysis:</strong> Modeling the time to failure of a system or component.</li><li><strong>Queuing theory:</strong> Modeling the waiting times in queues or the time between events.</li><li><strong>Finance:</strong> Modeling the size of insurance claims or the time until default on a loan.</li><li><strong>Meteorology:</strong> Modeling rainfall amounts or the time between rainfall events.</li><li><strong>Bayesian statistics:</strong> Used as a prior distribution for various parameters.</li></ul><p><strong>In summary,</strong> the Gamma distribution is a versatile tool for modeling positive, skewed data and has applications in a wide range of fields due to its flexibility and relationship to other important distributions.</p><p><strong>Beta Distribution</strong></p><p>The Beta distribution is a continuous probability distribution defined on the interval [0, 1]. It is commonly used to model random variables that represent probabilities or proportions. The Beta distribution is characterized by two shape parameters, α and β, which determine the shape of the distribution.</p><p><strong>Key Properties:</strong></p><ul><li><strong>Flexibility:</strong> The Beta distribution is very flexible and can take on a variety of shapes depending on the values of its parameters. This makes it suitable for modeling a wide range of phenomena.</li><li><strong>Relationship to Other Distributions:</strong> For specific values of α and β, the Beta distribution can take the same shape as other distributions, such as the uniform distribution.</li><li><strong>Conjugate Prior:</strong> The Beta distribution is often used as a conjugate prior distribution in Bayesian statistics, particularly for binomial likelihoods. This means that if the prior distribution for a binomial parameter is a Beta distribution, then the posterior distribution will also be a Beta distribution after observing data.</li></ul><p><strong>Uses:</strong></p><ul><li><strong>Bayesian Statistics:</strong> Modeling prior beliefs about probabilities or proportions.</li><li><strong>Modeling Proportions:</strong> Representing random variables that lie between 0 and 1, such as the proportion of defective items in a batch or the click-through rate of an advertisement.</li><li><strong>Machine Learning:</strong> Used in various machine learning algorithms, such as Bayesian networks and variational autoencoders.</li><li><strong>Task Duration Modeling:</strong> In project management, the Beta distribution can be used to model the probability distribution of the duration of a task.</li></ul><p><strong>In summary,</strong> the Beta distribution is a versatile tool for modeling probabilities, proportions, and other quantities that fall within the range of 0 to 1. Its flexibility and properties make it suitable for a wide range of applications in various fields.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 03 - Distributions</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #ffffff;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Core Typography Styles (GitHub Markdown Flavor) */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        ul, ol {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+        }
+        code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        }
+        
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .nested-box {
+            background-color: #f6f8fa;
+            border-left: 4px solid #e1e4e8;
+            padding: 12px 16px;
+            margin: 8px 0 16px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        .nested-box p {
+            margin-bottom: 8px;
+        }
+        .nested-box ul {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../modules.html">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <a href="../modules.html" class="back-link">← Back to Modules Directory</a>
+
+    <!-- Main Content -->
+    <h1>Module 03 - Probability & Distributions</h1>
+    <p>A structured guide tracking random variable classifications, density transformation functions, parametric sampling distributions, and non-parametric estimators.</p>
+
+    <h2>Outline and Summary of Key Elements and Terms</h2>
+    <ol>
+        <li>
+            <strong>Random Variables</strong>
+            <ul>
+                <li>A random variable is a variable whose value is a numerical outcome of a random phenomenon.</li>
+                <li>Random variables can be discrete (e.g., the outcome of a die roll) or continuous (e.g., the height of a person).</li>
+                <li>Understanding random variables is essential for probability and statistical modeling.</li>
+            </ul>
+        </li>
+
+        <li>
+            <strong>IID: Independent and Identically Distributed</strong>
+            <ul>
+                <li>A collection of random variables is independent and identically distributed (IID) if each variable has the same probability distribution as the others and all are mutually independent.</li>
+                <li>IID random variables are commonly assumed in many statistical analyses.</li>
+                <li>The IID assumption simplifies calculations and allows for the use of certain statistical methods.</li>
+            </ul>
+        </li>
+
+        <li>
+            <strong>Types of Distributions</strong>
+            <ul>
+                <li>There are many different types of probability distributions, including normal, uniform, binomial, Bernoulli, Poisson, and others.</li>
+                <li>Each distribution has its own unique characteristics and parameters that define its shape and behavior.</li>
+                <li>Choosing the appropriate distribution is crucial for accurate statistical modeling and inference.</li>
+            </ul>
+        </li>
+
+        <li>
+            <strong>Probability Density Function (PDF)</strong>
+            <ul>
+                <li>The PDF is a function that describes the relative likelihood of a continuous random variable taking on a given value.</li>
+                <li>The area under the PDF curve between two points represents the probability that the variable falls within that range.</li>
+                <li>The total area under the PDF curve is always equal to 1.</li>
+            </ul>
+        </li>
+
+        <li>
+            <strong>Cumulative Density Function (CDF)</strong>
+            <ul>
+                <li>The CDF is a function that gives the probability that a random variable is less than or equal to a given value.</li>
+                <li>The CDF is the mathematical integral of the PDF.</li>
+                <li>The CDF is useful for calculating probabilities of events that fall within a certain range.</li>
+            </ul>
+        </li>
+
+        <li>
+            <strong>Percent Point Function (PPF)</strong>
+            <ul>
+                <li>The PPF is the mathematical inverse of the CDF.</li>
+                <li>It gives the value of the random variable for which the CDF is equal to a given probability.</li>
+                <li>The PPF is useful for finding quantiles and percentiles of a distribution.</li>
+            </ul>
+        </li>
+
+        <li>
+            <strong>Kernel Density Estimation (KDE)</strong>
+            <ul>
+                <li>KDE is a non-parametric method for estimating the PDF of a random variable.</li>
+                <li>It uses a kernel function to smooth the observed data and estimate the underlying distribution.</li>
+                <li>KDE is useful when the data does not fit a known parametric distribution.</li>
+            </ul>
+        </li>
+
+        <li>
+            <strong>Normal Distribution</strong>
+            <ul>
+                <li>The normal distribution is a bell-shaped, symmetrical distribution that is widely used in statistics.</li>
+                <li>It is characterized by its mean (μ) and standard deviation (σ).</li>
+                <li>Many natural phenomena follow a normal distribution.</li>
+            </ul>
+        </li>
+
+        <li>
+            <strong>Z Distribution</strong>
+            <ul>
+                <li>The Z distribution is a standard normal distribution with a mean of 0 and a standard deviation of 1.</li>
+                <li>It is used to standardize normal distributions and calculate probabilities.</li>
+                <li>Z-scores represent the number of standard deviations a data point is from the mean.</li>
+            </ul>
+        </li>
+
+        <li>
+            <strong>t Distribution</strong>
+            <ul>
+                <li>The t-distribution is similar to the normal distribution but has heavier tails.</li>
+                <li>It is used when the sample size is small or the population standard deviation is unknown.</li>
+                <li>The t-distribution approaches the normal distribution as the sample size increases.</li>
+            </ul>
+        </li>
+
+        <li>
+            <strong>Uniform Distribution</strong>
+            <ul>
+                <li>The uniform distribution is a distribution where all values within a given range are equally likely.</li>
+                <li>It is often used to model random events with no clear preference for any particular outcome.</li>
+                <li>The uniform distribution can be discrete or continuous.</li>
+            </ul>
+        </li>
+
+        <li>
+            <strong>Binomial Distribution</strong>
+            <ul>
+                <li>The binomial distribution is a discrete distribution that models the probability of a certain number of successes in a sequence of independent trials.</li>
+                <li>Each trial has only two possible outcomes (success or failure).</li>
+                <li>The binomial distribution is characterized by the number of trials (n) and the probability of success on each trial (p).</li>
+            </ul>
+        </li>
+
+        <li>
+            <strong>Bernoulli Distribution</strong>
+            <ul>
+                <li>The Bernoulli distribution is a special case of the binomial distribution with only one trial.</li>
+                <li>It models the probability of a single event with two possible outcomes (success or failure).</li>
+                <li>The Bernoulli distribution is characterized by the probability of success (p).</li>
+            </ul>
+        </li>
+
+        <li>
+            <strong>Multinomial Distribution</strong>
+            <ul>
+                <li>The multinomial distribution is a generalization of the binomial distribution to more than two possible outcomes.</li>
+                <li>It models the probability of a certain number of occurrences of each outcome in a sequence of independent trials.</li>
+                <li>The multinomial distribution is characterized by the number of trials (n) and the probabilities of each outcome.</li>
+            </ul>
+        </li>
+
+        <li>
+            <strong>Poisson Distribution</strong>
+            <ul>
+                <li>The Poisson distribution is a discrete distribution that models the probability of a certain number of events occurring in a fixed interval of time or space.</li>
+                <li>It is often used to model rare events.</li>
+                <li>The Poisson distribution is characterized by the average rate of events (λ).</li>
+            </ul>
+        </li>
+
+        <li>
+            <strong>Chi-Squared Distribution</strong>
+            <div class="nested-box">
+                <p>A continuous probability distribution representing the sum of squared standard normal deviates.</p>
+                <ul>
+                    <li><strong>Shape:</strong> Right-skewed distribution depending heavily on degrees of freedom (k). As k increases, the distribution becomes more symmetrical.</li>
+                    <li><strong>Range:</strong> Bounded from 0 to infinity.</li>
+                    <li><strong>Uses:</strong> Goodness of Fit testing, categorical Contingency Tests of Independence, and constructing confidence intervals for population variance.</li>
+                    <li><strong>Example:</strong> Checking if a die is fair by rolling it 60 times and executing a goodness-of-fit comparison against uniform expected frequencies (10 per face).</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <strong>Gamma Distribution</strong>
+            <div class="nested-box">
+                <p>A continuous, flexible probability distribution widely used to model positive, skewed data parameters.</p>
+                <ul>
+                    <li><strong>Parameters:</strong> Controlled by a Shape parameter (α or k) and a Rate parameter (β) or inverse scale parameter (θ = 1/β).</li>
+                    <li><strong>Properties:</strong> Highly flexible; includes the exponential distribution and Chi-Squared distribution as mathematical special cases.</li>
+                    <li><strong>Uses:</strong> Reliability analysis (time-to-failure systems), queuing theory (waiting line deltas), meteorological calculations (rainfall metrics), and Bayesian prior assignments.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <strong>Beta Distribution</strong>
+            <div class="nested-box">
+                <p>A continuous probability distribution strictly defined and bounded on the interval [0, 1], representing random variables for probabilities or proportions.</p>
+                <ul>
+                    <li><strong>Parameters:</strong> Defined by two shape parameters (α and β) that customize its visual configuration.</li>
+                    <li><strong>Conjugate Prior:</strong> Serves as the conjugate prior for binomial likelihood distributions in Bayesian statistics, ensuring the calculated mathematical posterior remains an updated Beta form.</li>
+                    <li><strong>Uses:</strong> Modeling advertisement click-through rates (CTR), task duration modeling within PERT/project management environments, and training nodes inside variational autoencoders.</li>
+                </ul>
+            </div>
+        </li>
+    </ol>
+
+</body>
+</html>
