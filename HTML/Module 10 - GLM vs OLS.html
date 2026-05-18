@@ -1,1 +1,190 @@
-<h3><a id="_5nu346hdtdn"></a></h3><h3><a id="_qi9uwnimt3ri"></a><strong>Fundamentals</strong></h3><ul><li><strong>Ordinary Least Squares (OLS)</strong>: OLS is a statistical method used to estimate the parameters of a linear regression model. The goal of OLS is to find the line that minimizes the sum of the squared differences between the observed data points and the points on the line.</li><li><strong>Generalized Linear Models (GLMs)</strong>: GLMs are a flexible generalization of ordinary linear regression that allows for response variables that have error distribution models other than a normal distribution.</li></ul><h3><a id="_a9hxip6qkhif"></a><strong>Key Statistics</strong></h3><ul><li><strong>R-squared</strong>: A statistical measure that indicates the proportion of the variance in the dependent variable that is explained by the independent variables.</li><li><strong>AIC (Akaike Information Criterion)</strong>: An estimator of prediction error for a statistical model. It's used to compare different models and select the one that is most likely to make good predictions.</li><li><strong>BIC (Bayesian Information Criterion)</strong>: Similar to AIC, but it places a larger penalty on models with more parameters.</li><li><strong>Log-likelihood</strong>: The probability of observing the data given a set of model parameters.</li></ul><h3><a id="_c8n74j7swjxi"></a><strong>Libraries</strong></h3><ul><li><strong>statsmodels</strong>: A Python module that provides classes and functions for the estimation of many different statistical models, as well as for conducting statistical tests, and statistical data exploration.</li><li><strong>scikit-learn</strong>: A Python library that provides a wide range of algorithms for machine learning tasks, including regression, classification, clustering, and dimensionality reduction.</li><li><strong>matplotlib.pyplot</strong>: A Python plotting library that produces high-quality figures in a variety of formats.</li></ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 10 - GLM vs OLS Comparative Frameworks</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #ffffff;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Core Typography Styles (GitHub Markdown Flavor) */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        ul {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-top: 0.4em;
+            margin-bottom: 0.4em;
+        }
+        code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        }
+        
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Group Containers */
+        .concept-card {
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .concept-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0366d6;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #f1f1f1;
+            padding-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../modules.html">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <a href="../modules.html" class="back-link">← Back to Modules Directory</a>
+
+    <!-- Main Content -->
+    <h1>Module 10 - GLM vs OLS</h1>
+    <p class="intro-text">This study reference evaluates the core differences and underlying structural frameworks of Ordinary Least Squares (OLS) linear regression versus Generalized Linear Models (GLMs) for estimation and data exploration.</p>
+
+    <h2>1. Modeling Fundamentals</h2>
+    <p>Data science tasks switch between these regression architectures depending on target features and residual error assumptions:</p>
+
+    <!-- OLS Card -->
+    <div class="concept-card">
+        <div class="concept-title">Ordinary Least Squares (OLS)</div>
+        <p>A classic parametric statistical method used to estimate parameters in standard linear regression models. The optimization engine solves for weight coefficients by fitting a straight line that minimizes the vertical sum of the squared differences (residuals) between the true observed targets and the model's projections.</p>
+    </div>
+
+    <!-- GLM Card -->
+    <div class="concept-card">
+        <div class="concept-title">Generalized Linear Models (GLMs)</div>
+        <p>A highly flexible generalization of classical ordinary linear regression that extends estimation capabilities to target variables containing error distribution profiles other than a symmetric normal shape. It uses mathematical link functions to safely connect a linear input space directly to exponential distribution families (such as Binomial, Poisson, or Gamma shapes).</p>
+    </div>
+
+    <h2>2. Key Fit &amp; Evaluation Statistics</h2>
+    <p>Evaluating parametric boundaries utilizes standard probability and predictive error information criteria:</p>
+    <ul>
+        <li><strong>R-squared:</strong> The coefficient of determination. It indicates the proportion of total variance within the continuous dependent target variable explained by the variance of the independent predictor features.</li>
+        <li><strong>Log-likelihood:</strong> The exact mathematical probability of observing your true historical dataset given a specific, fitted set of internal model parameters. Higher metrics confirm an optimized fit.</li>
+        <li><strong>AIC (Akaike Information Criterion):</strong> An informational metric used to approximate out-of-sample prediction errors across statistical models. It balances log-likelihood values against parameter complexity to assist in model selection, where a lower relative score marks the preferred model configuration.</li>
+        <li><strong>BIC (Bayesian Information Criterion):</strong> Similar to AIC for model comparison tasks, but enforces a much stricter mathematical penalty for adding extraneous predictor features to prevent overfitting.</li>
+    </ul>
+
+    <h2>3. Python Programmatic Ecosystem</h2>
+    <p>Building and evaluating these statistical estimators requires specialized open-source modules:</p>
+    <ul>
+        <li><code>statsmodels</code>: A dedicated Python statistics package providing explicit optimization classes, functions, summary reports, and residual diagnostics tests for OLS, GLMs, and experimental data analysis.</li>
+        <li><code>scikit-learn</code>: A production-focused machine learning library containing uniform APIs for data preprocessing, train-test splitting, cross-validation, and predictive model fitting.</li>
+        <li><code>matplotlib.pyplot</code>: A core, low-level visualization and plotting architecture used to construct data figures, residual histogram curves, and visual regression line evaluations.</li>
+    </ul>
+
+</body>
+</html>
