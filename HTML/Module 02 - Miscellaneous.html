@@ -1,1 +1,262 @@
-<p><strong>Box plot</strong></p><ul><li>A graphical representation of the distribution of a dataset.</li><li>Displays the median, quartiles, and potential outliers.</li><li>The box represents the interquartile range (IQR), which contains the middle 50% of the data.</li><li>The line inside the box represents the median.</li><li>Whiskers extend from the box to indicate the range of the data within the fences.</li><li>Outliers are plotted as individual points beyond the fences.</li></ul><p><strong>Fence</strong></p><ul><li>A cutoff value used in box plots to identify potential outliers.</li><li>Calculated as 1.5 times the interquartile range (IQR) above the upper quartile and below the lower quartile.</li><li>Data points outside the fences are considered potential outliers.</li></ul><p><strong>Whiskers</strong></p><ul><li>Lines extending from the box in a box plot.</li><li>Indicate the range of the data within the fences.</li><li>The upper whisker extends to the largest data point within the upper fence.</li><li>The lower whisker extends to the smallest data point within the lower fence.</li></ul><p><strong>IQR (Interquartile Range)</strong></p><ul><li>The range between the first quartile (Q1) and the third quartile (Q3).</li><li>Contains the middle 50% of the data.</li><li>Calculated as Q3 - Q1.</li></ul><p><strong>Quartiles</strong></p><ul><li>Values that divide a dataset into four equal parts.</li><li>Q1: The 25th percentile.</li><li>Q2: The median (50th percentile).</li><li>Q3: The 75th percentile.</li></ul><p><strong>Quantiles</strong></p><ul><li>A generalization of quartiles that divide a dataset into any number of equal parts.</li><li>Quartiles are a specific type of quantile.</li><li>Percentiles are another common type of quantile.</li></ul><p><strong>Outliers</strong></p><ul><li>Data points that are significantly different from other observations in the dataset.</li><li>Can be identified using various methods, including box plots and z-scores.</li><li>May indicate errors, unusual events, or simply the natural variability of the data. </li></ul><p><strong>Cardinality</strong></p><ul><li>In the context of data, cardinality refers to the number of unique values in a dataset or a particular column (feature) of a dataset.</li><li>High cardinality means many unique values (e.g., customer IDs, product names).</li><li>Low cardinality means few unique values (e.g., binary categories like gender, boolean values).</li><li>Important for understanding data types, storage efficiency, and potential issues like high-cardinality categorical features in machine learning.</li></ul><p><strong>Features with Constant and Semi-Constant Values</strong></p><ul><li><strong>Constant features</strong>: Have only one unique value in the entire dataset.</li><li><strong>Semi-constant features</strong>: Have a dominant unique value and very few occurrences of other values.</li><li>These features provide little to no information for predictive modeling or analysis.</li><li>Often removed during feature selection to improve model efficiency and prevent overfitting.</li></ul><p><strong>MCAR, MNAR, MAR</strong></p><p>These are types of missing data mechanisms:</p><ul><li><strong>MCAR (Missing Completely at Random)</strong>: The probability of data being missing is unrelated to any observed or unobserved variables. Essentially, missingness occurs entirely by chance.</li><li><strong>MNAR (Missing Not at Random)</strong>: The probability of missingness depends on the missing values themselves. This is the most complex type of missing data, as the missingness is related to the information we don't have.</li><li><strong>MAR (Missing at Random)</strong>: The probability of missingness depends on observed variables but not on the missing values themselves. The missingness can be explained by other information in the data.</li></ul><p><strong>Complete Case Analysis or Listwise Deletion</strong></p><ul><li>A simple method for handling missing data.</li><li>Involves removing any rows (observations) from the dataset that have at least one missing value.</li><li>Can lead to loss of information and biased results if the missing data is not MCAR.</li><li>Suitable when the proportion of missing data is small and MCAR can be reasonably assumed.</li></ul><p><strong>Use of </strong>any<strong> and </strong>all<strong> in a Pandas DataFrame</strong></p><ul><li>any: Returns True if at least one value in a Series or DataFrame meets a certain condition.</li><li>all: Returns True only if all values in a Series or DataFrame meet a certain condition.</li><li>Useful for filtering data, checking for missing values, and performing logical operations on data.</li></ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 02 - Miscellaneous</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #ffffff;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Core Typography Styles (GitHub Markdown Flavor) */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        ul {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-top: 0.4em;
+            margin-bottom: 0.4em;
+        }
+        code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        }
+        
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Group Containers */
+        .sub-group {
+            background-color: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        .sub-group-title {
+            margin-top: 0;
+            font-weight: 600;
+            color: #0366d6;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../modules.html">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <a href="../modules.html" class="back-link">← Back to Modules Directory</a>
+
+    <!-- Main Content -->
+    <h1>Module 02 - Miscellaneous Topics</h1>
+    <p>A compilation of supplementary structural concepts covering distributions, data cleanup filtering metrics, exploratory visualization methods, and missing data mechanisms.</p>
+
+    <h2>1. Exploratory Data Analysis & Visualizations</h2>
+    
+    <ul>
+        <li><strong>Box plot:</strong>
+            <ul>
+                <li>A graphical representation of the distribution of a dataset.</li>
+                <li>Displays the median, quartiles, and potential outliers.</li>
+                <li>The box represents the interquartile range (IQR), which contains the middle 50% of the data.</li>
+                <li>The line inside the box represents the median.</li>
+                <li>Whiskers extend from the box to indicate the range of the data within the fences.</li>
+                <li>Outliers are plotted as individual points beyond the fences.</li>
+            </ul>
+        </li>
+        <li><strong>Fence:</strong>
+            <ul>
+                <li>A cutoff value used in box plots to identify potential outliers.</li>
+                <li>Calculated as 1.5 times the interquartile range (IQR) above the upper quartile and below the lower quartile.</li>
+                <li>Data points outside the fences are considered potential outliers.</li>
+            </ul>
+        </li>
+        <li><strong>Whiskers:</strong>
+            <ul>
+                <li>Lines extending from the box in a box plot.</li>
+                <li>Indicate the range of the data within the fences.</li>
+                <li>The upper whisker extends to the largest data point within the upper fence.</li>
+                <li>The lower whisker extends to the smallest data point within the lower fence.</li>
+            </ul>
+        </li>
+        <li><strong>IQR (Interquartile Range):</strong>
+            <ul>
+                <li>The range between the first quartile (Q1) and the third quartile (Q3).</li>
+                <li>Contains the middle 50% of the data.</li>
+                <li>Calculated as <code>Q3 - Q1</code>.</li>
+            </ul>
+        </li>
+        <li><strong>Quartiles:</strong>
+            <ul>
+                <li>Values that divide a dataset into four equal parts.</li>
+                <li><code>Q1</code>: The 25th percentile.</li>
+                <li><code>Q2</code>: The median (50th percentile).</li>
+                <li><code>Q3</code>: The 75th percentile.</li>
+            </ul>
+        </li>
+        <li><strong>Quantiles:</strong>
+            <ul>
+                <li>A generalization of quartiles that divide a dataset into any number of equal parts.</li>
+                <li>Quartiles are a specific type of quantile; percentiles are another common type.</li>
+            </ul>
+        </li>
+        <li><strong>Outliers:</strong>
+            <ul>
+                <li>Data points that are significantly different from other observations in the dataset.</li>
+                <li>Can be identified using various methods, including box plots and z-scores.</li>
+                <li>May indicate errors, unusual events, or simply the natural variability of the data.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>2. Data Cardinality & Variance</h2>
+    <ul>
+        <li><strong>Cardinality:</strong>
+            <ul>
+                <li>In the context of data, cardinality refers to the number of unique values in a dataset or a particular column (feature) of a dataset.</li>
+                <li>High cardinality means many unique values (e.g., customer IDs, product names).</li>
+                <li>Low cardinality means few unique values (e.g., binary categories like gender, boolean values).</li>
+                <li>Important for understanding data types, storage efficiency, and potential issues like high-cardinality categorical features in machine learning.</li>
+            </ul>
+        </li>
+        <li><strong>Features with Constant and Semi-Constant Values:</strong>
+            <ul>
+                <li><strong>Constant features</strong>: Have only one unique value in the entire dataset.</li>
+                <li><strong>Semi-constant features</strong>: Have a dominant unique value and very few occurrences of other values.</li>
+                <li>These features provide little to no information for predictive modeling or analysis.</li>
+                <li>Often removed during feature selection to improve model efficiency and prevent overfitting.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>3. Missing Data Mechanisms & Filtering</h2>
+    <p>Understanding structural patterns behind missing rows or entries within datasets during pipeline preparation.</p>
+
+    <div class="sub-group">
+        <p class="sub-group-title">Missing Data Mechanisms</p>
+        <ul>
+            <li><strong>MCAR (Missing Completely at Random):</strong> The probability of data being missing is unrelated to any observed or unobserved variables. Essentially, missingness occurs entirely by chance.</li>
+            <li><strong>MNAR (Missing Not at Random):</strong> The probability of missingness depends on the missing values themselves. This is the most complex type of missing data, as the missingness is related to the information we don't have.</li>
+            <li><strong>MAR (Missing at Random):</strong> The probability of missingness depends on observed variables but not on the missing values themselves. The missingness can be explained by other information in the data.</li>
+        </ul>
+    </div>
+
+    <ul>
+        <li><strong>Complete Case Analysis or Listwise Deletion:</strong>
+            <ul>
+                <li>A simple method for handling missing data.</li>
+                <li>Involves removing any rows (observations) from the dataset that have at least one missing value.</li>
+                <li>Can lead to loss of information and biased results if the missing data is not MCAR.</li>
+                <li>Suitable when the proportion of missing data is small and MCAR can be reasonably assumed.</li>
+            </ul>
+        </li>
+        <li><strong>Use of <code>any</code> and <code>all</code> in a Pandas DataFrame:</strong>
+            <ul>
+                <li><code>any</code>: Returns True if at least one value in a Series or DataFrame meets a certain condition.</li>
+                <li><code>all</code>: Returns True only if all values in a Series or DataFrame meet a certain condition.</li>
+                <li>Useful for filtering data, checking for missing values, and performing logical operations on data.</li>
+            </ul>
+        </li>
+    </ul>
+
+</body>
+</html>
