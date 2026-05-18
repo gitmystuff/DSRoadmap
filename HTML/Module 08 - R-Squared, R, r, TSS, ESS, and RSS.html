@@ -1,1 +1,224 @@
-<p><strong>Core Concepts and Terms</strong></p><ol><li><strong>R-squared (R^2)</strong>: The coefficient of determination, a statistical measure that indicates the proportion of the variance in the dependent variable that is predictable from the independent variable(s). Essentially, it tells us how well our model fits the data. A higher R-squared value generally indicates a better fit, with 1 being a perfect fit.<br /></li><li><strong>R</strong>: In simple linear regression, R represents the correlation coefficient. It measures the strength and direction of the linear relationship between two variables. R ranges from -1 to 1, where -1 indicates a perfect negative linear relationship, 1 indicates a perfect positive linear relationship, and 0 indicates no linear relationship.<br /></li><li><strong>r</strong>: Pearson's correlation coefficient, measuring the linear correlation between two sets of data. It's calculated by dividing the covariance of the two variables by the product of their standard deviations. Like R, it ranges from -1 to 1, with the same interpretations.<br /></li><li><strong>TSS (Total Sum of Squares)</strong>: Measures the total variability in the dependent variable. It's calculated as the sum of the squared differences between each observed data point and the mean of the dependent variable.<br /></li><li><strong>ESS (Explained Sum of Squares)</strong>: Measures the variability in the dependent variable that is explained by the independent variable(s). It's the sum of the squared differences between the predicted values and the mean of the dependent variable.<br /></li><li><strong>RSS (Residual Sum of Squares)</strong>: Also known as the sum of squared errors (SSE), it measures the variability in the dependent variable that is not explained by the model. It's calculated as the sum of the squared differences between the observed values and the predicted values.<br /></li></ol><p><strong>Additional Important Concepts</strong></p><ul><li><strong>Adjusted R-squared</strong>: A modified version of R-squared that adjusts for the number of predictors in the model. It penalizes the addition of unnecessary variables that don't improve the model significantly.<br /></li><li><strong>Out-of-Sample R-squared (OOS R-squared)</strong>: Measures the model's performance on data that was not used to train the model. This is important for evaluating how well the model generalizes to new, unseen data.<br /></li><li><strong>Degrees of Freedom</strong>: The number of independent pieces of information available to estimate a parameter. In the context of adjusted R-squared, degrees of freedom are used to account for the number of variables and observations in the model.<br /></li></ul><p><strong>Deep Dive and Elaboration</strong></p><ul><li><strong>Relationship between R-squared, R, and r</strong>:<br /><ul><li>In simple linear regression (one independent variable), R is simply the square root of R-squared, and both have the same sign. They both reflect the strength of the linear relationship between the variables.</li><li>The concept of 'r' (Pearson's correlation coefficient) is more general and doesn't assume a dependent vs. independent relationship between variables, just their joint variability.</li><li>In multiple linear regression, the relationship between R and R-squared is more complex. R is calculated similarly to simple linear regression, but R-squared has a different formula to account for multiple predictors.</li></ul></li><li><strong>Understanding TSS, ESS, and RSS</strong>:<br /><ul><li>These three concepts are fundamental to understanding how R-squared is calculated and what it represents.</li><li>Visualizing these sums of squares graphically can be helpful. Imagine a scatter plot with the observed values of the dependent variable on the y-axis and the predicted values on the x-axis. TSS represents the total variation of the observed values around their mean. ESS represents the variation of the predicted values around the mean. RSS represents the variation of the observed values around the predicted values.</li><li>R-squared can be calculated as ESS/TSS, which shows the proportion of the total variation explained by the model.</li></ul></li><li><strong>Why Adjusted R-squared is Important</strong>:<br /><ul><li>R-squared tends to increase as more variables are added to the model, even if those variables don't actually improve the model's predictive power. Adjusted R-squared addresses this issue by penalizing the addition of unnecessary variables.</li><li>When comparing models with different numbers of predictors, adjusted R-squared is a more reliable measure of model fit than R-squared.</li></ul></li></ul><p><strong>Key Considerations</strong></p><ul><li><strong>Interpretation</strong>: While R-squared and related measures are valuable tools, it's important to interpret them in the context of the specific data and research question. A high R-squared doesn't necessarily mean that the model is a good one, and a low R-squared doesn't necessarily mean that the model is bad.</li><li><strong>Assumptions</strong>: Linear regression models have certain assumptions that need to be met for the results to be valid. These assumptions include linearity, independence of errors, homoscedasticity, and normality of errors.</li><li><strong>Causality</strong>: Correlation does not imply causation. Even if there's a strong linear relationship between two variables, it doesn't necessarily mean that one causes the other.</li></ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 08 - Sum of Squares Framework</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #ffffff;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Core Typography Styles (GitHub Markdown Flavor) */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        ul {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-top: 0.4em;
+            margin-bottom: 0.4em;
+        }
+        code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        }
+        
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Custom Information Containers */
+        .component-card {
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .component-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #0366d6;
+            margin-bottom: 6px;
+            border-bottom: 1px solid #f1f1f1;
+            padding-bottom: 4px;
+        }
+        .formula-display {
+            font-family: SFMono-Regular, Consolas, monospace;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 10px 14px;
+            border-radius: 6px;
+            display: inline-block;
+            margin: 8px 0;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../modules.html">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <a href="../modules.html" class="back-link">← Back to Modules Directory</a>
+
+    <!-- Main Content -->
+    <h1>Module 08 - Sum of Squares Framework (TSS, ESS, RSS, R²)</h1>
+    <p class="intro-text">This study reference details the Analysis of Variance (ANOVA) sum of squares decomposition framework used to evaluate ordinary least squares (OLS) regression models. It maps out how total target variability splits into explained and unexplained components, providing the mathematical basis for coefficients of determination.</p>
+
+    <h2>1. The ANOVA Sum of Squares Decomposition</h2>
+    <p>To evaluate how well a regression line tracks empirical data, the total variation in the dependent target variable is broken down into three component elements:</p>
+
+    <!-- TSS Card -->
+    <div class="component-card">
+        <div class="component-title">Total Sum of Squares (TSS)</div>
+        <p>Measures the baseline total variability present within the dependent target variable. It calculates the sum of the squared differences between each raw observed data point and the general mean of the dependent variable. Graphically, this captures the total variation of the observed values around a horizontal intercept line mapping the target average.</p>
+        <div class="formula-display">TSS = &Sigma;(y_actual - y_mean)&sup2;</div>
+    </div>
+
+    <!-- ESS Card -->
+    <div class="component-card">
+        <div class="component-title">Explained Sum of Squares (ESS)</div>
+        <p>Measures the portion of target variability that is successfully captured and explained by the independent predictor features. It aggregates the sum of the squared differences between the model's predicted values and the baseline mean of the dependent variable. Graphically, this displays the variance of the regression line values around the target average.</p>
+        <div class="formula-display">ESS = &Sigma;(y_predicted - y_mean)&sup2;</div>
+    </div>
+
+    <!-- RSS Card -->
+    <div class="component-card">
+        <div class="component-title">Residual Sum of Squares (RSS)</div>
+        <p>Also known as the Sum of Squared Errors (SSE), this parameter measures the remaining variability in the dependent variable that the model fails to explain. It calculates the sum of the squared differences between the raw observed values and the model's matching predicted coordinates. Graphically, this represents the scatter of observed data points directly around the optimized line of best fit.</p>
+        <div class="formula-display">RSS = &Sigma;(y_actual - y_predicted)&sup2;</div>
+    </div>
+
+    <p>These components fit together in a strict additive framework representing total model variance:</p>
+    <div class="formula-display" style="background-color: #f6f8fa; color: #24292e; border: 1px solid #e1e4e8;">TSS = ESS + RSS</div>
+
+    <h2>2. Correlation vs. Determination Indices</h2>
+    <ul>
+        <li><strong>R-squared (R² / Coefficient of Determination):</strong> A standardized goodness-of-fit metric that defines the precise proportion of total variance in the dependent variable explained by the regression inputs. Derived directly from the sum of squares decomposition framework:
+            <br>
+            <div class="formula-display">R&sup2; = ESS / TSS = 1 - (RSS / TSS)</div>
+            A score of 1 represents a perfect fit with zero residual error. However, a high R² score does not automatically guarantee a well-specified model, just as a lower score does not render an experimental dataset invalid; context and assumption testing remain critical.
+        </li>
+        <li><strong>R (Multiple Correlation Coefficient):</strong> In simple linear regression layouts, <code>R</code> equals the exact square root of R-squared, sharing the identical directional sign as the model's slope coefficient. It measures the joint strength and direction linking the estimated values to the raw target data.</li>
+        <li><strong>r (Pearson's Correlation Coefficient):</strong> Measures the linear correlation strength mapping two separate continuous sets of data by dividing their covariance by the product of their respective standard deviations. Unlike regression parameters, <code>r</code> is a symmetrical relationship metric that treats both continuous variables identically without enforcing an independent vs. dependent structure.</li>
+    </ul>
+
+    <h2>3. Model Parsimony &amp; Out-of-Sample Performance</h2>
+    <ul>
+        <li><strong>Adjusted R-squared:</strong> A modified adaptation of the standard R² coefficient that penalizes the addition of useless independent variables. Standard R² values will mathematically increase or remain constant whenever a new feature is appended—even if that feature contains only random noise. Adjusted R-squared accounts for this by incorporating degrees of freedom parameters:
+            <br>
+            <div class="formula-display">Adj R&sup2; = 1 - [((1 - R&sup2;) * (n - 1)) / (n - k - 1)]</div>
+            Where <code>n</code> equals total observations and <code>k</code> equals total model parameters (excluding the intercept constant). It is a far more reliable metric when evaluating and comparing competing models with varying feature lengths.
+        </li>
+        <li><strong>Out-of-Sample R-squared (OOS R²):</strong> Evaluates model performance using a completely separate validation testing block that was excluded during training optimization. This metric is a vital diagnostic to verify whether an optimized model generalizes well to fresh data rows or is suffering from overfitting.</li>
+        <li><strong>Degrees of Freedom:</strong> The count of independent pieces of statistical data available to estimate a parameter. In variance analysis, it calibrates the penalization matrix to adjust for sample sizes relative to model parameter length.</li>
+    </ul>
+
+    <h2>4. Key Structural Cautions</h2>
+    <ul>
+        <li><strong>Interpretation Bounding:</strong> Goodness-of-fit metrics must be paired with comprehensive residual diagnostic checks. High fits can still mask critical baseline assumption violations like non-linearity or heteroscedasticity.</li>
+        <li><strong>Causality Boundaries:</strong> Strong linear correlation or high R² determination scores do not imply or prove a causal link between variables. Joint variance alignments can be heavily driven by hidden confounding parameters or random sampling chance.</li>
+    </ul>
+
+</body>
+</html>
