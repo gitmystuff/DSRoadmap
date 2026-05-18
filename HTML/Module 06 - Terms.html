@@ -1,1 +1,427 @@
-<h3><a id="_xav3hwwtulf4"></a><strong>Terms and Concepts</strong></h3><ol><li><strong>Bessel's Correction<br /></strong><ul><li>Bessel's correction is the use of n−1 instead of n in the formula for the sample variance and sample standard deviation, where n is the number of observations in a sample.</li><li>This method corrects the bias in the estimation of the population variance.</li><li>It also partially corrects the bias in the estimation of the population standard deviation.</li></ul></li><li><strong>Bias<br /></strong><ul><li>Bias is a systematic error that can occur in a statistical analysis, leading to inaccurate or misleading results.</li><li>It can be caused by various factors, such as sampling bias, measurement bias, or human bias.</li></ul></li><li><strong>Degrees of Freedom<br /></strong><ul><li>Degrees of freedom are the number of independent values that a statistical analysis can estimate.</li><li>You can also think of it as the number of values that are free to vary as you estimate parameters.</li><li>Degrees of freedom is a combination of how much data you have and how many parameters you need to estimate.</li></ul></li><li><strong>Standard Deviation<br /></strong><ul><li>The standard deviation is a measure of the spread or dispersion of data points around the mean.</li><li>It is calculated as the square root of the variance.</li><li>A higher standard deviation indicates that the data is more spread out, while a lower standard deviation indicates that the data is more clustered around the mean.</li></ul></li><li><strong>Boosting<br /></strong><ul><li>In machine learning, boosting is an ensemble meta-algorithm for primarily reducing bias, and also variance in supervised learning, and a family of machine learning algorithms that convert weak learners to strong ones.</li><li>Boosting is based on the question posed by Kearns and Valiant (1988, 1989): &quot;Can a set of weak learners create a single strong learner?&quot;.</li><li>A weak learner is defined to be a classifier that is only slightly correlated with the true classification (it can label examples better than random guessing).</li></ul></li><li><strong>Bootstrapping<br /></strong><ul><li>Bootstrapping is a statistical procedure that resamples a single dataset to create many simulated samples.</li><li>This process allows you to calculate standard errors, construct confidence intervals, and perform hypothesis testing for numerous types of sample statistics.</li><li>These resamples are known as sampling distributions of estimates.</li></ul></li><li><strong>Central Limit Theorem<br /></strong><ul><li>The central limit theorem (CLT) is a statistical concept that states that the distribution of sample means approximates a normal distribution as the sample size gets larger, regardless of the population's distribution.</li><li>Sample means will be normally distributed, even if the population isn't normally distributed.</li><li>The central limit theorem is important in hypothesis testing and confidence intervals.</li></ul></li><li><strong>Law of Large Numbers<br /></strong><ul><li>In probability theory, the law of large numbers (LLN) is a theorem that describes the result of performing the same experiment a large number of times.</li><li>According to the law, the average of the results obtained from a large number of trials should be close to the expected value and tends to become closer to the expected value as more trials are performed.</li><li>Guarantees stable long-term results for the averages of some random events.</li></ul></li><li><strong>Distribution of Sample Means</strong><ul><li>Imagine taking many random samples from a population and calculating the mean of each sample. The distribution of these sample means is called the &quot;distribution of sample means.&quot;</li><li>Crucially, even if the original population isn't normally distributed, the distribution of sample means tends towards a normal distribution as the sample size increases. This is the foundation of the Central Limit Theorem.</li><li>This distribution has its own mean (close to the population mean) and standard deviation (called the standard error).</li></ul></li><li><strong>Confidence Intervals</strong><ul><li>A confidence interval is a range of values around a sample statistic (like the mean) that is likely to contain the true population parameter with a certain level of confidence (e.g., 95%).</li><li>It essentially gives you a plausible range for where the true population value lies, based on your sample data.</li><li>Confidence intervals are affected by sample size and variability. Larger samples and lower variability lead to narrower confidence intervals, indicating more precise estimates.</li></ul></li><li><strong>Uncertainty</strong><ul><li>In the statistical sense, uncertainty refers to the lack of complete knowledge about a population or phenomenon. We use samples to estimate population characteristics, but there's always some level of uncertainty because we haven't measured the entire population.</li><li>Uncertainty can be quantified using concepts like confidence intervals, standard errors, and margins of error.</li></ul></li><li><strong>Margin of Error</strong><ul><li>The margin of error is the range of values above and below the sample statistic in a confidence interval.</li><li>It essentially tells you how much your sample estimate might differ from the true population value due to random sampling error.</li><li>A larger margin of error indicates greater uncertainty in the estimate.</li></ul></li><li><strong>Standard Error</strong><ul><li>The standard error is the standard deviation of the distribution of sample means.</li><li>It measures how much the sample means vary from the true population mean.</li><li>A smaller standard error indicates that the sample means are clustered more closely around the population mean, suggesting a more precise estimate.</li></ul></li><li><strong>Relationships and Comparisons</strong></li></ol><ul><li>The distribution of sample means is the foundation for understanding confidence intervals and standard errors.</li><li>Confidence intervals are constructed using the margin of error, which is calculated using the standard error.</li><li>All these concepts help quantify and manage uncertainty in statistical analysis.</li><li>By understanding these concepts and their relationships, you can better interpret statistical results, estimate population parameters, and make informed decisions based on data analysis.</li></ul><ol><li><strong>Natural Language Processing (NLP)</strong><ul><li>Natural language processing (NLP) is a field of artificial intelligence (AI) that focuses on enabling computers to understand, interpret, and generate human language.</li><li>It involves developing algorithms and models that can analyze text and speech, extract meaning, and perform tasks such as translation, summarization, and question answering.</li><li>NLP is used in various applications, including chatbots, machine translation, sentiment analysis, and text classification.</li></ul></li><li><strong>One-Hot Encoding</strong><ul><li>In machine learning, one-hot encoding is a frequently used method to deal with categorical data.</li><li>Because many machine learning models need their input variables to be numeric, categorical variables need to be transformed in the pre-processing part.</li><li>One-hot encoding creates new binary columns for each unique value in a categorical variable, indicating the presence or absence of that value for each observation. </li></ul></li></ol><p>Natural Language Processing (NLP) is a branch of artificial intelligence that deals with enabling computers to understand, interpret, and generate human language.</p><ol><li><strong>Word Tokens</strong><ul><li>Tokens are the total number of words in a corpus regardless of whether they are repeated.</li><li>Word tokenization splits text into words.</li><li>Tokens are the basic building blocks of natural language understanding.</li></ul></li><li><strong>CountVectorizer</strong><ul><li>CountVectorizer is a tool used in NLP to convert a collection of text documents into numerical feature vectors.</li><li>It works by counting the occurrences of each word in each document and creating a matrix representation of the data.</li><li>This matrix can then be used as input for machine learning algorithms.</li></ul></li><li><strong>Bag of Words</strong><ul><li>The bag-of-words model is a simplifying representation used in NLP and information retrieval (IR).</li><li>In this model, a text (such as a sentence or a document) is represented as the bag (multiset) of its words, disregarding grammar and even word order but keeping multiplicity.</li><li>Keeping multiplicity means that the number of times a word appears in the text is recorded.</li></ul></li><li><strong>Stemming</strong><ul><li>Stemming is the process of reducing a word to its base or root form, called the stem.</li><li>This is done by removing suffixes and prefixes from the word.</li><li>Stemming is used in NLP to normalize words and reduce the number of unique words in a corpus.</li></ul></li><li><strong>Lemmatization</strong><ul><li>Lemmatization is the process of grouping together the inflected forms of a word so they can be analyzed as a single item.</li><li>This is done by using a dictionary or a set of rules to identify the base form of a word, called the lemma.</li><li>Lemmatization is used in NLP to improve the accuracy of text analysis.</li></ul></li><li><strong>TF-IDF (Term Frequency Inverse Document Frequency)</strong><ul><li>TF-IDF is a numerical statistic that reflects how important a word is to a document in a collection or corpus.</li><li>It is used to score words in the context of the document as well as in the context of the corpus.</li><li>The higher the TF-IDF score, the more useful the word is in the analysis of the document.</li></ul></li><li><strong>Stop Words</strong><ul><li>Stop words are commonly used words (such as &quot;the&quot;, &quot;a&quot;, &quot;is&quot;, &quot;to&quot;) that are often removed from text during NLP tasks.</li><li>This is because stop words typically do not carry much meaning and can clutter the analysis.</li><li>Removing stop words can improve the efficiency and accuracy of NLP tasks.</li></ul></li><li><strong>spaCy</strong><ul><li>spaCy is an open-source library for advanced NLP tasks.</li><li>It provides tools for various NLP tasks, such as tokenization, part-of-speech tagging, named entity recognition, and dependency parsing.</li><li>It is designed to be fast, efficient, and easy to use.</li></ul></li><li><strong>Language Models</strong><ul><li>A language model is a probability distribution over sequences of words.</li><li>It assigns a probability to the whole sequence.</li><li>Language models are used in various NLP tasks, such as machine translation, speech recognition, and text generation.</li></ul></li><li><strong>N-grams</strong><ul><li>N-grams are contiguous sequences of n items from a given sample of text or speech.</li><li>They are used to model the probability of a sequence of words, which is useful in various NLP tasks.</li><li>Examples of n-grams include unigrams (single words), bigrams (two words), and trigrams (three words).</li></ul></li><li><strong>Markov Chains</strong><ul><li>A Markov chain is a mathematical system that undergoes transitions from one state to another, between a finite or countable number of possible states.</li><li>It is a stochastic model describing a sequence of possible events in which the probability of each event depends only on the state attained in the previous event.</li><li>Markov chains are used in NLP to model the probability of a sequence of words, which is useful in various NLP tasks.</li></ul></li><li><strong>Word Embeddings</strong><ul><li>In natural language processing (NLP), a word embedding is a learned representation for text where words that have the same meaning have a similar representation.</li><li>Word embeddings are used to capture the semantic relationships between words.</li><li>They are used in various NLP tasks, such as machine translation, sentiment analysis, and text classification.</li></ul></li><li><strong>Similarity Measures</strong><ul><li>Similarity measures are used to quantify the similarity between two pieces of text.</li><li>There are various similarity measures, such as cosine similarity, Jaccard distance, and Euclidean distance.</li><li>Similarity measures are used in NLP tasks such as information retrieval, document clustering, and text classification.</li></ul></li><li><strong>Part of Speech (POS)</strong><ul><li>Part-of-speech (POS) tagging is the process of assigning a part-of-speech tag to each word in a text.</li><li>POS tags indicate the grammatical role of a word in a sentence, such as noun, verb, adjective, or adverb.</li><li>POS tagging is used in various NLP tasks, such as parsing, machine translation, and information retrieval.</li></ul></li><li><strong>Named Entity Recognition (NER)</strong><ul><li>Named-entity recognition (NER) is a subtask of information extraction that seeks to locate and classify named entities in text into predefined categories such as the names of persons, organizations, locations, expressions of times, quantities, monetary values, percentages, etc.</li><li>NER is used in various NLP applications, such as information retrieval, question answering, and machine translation.</li></ul></li><li><strong>Sentence Segmentation</strong><ul><li>Sentence segmentation, also known as sentence boundary disambiguation, is the problem in natural language processing of deciding where sentences begin and end.</li><li>Sentence segmentation is used to divide a text into individual sentences, which is a necessary step for many NLP tasks.</li></ul></li><li><strong>Topic Modeling</strong><ul><li>Topic modeling is a statistical method for discovering abstract &quot;topics&quot; that occur in a collection of documents.</li><li>It is used to uncover hidden themes or topics in a corpus of text data.</li><li>Topic modeling is used in various NLP applications, such as document summarization, information retrieval, and text classification.</li></ul></li><li><strong>Latent Dirichlet Allocation (LDA)</strong><ul><li>Latent Dirichlet Allocation (LDA) is a generative statistical model that allows sets of observations to be explained by unobserved groups that explain why some parts of the data are similar.</li></ul></li><li><strong>Non-Negative Matrix Factorization</strong><ul><li>Non-Negative Matrix Factorization is a statistical method that helps us to reduce the dimension of the input corpora or corpora. Internally, it uses the factor analysis method to give comparatively less weightage to the words that are having less coherence.</li><li><a href="https://www.analyticsvidhya.com/blog/2021/06/part-15-step-by-step-guide-to-master-nlp-topic-modelling-using-nmf/">https://www.analyticsvidhya.com/blog/2021/06/part-15-step-by-step-guide-to-master-nlp-topic-modelling-using-nmf/</a> </li><li>Performs dimensionality reduction and clustering</li><li>Used with TF-IDF</li></ul></li><li><strong>Similarity Measures</strong><ul><li><a href="https://flavien-vidal.medium.com/similarity-distances-for-natural-language-processing-16f63cd5ba55">https://flavien-vidal.medium.com/similarity-distances-for-natural-language-processing-16f63cd5ba55</a></li><li>Longest Common Substring<ol><li>India and Indiana would return 5</li></ol></li><li>Levenshtein Edit Distance<ol><li>Finds the minimum number of single-character edits such as replacement, deletion, and insertion, needed to convert 1 text into another</li><li>India and Indiana would return 2</li></ol></li><li>Hamming Distance<ol><li>Finds the number replacements needed to change one text into another of equal size</li><li>Indians and Indiana returns 2</li></ol></li><li>Jaccard Distance<ol><li>Finds how disimilar two words are by distance and the lower the distance, the more similar</li></ol></li><li>Euclidean Distance<ol><li>Finds the length between two points</li></ol></li><li>l2 norm</li><li>Dot Product<ol><li>Considers orientation, the direction, that Euclidean lacks</li><li>Uses magnitude with orientation</li></ol></li><li>Cosine Similarity<ol><li>In data analysis, cosine similarity is a measure of similarity between two non-zero vectors defined in an inner product space. Cosine similarity is the cosine of the angle between the vectors; that is, it is the dot product of the vectors divided by the product of their lengths. It follows that the cosine similarity does not depend on the magnitudes of the vectors, but only on their angle. The cosine similarity always belongs to the interval -1, 1. For example, two proportional vectors have a cosine similarity of 1, two orthogonal vectors have a similarity of 0, and two opposite vectors have a similarity of -1. For example, in information retrieval and text mining, each word is assigned a different coordinate and a document is represented by the vector of the numbers of occurrences of each word in the document. Cosine similarity then gives a useful measure of how similar two documents are likely to be, in terms of their subject matter, and independently of the length of the documents. The technique is also used to measure cohesion within clusters in the field of data mining.</li><li>https://en.wikipedia.org/wiki/Cosine_similarity</li></ol></li></ul></li></ol>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 06 - Terms and Concepts</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #ffffff;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Core Typography Styles (GitHub Markdown Flavor) */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        ul, ol {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-top: 0.4em;
+            margin-bottom: 0.4em;
+        }
+        code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        }
+
+        /* Concept Display Cards */
+        .term-card {
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .term-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0366d6;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #f1f1f1;
+            padding-bottom: 4px;
+        }
+        .nested-box {
+            background-color: #f6f8fa;
+            border-left: 4px solid #dfe2e5;
+            padding: 12px 16px;
+            margin: 12px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            color: #586069;
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../modules.html">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <a href="../modules.html" class="back-link">← Back to Modules Directory</a>
+
+    <!-- Main Content -->
+    <h1>Module 06 - Terms and Concepts</h1>
+    <p class="intro-text">This structural index compiles core parameters spanning mathematical sampling estimators, asymptotic limit theorems, ensemble reductions, and standard vectorization procedures in algorithmic text pipelines.</p>
+
+    <h2>1. Sampling Theory &amp; Mathematical Estimators</h2>
+
+    <!-- Bessel's Correction -->
+    <div class="term-card">
+        <div class="term-title">Bessel's Correction</div>
+        <p>The intentional substitution of <code>n - 1</code> instead of <code>n</code> in empirical sample variance and standard deviation denominators, where <code>n</code> represents the absolute count of observed elements. This structural adjustment eliminates negative bias when estimating population parameters from fractional data rows, and partially corrects geometric bias in standard deviations.</p>
+    </div>
+
+    <!-- Degrees of Freedom -->
+    <div class="term-card">
+        <div class="term-title">Degrees of Freedom</div>
+        <p>The total number of linearly independent values free to vary dynamically across a data matrix during parameter optimization. It represents the residual difference between the volume of captured observation rows and the number of fixed parametric restrictions required by an active estimator model.</p>
+    </div>
+
+    <!-- Bias -->
+    <div class="term-card">
+        <div class="term-title">Bias (Systemic Error)</div>
+        <p>A systematic error embedded within data collection or pipeline deployment that distorts true values away from empirical reality, skewing downstream machine learning inferences. It stems from faulty sampling frames, un-calibrated sensor units, or selection choices.</p>
+    </div>
+
+    <!-- Standard Deviation -->
+    <div class="term-card">
+        <div class="term-title">Standard Deviation</div>
+        <p>A foundational parametric metric tracking the explicit spread of discrete observations around their arithmetic mean. Computed as the positive square root of the variance vector; elevated values isolate highly dispersed features, while lower scores confirm tighter grouping.</p>
+    </div>
+
+    <!-- Bootstrapping -->
+    <div class="term-card">
+        <div class="term-title">Bootstrapping</div>
+        <p>A non-parametric statistical resampling routine that builds numerous simulated data subsets by sampling a single empirical matrix with replacement. This enables engineers to reconstruct complete sampling distributions to approximate stable standard errors and confidence intervals without making distribution assumptions.</p>
+    </div>
+
+    <!-- Boosting -->
+    <div class="term-card">
+        <div class="term-title">Boosting</div>
+        <p>An ensemble machine learning meta-algorithm engineered to systematically minimize structural bias. It iteratively maps sequence chains of individual weak learners (classifiers slightly better than random guessing) into an aggregated strong learner by dynamically weighting past prediction errors.</p>
+    </div>
+
+    <h2>2. Asymptotic Theorems &amp; Sampling Workflows</h2>
+
+    <!-- Law of Large Numbers -->
+    <div class="term-card">
+        <div class="term-title">Law of Large Numbers (LLN)</div>
+        <p>A mathematical theorem dictating that as the frequency of identical, independent random trials scales toward infinity, the empirical sample average converges to the true population expected value. This guarantees long-term parametric stability over high iteration frequencies.</p>
+    </div>
+
+    <!-- Central Limit Theorem -->
+    <div class="term-card">
+        <div class="term-title">Central Limit Theorem (CLT)</div>
+        <p>A fundamental theorem establishing that the distribution of sample means approaches a normal shape as the individual sample length limits expand (typically <code>n &ge; 30</code>), regardless of the raw population distribution shape. This provides the mathematical justification for using parametric hypothesis tests on skewed empirical data.</p>
+    </div>
+
+    <!-- Distribution of Sample Means -->
+    <div class="term-card">
+        <div class="term-title">Distribution of Sample Means</div>
+        <p>The continuous probability distribution formed by extracting infinite random samples of size <code>n</code> from a parent universe and calculating each individual average. It centers precisely around the population mean, with its dispersion tracking a tight standard error parameter.</p>
+    </div>
+
+    <h2>3. Uncertainty Quantification Metrics</h2>
+
+    <!-- Uncertainty -->
+    <div class="term-card">
+        <div class="term-title">Uncertainty</div>
+        <p>The statistical state of containing incomplete operational metrics regarding a targeted parent population. Because data architectures capture samples rather than full censuses, uncertainty models use standard errors and margins of error to establish bounds for where true values track.</p>
+    </div>
+
+    <!-- Confidence Intervals -->
+    <div class="term-card">
+        <div class="term-title">Confidence Intervals</div>
+        <p>An estimated interval range bounded around an empirical sample statistic that is calculated to enclose the true population parameter at a specified probability threshold (e.g., a 95% threshold). Expanding sample limits or reducing variance narrows these bounds, increasing precision.</p>
+    </div>
+
+    <!-- Margin of Error -->
+    <div class="term-card">
+        <div class="term-title">Margin of Error</div>
+        <p>The numeric radius representing the maximum random sampling error divergence extended above and below an active sample statistic within a confidence bounds calculation.</p>
+    </div>
+
+    <!-- Standard Error -->
+    <div class="term-card">
+        <div class="term-title">Standard Error</div>
+        <p>The true standard deviation of the sampling distribution of a statistic, most commonly tracking the sample mean. It measures the potential volatility expected across individual sample runs, dropping inversely relative to sample length expansion.</p>
+    </div>
+
+    <h2>4. Text Pipeline Parsing &amp; Tokenization Foundations</h2>
+
+    <!-- NLP -->
+    <div class="term-card">
+        <div class="term-title">Natural Language Processing (NLP)</div>
+        <p>A specialized branch of machine learning and computational linguistics focused on building algorithms capable of analyzing, parsing, interpreting, and generating raw human language structures across textual or vocal fields.</p>
+    </div>
+
+    <!-- One-Hot Encoding -->
+    <div class="term-card">
+        <div class="term-title">One-Hot Encoding</div>
+        <p>A categorical preprocessing method that transforms discrete string parameters into sparse binary dummy matrices, creating unique flag features (0 or 1) for every unique class instance to satisfy numerical tensor requirements.</p>
+    </div>
+
+    <!-- Word Tokens -->
+    <div class="term-card">
+        <div class="term-title">Word Tokens</div>
+        <p>The raw, discrete programmatic text segments (typically individual words, word parts, or punctuated symbols) produced by running parsing filters over an unstructured string corpus, serving as basic pipeline entries.</p>
+    </div>
+
+    <!-- CountVectorizer -->
+    <div class="term-card">
+        <div class="term-title">CountVectorizer</div>
+        <p>An NLP token processing component that transforms an array of text files into structural feature matrices by tabulating raw token occurrence frequencies across an established token library dictionary.</p>
+    </div>
+
+    <!-- Bag of Words -->
+    <div class="term-card">
+        <div class="term-title">Bag of Words (BoW)</div>
+        <p>A simplified document vector representation model that extracts vocabulary occurrence counts while ignoring grammar patterns, syntax trees, and relative positional tracking parameters inside the text string.</p>
+    </div>
+
+    <!-- Stemming -->
+    <div class="term-card">
+        <div class="term-title">Stemming</div>
+        <p>An algorithmic heuristic text filter that normalizes text entries by stripping away known prefixes and suffixes to return raw character roots (stems), which can occasionally cause non-standard spelling results.</p>
+    </div>
+
+    <!-- Lemmatization -->
+    <div class="term-card">
+        <div class="term-title">Lemmatization</div>
+        <p>A morphologically rigorous text-normalization procedure that maps inflected words back to their structurally authentic, dictionary-verified base form (lemma) by referencing detailed part-of-speech context keys.</p>
+    </div>
+
+    <!-- TF-IDF -->
+    <div class="term-card">
+        <div class="term-title">TF-IDF (Term Frequency-Inverse Document Frequency)</div>
+        <p>A statistical normalization weighting formula that balances local term occurrence frequencies against macro-corpus document distribution ratios. It scales down common stop-words while highlighting distinct, highly specific diagnostic tokens.</p>
+    </div>
+
+    <!-- Stop Words -->
+    <div class="term-card">
+        <div class="term-title">Stop Words</div>
+        <p>High-frequency structural syntax tokens (such as <code>"the"</code>, <code>"and"</code>, or <code>"is"</code>) stripped out early during textual feature preprocessing because they provide minimal semantic information and inflate vector dimensions.</p>
+    </div>
+
+    <!-- spaCy -->
+    <div class="term-card">
+        <div class="term-title">spaCy</div>
+        <p>An open-source library optimized for advanced, production-scale natural language processing. It provides compiled, high-performance pipelines for part-of-speech tagging, entity mapping, and syntactic structural parsing.</p>
+    </div>
+
+    <!-- Language Models -->
+    <div class="term-card">
+        <div class="term-title">Language Models</div>
+        <p>A statistical framework or neural network topology that estimates probability distributions over contiguous sequences of text tokens, evaluating the structural likelihood of consecutive word configurations.</p>
+    </div>
+
+    <!-- N-grams -->
+    <div class="term-card">
+        <div class="term-title">N-grams</div>
+        <p>A sliding-window contiguous slice of <code>n</code> consecutive tokens extracted from a text string. These can span unigrams (single tokens), bigrams (double pairs), or trigrams (triple token sequences) to preserve contextual phrases.</p>
+    </div>
+
+    <!-- Markov Chains -->
+    <div class="term-card">
+        <div class="term-title">Markov Chains</div>
+        <p>A stochastic mathematical system that steps between distinct sequential states under the condition that the transition probability profile of any forthcoming event depends exclusively on the parameters of the immediate present state.</p>
+    </div>
+
+    <!-- Word Embeddings -->
+    <div class="term-card">
+        <div class="term-title">Word Embeddings</div>
+        <p>High-dimensional, dense continuous vector space models where text tokens are plotted geometrically based on neural contextual learning. This placement ensures tokens sharing semantic definitions share highly correlated geometric alignments.</p>
+    </div>
+
+    <!-- Part of Speech (POS) -->
+    <div class="term-card">
+        <div class="term-title">Part of Speech (POS) Tagging</div>
+        <p>The grammatical token classification task that labels individual parsed strings with their exact syntactic structural role (such as noun, verb, or modifier) based on surrounding phrase mechanics.</p>
+    </div>
+
+    <!-- Named Entity Recognition (NER) -->
+    <div class="term-card">
+        <div class="term-title">Named Entity Recognition (NER)</div>
+        <p>An information extraction routine that detects unstructured strings and maps them into predefined semantic categories (such as names, organizational entities, geographical coordinates, or financial metrics).</p>
+    </div>
+
+    <!-- Sentence Segmentation -->
+    <div class="term-card">
+        <div class="term-title">Sentence Segmentation</div>
+        <p>An NLP boundary evaluation task tasked with locating grammatical endings and split coordinates to break text files into discrete standalone sentences.</p>
+    </div>
+
+    <h2>5. Latent Factor Space &amp; Topic Modeling</h2>
+
+    <!-- Topic Modeling -->
+    <div class="term-card">
+        <div class="term-title">Topic Modeling</div>
+        <p>An unsupervised machine learning task that maps document matrices to uncover latent clusters, mapping hidden thematic associations across large textual collections.</p>
+    </div>
+
+    <!-- Latent Dirichlet Allocation (LDA) -->
+    <div class="term-card">
+        <div class="term-title">Latent Dirichlet Allocation (LDA)</div>
+        <p>A generative, probabilistic Bayesian topic modeling framework that maps documents as continuous mixtures over unobserved topics, which are themselves represented as discrete probability distributions over text tokens.</p>
+    </div>
+
+    <!-- Non-Negative Matrix Factorization -->
+    <div class="term-card">
+        <div class="term-title">Non-Negative Matrix Factorization (NMF)</div>
+        <p>A non-negative linear algebra matrix decomposition technique used for dimensionality reduction and topic modeling. It fits zero-bounded components to TF-IDF weights, clustering documents based on structural concept coherence scores.</p>
+    </div>
+
+    <h2>6. Mathematical Distance &amp; Similarity Reference Engine</h2>
+    <p>A comparative structural breakdown of string matching distances and high-dimensional vector alignment metrics:</p>
+
+    <!-- Longest Common Substring -->
+    <div class="term-card">
+        <div class="term-title">Longest Common Substring</div>
+        <p>A metric counting the longest sequential character sequence shared identically between two string profiles.</p>
+        <div class="nested-box"><em>Example:</em> Matching <code>"India"</code> and <code>"Indiana"</code> evaluates to an exact similarity distance index of <strong>5</strong>.</div>
+    </div>
+
+    <!-- Levenshtein Edit Distance -->
+    <div class="term-card">
+        <div class="term-title">Levenshtein Edit Distance</div>
+        <p>Calculates the minimum single-character edit transformations (substitutions, insertions, or deletions) required to convert one string into another.</p>
+        <div class="nested-box"><em>Example:</em> Transitioning from <code>"India"</code> to <code>"Indiana"</code> requires 2 insertion modifications, returning an edit distance of <strong>2</strong>.</div>
+    </div>
+
+    <!-- Hamming Distance -->
+    <div class="term-card">
+        <div class="term-title">Hamming Distance</div>
+        <p>Calculates the absolute frequency of substitution edits required to swap character tracking between two equal-length strings.</p>
+        <div class="nested-box"><em>Example:</em> Evaluating <code>"Indians"</code> against <code>"Indiana"</code> isolates variations across the final two positions, matching a distance index of <strong>2</strong>.</div>
+    </div>
+
+    <!-- Jaccard Distance -->
+    <div class="term-card">
+        <div class="term-title">Jaccard Distance</div>
+        <p>A set-theoretic distance metric that measures token dissimilarity by subtracting the intersection ratio over the unique union space of two sets from 1. Lower scores confirm high vocabulary overlap.</p>
+    </div>
+
+    <!-- Euclidean Distance -->
+    <div class="term-card">
+        <div class="term-title">Euclidean Distance (L2 Norm)</div>
+        <p>Measures the straight-line distance connecting two vector coordinate targets inside a continuous geometric coordinate space. This metric can be sensitive to absolute document length variation during text processing.</p>
+    </div>
+
+    <!-- Dot Product -->
+    <div class="term-card">
+        <div class="term-title">Dot Product</div>
+        <p>An algebraic operator that scales combined vector vectors by multiplying respective coordinate entries and adding the results. It factors in vector direction and magnitude simultaneously.</p>
+    </div>
+
+    <!-- Cosine Similarity -->
+    <div class="term-card">
+        <div class="term-title">Cosine Similarity</div>
+        <p>Measures the inner product angle separating two continuous feature vectors, bounded from -1 (inverse direction) to +1 (identical direction). Because it isolates spatial orientation while ignoring vector magnitudes, it serves as a robust metric for document comparison regardless of total word count limits.</p>
+    </div>
+
+</body>
+</html>
