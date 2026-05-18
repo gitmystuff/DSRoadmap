@@ -1,1 +1,224 @@
-<ol><li><strong>Confusion Matrix</strong>: A table used to evaluate the performance of a classification model by comparing predicted class labels to actual class labels. It provides insights into the types of errors made by the model.<br /></li><li><strong>Error Matrix</strong>: Another name for a confusion matrix.<br /></li><li><strong>Contingency Table</strong>: A table that displays the frequencies of different combinations of two categorical variables. In the case of a confusion matrix, the variables are the actual and predicted classes.<br /></li><li><strong>True Positive (TP)</strong>: An instance where the model correctly predicts the positive class.<br /></li><li><strong>False Positive (FP)</strong>: An instance where the model incorrectly predicts the positive class when the actual class is negative.<br /></li><li><strong>False Negative (FN)</strong>: An instance where the model incorrectly predicts the negative class when the actual class is positive.<br /></li><li><strong>True Negative (TN)</strong>: An instance where the model correctly predicts the negative class.<br /></li><li><strong>Accuracy</strong>: The proportion of correctly classified instances out of the total instances. It's calculated as (TP + TN) / (TP + FP + TN + FN).<br /></li><li><strong>Precision</strong>: The proportion of true positive predictions out of all positive predictions. It's calculated as TP / (TP + FP).<br /></li><li><strong>Recall</strong>: The proportion of true positive predictions out of all actual positive instances. It's calculated as TP / (TP + FN). Also known as sensitivity.<br /></li><li><strong>Type I Error</strong>: Incorrectly rejecting the null hypothesis when it is actually true. Equivalent to a false positive.<br /></li><li><strong>Type II Error</strong>: Incorrectly failing to reject the null hypothesis when it is actually false. Equivalent to a false negative.<br /></li><li><strong>Underfitting</strong>: Occurs when a model is too simple to capture the underlying patterns in the data, resulting in poor performance on both training and test data.<br /></li><li><strong>Overfitting</strong>: Occurs when a model is too complex and learns the training data too well, including noise. This leads to good performance on training data but poor generalization to new, unseen data.<br /></li><li><strong>Bias-Variance Tradeoff</strong>: The inherent tradeoff in machine learning between bias (error due to oversimplification) and variance (error due to overcomplexity). The goal is to find the right balance for optimal model generalization.<br /></li><li><strong>Precision-Recall Tradeoff</strong>: The tradeoff between precision and recall. Increasing precision often decreases recall, and vice versa. The optimal balance depends on the specific application and the relative costs of false positives and false negatives.<br /></li><li><strong>F1 Score</strong>: The harmonic mean of precision and recall. It provides a single metric that balances both precision and recall.<br /></li><li><strong>ROC Curve</strong>: A graphical representation of the tradeoff between true positive rate (sensitivity) and false positive rate (1-specificity) for different classification thresholds.<br /></li><li><strong>AUC (Area Under the ROC Curve)</strong>: A measure of the overall performance of a classification model. A higher AUC indicates better discrimination ability.<br /></li></ol>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 11 - Binary Evaluation Confusion Matrix</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #ffffff;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Core Typography Styles (GitHub Markdown Flavor) */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        ul {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-top: 0.4em;
+            margin-bottom: 0.4em;
+        }
+        code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        }
+        
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Diagnostic Metrics Cards */
+        .metric-card {
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .metric-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #0366d6;
+            margin-bottom: 6px;
+            border-bottom: 1px solid #f1f1f1;
+            padding-bottom: 4px;
+        }
+        .formula-display {
+            font-family: SFMono-Regular, Consolas, monospace;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 8px 14px;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 8px 0;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../modules.html">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <a href="../modules.html" class="back-link">← Back to Modules Directory</a>
+
+    <!-- Main Content -->
+    <h1>Module 11 - Binary Evaluation Confusion Matrix</h1>
+    <p class="intro-text">This study reference evaluates diagnostic metrics for supervised binary classification models. It maps out the contingency structures used to cross-tabulate true factual classes against algorithmic predictions, defining criteria to calibrate operational decision thresholds.</p>
+
+    <h2>1. The Contingency Matrix Foundation</h2>
+    <ul>
+        <li><strong>Confusion Matrix (Error Matrix):</strong> A tabular, cross-tabulated cross-verification layout used to evaluate the performance of a supervised classification model. It maps matching counts by comparing predicted class labels directly against actual, empirical ground-truth class labels, isolating the exact frequency and orientation of classification errors.</li>
+        <li><strong>Contingency Table:</strong> A joint frequency distribution table displaying the empirical distribution profiles of discrete categorical variables. For binary classification evaluation, the two tracking attributes correspond to the actual observed target classes and the model's predicted class mappings.</li>
+    </ul>
+
+    <h2>2. Primary Cell Quantifiers &amp; Classical Statistical Errors</h2>
+    <p>Every instance processed through a binary model lands inside one of four distinct cross-classification quadrants:</p>
+    <ul>
+        <li><strong>True Positive (TP):</strong> A validation instance where the model correctly predicts the positive target class, matching a true positive ground-truth label.</li>
+        <li><strong>True Negative (TN):</strong> A validation instance where the model correctly predicts the negative baseline class, matching a true negative ground-truth label.</li>
+        <li><strong>False Positive (FP / Type I Error):</strong> An evaluation error occurring when the model incorrectly predicts the positive class for an instance whose actual empirical ground-truth label is negative (False Alarm). Equivalent to a classical **Type I Error** in classical inferential testing.</li>
+        <li><strong>False Negative (FN / Type II Error):</strong> An evaluation error occurring when the model incorrectly predicts the negative class for an instance whose actual empirical ground-truth label is positive (Miss). Equivalent to a classical **Type II Error** in classical inferential testing.</li>
+    </ul>
+
+    <h2>3. Global Classification Rates</h2>
+    <p>By aggregating the cell counts from the confusion matrix quadrants, engineers calculate standard performance ratios:</p>
+
+    <!-- Accuracy -->
+    <div class="metric-card">
+        <div class="metric-title">Accuracy</div>
+        <p>The global proportion of correctly classified instances out of the total collection of processed evaluation records. While intuitive, it can be highly misleading when deployed on severely imbalanced datasets.</p>
+        <div class="formula-display">Accuracy = (TP + TN) / (TP + FP + TN + FN)</div>
+    </div>
+
+    <!-- Precision -->
+    <div class="metric-card">
+        <div class="metric-title">Precision (Positive Predictive Value)</div>
+        <p>The true positive prediction accuracy proportion calculated relative to the total volume of instances flagged as positive by the model. It quantifies the cost of false alarms, acting as a crucial metric when False Positives introduce severe operational risks.</p>
+        <div class="formula-display">Precision = TP / (TP + FP)</div>
+    </div>
+
+    <!-- Recall -->
+    <div class="metric-card">
+        <div class="metric-title">Recall (Sensitivity / True Positive Rate)</div>
+        <p>The proportion of true positive predictions captured out of the absolute universe of true positive instances. It quantifies the system's ability to catch missing targets, serving as a critical metric when False Negatives carry high penalties (e.g., medical diagnostics).</p>
+        <div class="formula-display">Recall = TP / (TP + FN)</div>
+    </div>
+
+    <!-- F1 Score -->
+    <div class="metric-card">
+        <div class="metric-title">F1 Score</div>
+        <p>The mathematical harmonic mean connecting precision and recall rates. It yields a single unified metric that penalizes extreme imbalances between the two rates, serving as a balanced goodness-of-fit indicator for asymmetric or imbalanced classification tasks.</p>
+        <div class="formula-display">F1 Score = 2 * ((Precision * Recall) / (Precision + Recall))</div>
+    </div>
+
+    <h2>4. Optimization Tradeoffs &amp; Threshold Curves</h2>
+    <ul>
+        <li><strong>Precision-Recall Tradeoff:</strong> The inverse mathematical relationship linking precision and recall behaviors across shifting decision thresholds. Calibrating a model's threshold to aggressively minimize false alarms (elevating precision) inevitably causes missing entries (dropping recall), and vice versa. Setting optimal thresholds depends entirely on the relative costs assigned to Type I vs. Type II errors.</li>
+        <li><strong>ROC Curve (Receiver Operating Characteristic):</strong> A continuous graphical baseline plotting the operational tradeoff between the True Positive Rate (Sensitivity / Recall) and the False Box Positive Rate (1 - Specificity) across every potential classification decision threshold.</li>
+        <li><strong>AUC (Area Under the ROC Curve):</strong> A non-parametric integration metric measuring the total cumulative area located beneath the ROC curve layer. Bounded between 0.5 (random guessing) and 1.0 (perfect classification accuracy), it quantifies the model's fundamental ability to separate and discriminate between positive and negative classes independent of individual threshold settings.</li>
+        <li><strong>Overfitting vs. Underfitting Bounds:</strong> Structural optimization extremes that distort performance metrics. <strong>Underfitting</strong> reflects an overly simplistic classification architecture that fails to map training or validation patterns. Conversely, <strong>Overfitting</strong> reflects an over-complex architecture that encodes random training noise, producing misleadingly high training matrix confusion scores that collapse upon exposure to validation testing sets.</li>
+        <li><strong>Bias-Variance Tradeoff:</strong> The core machine learning optimization constraint balancing model simplicity error (bias) against system complexity sensitivity (variance) to secure maximum generalization capacity.</li>
+    </ul>
+
+</body>
+</html>
