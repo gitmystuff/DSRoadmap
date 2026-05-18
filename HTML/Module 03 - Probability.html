@@ -1,1 +1,184 @@
-<p>The document &quot;Module 03 - Probability Complete.ipynb - Colab.pdf&quot; provides a comprehensive overview of essential probability concepts and their applications in data science. It covers a wide range of topics, from basic probability calculations to more advanced concepts like conditional probability, Bayes' theorem, and common fallacies in probability reasoning.</p><p><strong>Here's a detailed outline and summary of key elements and terms:</strong></p><ol><li><strong>Introduction: The Monty Hall Problem and Sample Space<br /></strong><ul><li><strong>Monty Hall Problem</strong>: A classic probability puzzle that demonstrates how counterintuitive probability can be. It illustrates the concept of conditional probability and how updating information can change the odds of an event.</li><li><strong>Sample Space</strong>: The set of all possible outcomes of an experiment.</li></ul></li><li><strong>Randomness and Randomized Controlled Trials<br /></strong><ul><li><strong>Randomness</strong>: A phenomenon where the outcome of a single event is uncertain, but a regular distribution of outcomes emerges over many repetitions.</li><li><strong>Confounding Variables</strong>: Factors that can distort the relationship between variables in an experiment.</li><li><strong>Blind Experiment</strong>: An experiment where participants don't know if they are in the treatment or control group.</li></ul></li><li><strong>Probability Calculations<br /></strong><ul><li><strong>Probability</strong>: The measure of the likelihood that an event will occur.</li><li><strong>Combinations and Permutations</strong>: Methods for counting the number of possible outcomes in different scenarios.</li><li><strong>Intersections, Unions, and Conditional Probability</strong>: Concepts for calculating probabilities involving multiple events.</li></ul></li><li><strong>Historical Context and Biases<br /></strong><ul><li><strong>Early Probability</strong>: The development of probability theory from its early roots in gambling to its modern applications in various fields.</li><li><strong>Biases</strong>: Common errors in probability reasoning, such as availability bias and the conjunction fallacy.</li></ul></li><li><strong>Advanced Probability Concepts<br /></strong><ul><li><strong>Conditional Probability</strong>: The probability of an event occurring given that another event has already occurred.</li><li><strong>Bayes' Theorem</strong>: A formula for updating beliefs based on new evidence.</li><li><strong>Prosecutor's Fallacy</strong>: A common error in legal reasoning that confuses the probability of a match with the probability of guilt.</li></ul></li></ol><p>The document also includes various examples and problems to illustrate these concepts and their applications in data analysis and decision-making.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 03 - Probability Complete</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #ffffff;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Core Typography Styles (GitHub Markdown Flavor) */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        ul, ol {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-top: 0.4em;
+            margin-bottom: 0.4em;
+        }
+        code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        }
+        
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            color: #586069;
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../modules.html">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <a href="../modules.html" class="back-link">← Back to Modules Directory</a>
+
+    <!-- Main Content -->
+    <h1>Module 03 - Probability Complete</h1>
+    <p class="intro-text">This comprehensive study guide unifies theoretical mathematical probability foundations with applied experiment methodologies. It spans basic sample space boundaries, experimental control structures to block confounding variables, combinatorial counting techniques, and advanced Bayesian updating updates.</p>
+
+    <ol>
+        <li>
+            <strong>Introduction: The Monty Hall Problem and Sample Space</strong>
+            <ul>
+                <li><strong>Monty Hall Problem:</strong> A classic probability puzzle showcasing how deeply counterintuitive probability calculations can be. It maps the operational impact of conditional probability frameworks, proving how updating system information mid-game shifts baseline odds.</li>
+                <li><strong>Sample Space:</strong> The complete, mathematically bounded universe containing all possible mutually exclusive outcomes of an experiment.</li>
+            </ul>
+        </li>
+
+        <li>
+            <strong>Randomness and Randomized Controlled Trials</strong>
+            <ul>
+                <li><strong>Randomness:</strong> A phenomenon where the precise outcome of a single standalone trial is entirely unpredictable under uncertainty, yet a stable, mathematically regular distribution of clean macro outcomes predictably emerges over a high volume of repeated iterations.</li>
+                <li><strong>Confounding Variables:</strong> Extraneous noise factors that correlate (either positively or negatively) with both the experimental independent and dependent parameters, distorting the validity of causal relationship inferences.</li>
+                <li><strong>Blind Experiment:</strong> An intentional structural control technique where participants are prevented from knowing whether they reside within the targeted treatment or control group to limit psychological bias.</li>
+            </ul>
+        </li>
+
+        <li>
+            <strong>Probability Calculations</strong>
+            <ul>
+                <li><strong>Probability:</strong> The metric measurement quantifying the literal likelihood that an explicit targeted event will materialize.</li>
+                <li><strong>Combinations and Permutations:</strong> Algorithmic counting structures applied to determine the total length of a sample space depending on whether ordering is structurally meaningful (permutations) or strictly irrelevant (combinations).</li>
+                <li><strong>Intersections, Unions, and Conditional Probability:</strong> Core set-theory operations defining joint occurrences (AND), combined options (OR), and restricted conditional sample environments.</li>
+            </ul>
+        </li>
+
+        <li>
+            <strong>Historical Context and Cognitive Biases</strong>
+            <ul>
+                <li><strong>Early Probability:</strong> Tracing the progression of foundational probability theory, tracking its emergence from competitive gaming and gambling optimization models into a structured, axiomatic science applied across machine learning and statistical modeling.</li>
+                <li><strong>Biases:</strong> Ubiquitous systemic errors embedded within natural human judgment, highlighted by availability bias metrics and the conjunction fallacy paradox.</li>
+            </ul>
+        </li>
+
+        <li>
+            <strong>Advanced Probability Concepts</strong>
+            <ul>
+                <li><strong>Conditional Probability:</strong> Updating the evaluation profile of a targeted event given that another conditional event has already occurred.</li>
+                <li><strong>Bayes' Theorem:</strong> The fundamental mathematical engine allowing engineers to systematically transform initial prior belief scores into updated posterior probability distributions upon processing new empirical evidence streams.</li>
+                <li><strong>Prosecutor's Fallacy:</strong> A critical structural misinterpretation in analytical reasoning where an engineer mistakenly confuses the likelihood of finding matching profile evidence given innocence with the completely different likelihood of absolute innocence given that matching evidence is present.</li>
+            </ul>
+        </li>
+    </ol>
+
+</body>
+</html>
