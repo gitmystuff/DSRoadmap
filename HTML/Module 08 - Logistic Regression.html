@@ -1,1 +1,208 @@
-<p>A glossary of terms and concepts from the document you provided is presented below.</p><ul><li><strong>Logistic Regression<br /></strong><ul><li>A statistical model that models the probability of an event taking place by having the log-odds for the event be a linear combination of one or more independent variables.</li></ul></li><li><strong>Sigmoid<br /></strong><ul><li>A sigmoid curve is a common S-shaped curve that is often used in statistics to represent cumulative distribution functions. Sigmoid curves are bound by 0 and 1 on the y-axis and have a probability of 0.5 at the midpoint, or x=0.</li></ul></li><li><strong>Threshold<br /></strong><ul><li>In logistic regression, a classification threshold, also called the decision threshold, is the value logistic regression uses to map a logistic regression value to a binary category. A logistic regression model that returns 0.9995 for a particular email message is predicting that it is very likely to be spam.</li></ul></li><li><strong>Probability<br /></strong><ul><li>The probability is the number of observed outcomes divided by the possible outcomes.</li></ul></li><li><strong>Odds<br /></strong><ul><li>The odds are what happened divided by what didn't happen. We take the odds to make the value continuous.</li></ul></li><li><strong>Log Odds<br /></strong><ul><li>The log of the odds is used to get a range from negative infinity to infinity. We take the odds ratio to get a parameter estimate and take the log of that ratio to make the variable range from negative infinity to infinity and be symmetric around 0 instead of 1.</li></ul></li><li><strong>Euler's Number<br /></strong><ul><li>Euler's number is often used as the base of an exponential. The derivative of the function y=ex is equal to itself. Euler's number is often used in machine learning.</li></ul></li><li><strong>Logistic Function<br /></strong><ul><li>A logistic function is often used in logistic regression to model how the probability of an event may be affected by one or more explanatory variables. An example would be to have the model p=f(a+bx), where x is the explanatory variable, a and b are model parameters to be fitted, and f is the standard logistic function: p=1+e−(β0​+β1​x)1​</li></ul></li><li><strong>Logistic Model<br /></strong><ul><li>In statistics, the logistic model (or logit model) is a statistical model that models the probability of an event taking place by having the log-odds for the event be a linear combination of one or more independent variables.</li></ul></li><li><strong>Logit<br /></strong><ul><li>A Logit function, the inverse of the logistic sigmoid, also known as the log-odds function, is a function that represents probability values from 0 to 1, and negative infinity to infinity.</li></ul></li><li><strong>Sigmoid vs. Logit<br /></strong><ul><li>The inverse of the logit curve is the inverse-logit or sigmoid function. The sigmoid function transforms the numbers (-∞ to +∞) back to values between 0 and 1. </li></ul></li></ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 08 - Binary Logistic Regression Classifiers</title>
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 85px 24px 50px 24px; /* Clearance for fixed top navbar */
+            background-color: #ffffff;
+        }
+
+        /* Fixed Sticky Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links a {
+            color: #c8e1ff;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .navbar-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Core Typography Styles (GitHub Markdown Flavor) */
+        h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        ul {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-top: 0.4em;
+            margin-bottom: 0.4em;
+        }
+        code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        }
+        
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Core Component Boxes */
+        .math-box {
+            background-color: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        .math-box h3 {
+            margin-top: 0;
+            font-weight: 600;
+            color: #24292e;
+            border-bottom: 1px solid #e1e4e8;
+            padding-bottom: 6px;
+        }
+        .formula-text {
+            font-family: SFMono-Regular, Consolas, monospace;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 10px 14px;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 10px 0;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
+            <div class="navbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../modules.html">Modules Directory</a>
+                <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </nav>
+
+    <a href="../modules.html" class="back-link">← Back to Modules Directory</a>
+
+    <!-- Main Content -->
+    <h1>Module 08 - Logistic Regression</h1>
+    <p class="intro-text">This study reference outlines the mathematical architecture of logistic regression classification models. It covers the progressive mapping pipeline that links bounded probability spaces to continuous log-odds equations via sigmoid transformations and maximum likelihood parameters.</p>
+
+    <h2>1. The Probability-to-Odds Transformation Pipeline</h2>
+    <p>To use a linear combination of features for binary classification, the bounded target must be mapped into an infinite continuous scale:</p>
+    
+    <ul>
+        <li><strong>Probability:</strong> The baseline frequency index of an event materializing, calculated as the count of target observed outcomes divided by the total possible sample space outcomes. Bound strictly between <code>0</code> and <code>1</code>.</li>
+        <li><strong>Odds:</strong> The ratio comparing the probability of an event manifesting relative to the probability of that same event failing to occur (<em>"what happened divided by what didn't happen"</em>). This transforms the event score into a continuous range from <code>0</code> to <code>+&infin;</code>.</li>
+        <li><strong>Log Odds:</strong> The natural logarithm computed over the raw odds ratio. Taking the log of the odds forces the variable space to become perfectly symmetrical around <code>0</code> and expand from <code>-&infin;</code> to <code>+&infin;</code>, creating an infinite continuous scale that linear equations can estimate.</li>
+    </ul>
+
+    <h2>2. Functional Foundations &amp; Link Inversions</h2>
+    <p>Logistic architectures rely on inverse functional pairs to step between linear predictors and bounded probability outputs:</p>
+
+    <!-- The Logit Block -->
+    <div class="math-box">
+        <h3>The Logit Function (The Inverse Link)</h3>
+        <p>The <strong>Logit function</strong> is the mathematical logarithm of the odds ratio, mapping input probability values bounded between <code>0</code> and <code>1</code> across an open scale from <code>-&infin;</code> to <code>+&infin;</code>. It defines the foundational framework of a <strong>Logistic Model</strong> (or logit model), establishing the log-odds of a binary event as a direct linear combination of independent input variables:</p>
+        <div class="formula-text">logit(p) = ln(p / (1 - p)) = b0 + b1*x1 + b2*x2 + ... + bn*xn</div>
+    </div>
+
+    <!-- The Sigmoid Block -->
+    <div class="math-box">
+        <h3>The Logistic / Sigmoid Function (The Activation Link)</h3>
+        <p>The mathematical inverse of the logit mapping is the <strong>Sigmoid function</strong> (or inverse-logit function). It compresses an infinite coordinate space ranging from <code>-&infin;</code> to <code>+&infin;</code> back into a smooth, S-shaped cumulative probability distribution bounded strictly between <code>0</code> and <code>1</code> along the vertical axis, matching a clear midpoint probability of exactly <code>0.5</code> at <code>x = 0</code>.</p>
+        <p>The standard operational <strong>Logistic Function</strong> used to output the final conditional probability of an event based on calculated independent feature parameters is structured as:</p>
+        <div class="formula-text">p = 1 / (1 + e^-(b0 + b1*x))</div>
+    </div>
+
+    <ul>
+        <li><strong>Euler's Number (e):</strong> A mathematical constant tracking near <code>2.71828</code> that serves as the standard base for exponential growth functions and logistic activation transformations within machine learning algorithms. Its derivative function (<code>y = e^x</code>) equals itself.</li>
+    </ul>
+
+    <h2>3. Mapping Class Boundaries</h2>
+    <ul>
+        <li><strong>Logistic Regression:</strong> A classification model that models the conditional probability of a discrete categorical outcome by passing a linear combination of independent explanatory features through a logistic sigmoid transformation.</li>
+        <li><strong>Classification Threshold (Decision Threshold):</strong> The explicit probability boundary value used to map continuous model probabilities to a rigid binary category. 
+            <div class="nested-box">
+                <em>Example:</em> If a spam classification script sets a decision threshold of <code>0.50</code>, any incoming email message yielding a sigmoid probability score of <code>0.9995</code> safely maps to the positive binary classification label (<strong>Spam</strong>).
+            </div>
+        </li>
+    </ul>
+
+</body>
+</html>
