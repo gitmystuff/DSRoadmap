@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DS Roadmap - Home</title>
+    <title>Module 06 - Astronomy and Statistics</title>
     <style>
         /* Base Configuration */
         body {
@@ -91,15 +91,8 @@
             margin-bottom: 16px;
         }
         li {
-            margin-top: 0.35em;
-            margin-bottom: 0.35em;
-        }
-        a {
-            color: #0366d6;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
+            margin-top: 0.4em;
+            margin-bottom: 0.4em;
         }
         code {
             padding: 0.2em 0.4em;
@@ -109,58 +102,46 @@
             border-radius: 3px;
             font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
         }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin: 24px 0;
+        a {
+            color: #0366d6;
+            text-decoration: none;
         }
-        th, td {
-            padding: 10px 12px;
-            border: 1px solid #dfe2e5;
-            text-align: left;
-        }
-        th {
-            background-color: #f6f8fa;
-            font-weight: 600;
-        }
-        tr:nth-child(even) {
-            background-color: #f8f9fa;
+        a:hover {
+            text-decoration: underline;
         }
 
-        /* Layout Elements */
-        .cta-box {
+        /* Directory Back-Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            color: #586069;
+            margin-bottom: 24px;
+        }
+
+        /* Group Containers */
+        .block-section {
             background-color: #f6f8fa;
             border: 1px solid #e1e4e8;
             border-radius: 6px;
-            padding: 16px;
-            margin: 24px 0;
-        }
-        .btn-primary {
-            display: inline-block;
-            background-color: #2ea44f;
-            color: #ffffff;
-            padding: 10px 20px;
-            font-weight: 600;
-            border-radius: 6px;
-            text-decoration: none;
-            margin-top: 6px;
-        }
-        .btn-primary:hover {
-            background-color: #2c974b;
-            text-decoration: none;
-            color: #ffffff;
-        }
-        .nested-details {
-            background-color: #f6f8fa;
-            border-left: 4px solid #e1e4e8;
-            padding: 12px 16px;
-            margin: 12px 0;
-            border-radius: 0 6px 6px 0;
-        }
-        .resource-section {
-            border-left: 3px solid #0366d6;
-            padding-left: 14px;
+            padding: 18px;
             margin-bottom: 20px;
+        }
+        .block-title {
+            margin-top: 0;
+            font-weight: 600;
+            color: #24292e;
+            border-bottom: 1px solid #e1e4e8;
+            padding-bottom: 6px;
         }
     </style>
 </head>
@@ -169,103 +150,185 @@
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="navbar-container">
-            <a class="navbar-brand" href="#">DS Roadmap</a>
+            <a class="navbar-brand" href="../index.html">DS Roadmap</a>
             <div class="navbar-links">
-                <a href="modules.html">Modules Directory</a>
+                <a href="../index.html">Home</a>
+                <a href="./index.html">Modules Directory</a>
                 <a href="https://github.com/gitmystuff/DSRoadmap" target="_blank">GitHub Repo</a>
             </div>
         </div>
     </nav>
 
+    <a href="./index.html" class="back-link">← Back to Modules Directory</a>
+
     <!-- Main Content -->
-    <h1>DS Roadmap</h1>
-    <p>Resources for a Data Science Roadmap</p>
+    <h1>Module 06 - Astronomy and Statistics</h1>
+    <p class="intro-text">A curated set of astronomical tools and a historical timeline tracing the co-development of statistics and astronomy, drawn from <em>The History of Statistics: The Measurement of Uncertainty before 1900 by Stephen M. Stigler</em>.</p>
 
-    <h2>Project Overview</h2>
-    <p>This project offers a comprehensive glossary of terms and definitions, organized by modules, to aid in the exploration and analysis of key concepts. The glossary is available as a CSV file, which can be utilized in both spreadsheet software and Python notebooks, providing flexibility and advanced functionalities.</p>
-
-    <div class="cta-box">
-        <p style="margin-bottom: 6px; font-weight: 600;">Looking for interactive HTML module notes?</p>
-        <p style="font-size: 0.95rem; color: #586069; margin-bottom: 12px;">Navigate seamlessly through browser-ready summaries containing complete mathematical structures.</p>
-        <a href="modules.html" class="btn-primary">Browse Interactive HTML Modules →</a>
-    </div>
-
-    <h2>Key Features</h2>
-    
-    <h3>HTML Viewer</h3>
-    <p>Click on <a href="modules.html">modules.html</a> to gain access to each module overview that has been used for this project. Code can be located in the relative class depository.</p>
-
-    <h3>Spreadsheet Usage</h3>
-    <p>The CSV file can be seamlessly integrated with spreadsheet software like Google Sheets or Microsoft Excel. This enables users to effortlessly view, sort, and filter the glossary by terms, modules, and definitions, facilitating quick access to specific information.</p>
-
-    <h3>Python Notebook Integration</h3>
-    <p>For users seeking more advanced functionalities, the project provides a Python notebook that offers:</p>
+    <h2>1. Online Interactive Maps</h2>
     <ul>
-        <li><strong>Sorting:</strong> Sort the glossary by terms or modules, enabling customized organization of the data.</li>
-        <li><strong>Similarity Search:</strong> Leverage pre-calculated vector embeddings to identify semantically similar terms. This feature allows users to explore related concepts and discover connections within the glossary.</li>
-        <li>Visit <code>Modules/Glossary.ipynb</code> for examples.</li>
-        <li><strong>Example Usage:</strong>
-            <ul>
-                <li>Go to <code>Modules/Glossary.ipynb</code></li>
-                <li>Click on <strong>Open in Colab</strong></li>
-                <li>Go to <strong>Runtime...Run all</strong></li>
-                <li>Scroll to the bottom and wait for LLM to load</li>
-                <li>Enter a similarity search term in the prompt when it becomes available</li>
-            </ul>
+        <li><a href="https://nso.edu/for-public/eclipse-map-2024/" target="_blank">https://nso.edu/for-public/eclipse-map-2024/</a></li>
+        <li><a href="https://eclipse2024.org/eclipse_cities/statemap.php" target="_blank">https://eclipse2024.org/eclipse_cities/statemap.php</a></li>
+        <li><a href="https://stellarium-web.org/" target="_blank">https://stellarium-web.org/</a></li>
+        <li><a href="https://www.solarsystemscope.com/" target="_blank">https://www.solarsystemscope.com/</a></li>
+        <li><a href="https://earthobservatory.nasa.gov/features/OrbitsHistory" target="_blank">https://earthobservatory.nasa.gov/features/OrbitsHistory</a></li>
+    </ul>
+
+    <h2>2. Historical Timeline</h2>
+    <p>The following chronology, sourced from The History of Statistics: The Measurement of Uncertainty before 1900 by Stephen M. Stigler, traces how astronomical problems — from calendar reform to planetary orbit-fitting — drove the development of least squares, error theory, and probability.</p>
+    <ul>
+      <li><a href="https://www.britannica.com/science/astronomy/History-of-astronomy" target="_blank">https://www.britannica.com/science/astronomy/History-of-astronomy</a>
+      </li>
+      <li>Calendars - <a href="https://en.wikipedia.org/wiki/History_of_calendars" target="_blank">https://en.wikipedia.org/wiki/History_of_calendars</a>
+      <ul>
+        <li><a href="https://imagine.gsfc.nasa.gov/science/toolbox/timing_history.html" target="_blank">https://imagine.gsfc.nasa.gov/science/toolbox/timing_history.html</a>
         </li>
-    </ul>
-
-    <h2>Additional Resources</h2>
-    <p>For data science enthusiasts seeking further learning and development opportunities, the project also includes a curated list of resources:</p>
-
-    <div class="resource-section">
-        <h3>General Data Science Topics</h3>
-        <h4>freeCodeCamp:</h4>
+        <li>Antiquity were lunisolar, based on moon phase and position of the sun
+        </li>
+        <li>Julius Caesar made reforms (Julian calendar) based on an algorithm of introducing a leap day every four years but added an extra day every 128 years causing seasonal equinoxes to fall at wrong time of year
+        </li>
+        <li>Gregorian (Pope Gregory XIII 1582) is now defacto
+        </ul></li>
+      <li><a href="https://en.wikipedia.org/wiki/Least_squares#History" target="_blank">https://en.wikipedia.org/wiki/Least_squares#History</a>
+      </li>
+      <li>Astronomical Collections
+      <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Tycho_Brahe" target="_blank">https://en.wikipedia.org/wiki/Tycho_Brahe</a>
+        </li>
+        <li><a href="https://observablehq.com/@christophe-yamahata/visualizing-tycho-brahe-s-astronomical-observations-mars" target="_blank">https://observablehq.com/@christophe-yamahata/visualizing-tycho-brahe-s-astronomical-observations-mars</a>
+        </li>
+        <li><a href="https://library.si.edu/digital-library/book/tychonisbraheas00braha" target="_blank">https://library.si.edu/digital-library/book/tychonisbraheas00braha</a>
+        </li>
+        <li><a href="https://library.si.edu/digital-library/book/tychonisbrahedan00brah" target="_blank">https://library.si.edu/digital-library/book/tychonisbrahedan00brah</a>
+        </li>
+        <li><a href="https://www.sciencephoto.com/media/720385/view/table-from-the-rudolphine-tables-1627-" target="_blank">https://www.sciencephoto.com/media/720385/view/table-from-the-rudolphine-tables-1627-</a>
+        </li>
+        <li><a href="https://early-astronomy.classics.lsa.umich.edu/western_rudolphine.php" target="_blank">https://early-astronomy.classics.lsa.umich.edu/western_rudolphine.php</a>
+        </li>
+        <li><a href="https://www.loc.gov/item/85194777/" target="_blank">https://www.loc.gov/item/85194777/</a>
+        </li>
+        <li><a href="https://www.loc.gov/resource/rbc0001.2013gen94777/?c=40&amp;sp=3&amp;st=gallery" target="_blank">https://www.loc.gov/resource/rbc0001.2013gen94777/?c=40&amp;sp=3&amp;st=gallery</a>
+        </li>
+        <li><a href="http://www.sites.hps.cam.ac.uk/starry/logarithms.html" target="_blank">http://www.sites.hps.cam.ac.uk/starry/logarithms.html</a>
+        </li>
+        <li><a href="http://www.sites.hps.cam.ac.uk/starry/keplertables.html" target="_blank">http://www.sites.hps.cam.ac.uk/starry/keplertables.html</a>
+        </li>
+        <li><a href="https://telescoper.blog/2015/08/29/statistics-in-astronomy/" target="_blank">https://telescoper.blog/2015/08/29/statistics-in-astronomy/</a>
+        </ul></li>
+      <li>Legendre (1805 - Least Squares)
+      <ul>
+        <li>New Methods for the Orbits of Comets (Least Squares)
+        </li>
+        <li>E = a + bx + cy + fz + &amp;c.,
+        </li>
+        <li>A, b, c, f, &amp;c known coefficients; the rest are unknown and determined by E (the error)
+        </li>
+        <li>Multiply terms by coefficient of the unknowns and add it all up
+        </li>
+        <li><a href="https://en.wikipedia.org/wiki/Least_squares" target="_blank">https://en.wikipedia.org/wiki/Least_squares</a>
+        </li>
+        <li><a href="https://www.cuemath.com/data/least-squares/" target="_blank">https://www.cuemath.com/data/least-squares/</a>
+        </ul></li>
+      <li>Cotes Rule
+      <ul>
+        <li>Errors decrease with aggregation rather than increase
+        </ul></li>
+      <li>Tobias Mayer and Euler
+      <ul>
+        <li>Method of averages - combination of different observations under same equations
+        </li>
+        <li>The inequalities of the motions of Jupiter and Saturn
+        </li>
+        <li>The librations (the moon’s face varies, wobbles) of the Moon
+        </li>
+        <li>Latitude measures angular elevation above horizon
+        </li>
+        <li>Longitude based on Moon features and position with stars
+        </li>
+        <li>Created a table of equations of condition
+        </li>
+        <li>Uses the symbol plus/minus x (margin of error?)
+        </li>
+        <li>Let error be the limit of accuracy for the mean
+        </li>
+        <li>Post 1750 mathematical astronomers averaged simple measurements, combining several days of observations into a single number, as well as doing the same with equations
+        </ul></li>
+      <li>Laplace
+      <ul>
+        <li>The Mechanics of the Planets
+        </li>
+        <li>Analytical Theory of Probability
+        </li>
+        <li>Mayer’s 27 equations of conditions of moon crater observations
+        </li>
+        <li>Laplace’s Saturn Data with residuals - <a href="https://www.britannica.com/biography/Pierre-Simon-marquis-de-Laplace" target="_blank">https://www.britannica.com/biography/Pierre-Simon-marquis-de-Laplace</a>
+        </li>
+        <li>To resolve inconsistencies he reduced the 24 equations by
         <ul>
-            <li>Python: <a href="https://www.freecodecamp.org/news/search/?query=python%20basics" target="_blank">freeCodeCamp Python Basics</a></li>
-            <li>R: <a href="https://www.freecodecamp.org/news/r-programming-course/" target="_blank">freeCodeCamp R Course</a></li>
-            <li>Calculus: <a href="https://www.freecodecamp.org/news/learn-college-calculus-in-free-course/" target="_blank">freeCodeCamp Calculus</a></li>
-            <li>Linear Algebra: <a href="https://www.freecodecamp.org/news/search?query=linear%20algebra" target="_blank">freeCodeCamp Linear Algebra</a></li>
-            <li>Statistics: <a href="https://www.freecodecamp.org/news/search?query=statistics" target="_blank">freeCodeCamp Statistics</a></li>
-            <li>Computer Science: <a href="https://www.freecodecamp.org/news/search?query=computer%20science%20basics" target="_blank">freeCodeCamp CS Basics</a></li>
-            <li>SQL: <a href="https://www.freecodecamp.org/news/search?query=sql" target="_blank">freeCodeCamp SQL</a></li>
-            <li>Database Management: <a href="https://www.freecodecamp.org/news/search?query=database%20management" target="_blank">freeCodeCamp Database Management</a></li>
-            <li>Version Control: <a href="https://www.freecodecamp.org/news/search?query=version%20control" target="_blank">freeCodeCamp Version Control</a></li>
-            <li>Cloud Computing: <a href="https://www.freecodecamp.org/news/search?query=cloud" target="_blank">freeCodeCamp Cloud Computing</a></li>
-        </ul>
+          <li>Sum of equations
+          </li>
+          <li>The difference of the sums
+          </li>
+          <li>Linear combinations of equations
+          </ul></li>
+        <li>Probability density for errors - Laplace distribution (two-sided exponential distribution)
+        </li>
+        <li><a href="https://en.wikipedia.org/wiki/System_of_linear_equations" target="_blank">https://en.wikipedia.org/wiki/System_of_linear_equations</a> 
 
-        <h4>YouTube:</h4>
-        <ul>
-            <li>Calculus: <a href="https://www.youtube.com/watch?v=HfACrKJ_Y2w" target="_blank">Calculus Video</a></li>
-            <li>Linear Algebra: <a href="https://www.youtube.com/watch?v=JnTa9XtvmfI" target="_blank">Linear Algebra Video</a></li>
-            <li>Statistics: <a href="https://www.youtube.com/watch?v=xxpc-HPKN28" target="_blank">Statistics Video</a></li>
-        </ul>
-    </div>
 
-    <div class="resource-section">
-        <h3>Machine Learning</h3>
-        <ul>
-            <li>YouTube: <a href="https://www.youtube.com/watch?v=vStJoetOxJg&list=PLkDaE6sCZn6FNC6YRfRQc_FbeQrF8BwGI" target="_blank">DeepLearning.AI Machine Learning</a></li>
-            <li>Coursera: <a href="https://www.coursera.org/specializations/machine-learning-introduction" target="_blank">Machine Learning Specialization</a></li>
-        </ul>
-    </div>
-         
-    <div class="resource-section">
-        <h3>Deep Learning</h3>
-        <ul>
-            <li>YouTube: <a href="https://www.youtube.com/watch?v=CS4cs9xVecg&list=PLkDaE6sCZn6Ec-XTbcX1uRg2_u4xOEky0" target="_blank">DeepLearning.AI Deep Learning</a></li>
-            <li>Coursera: <a href="https://www.coursera.org/specializations/machine-learning-introduction" target="_blank">Deep Learning Specialization</a></li>
-        </ul>
-    </div>
+Row reduction, Gaussian Elimination
+        </ul></li>
+      <li>Roger Boscovich
+      <ul>
+        <li>Least Absolute Deviation - the combination of different observations under different conditions
+        </ul></li>
+      <li>Legendre (Least Squares Method)
+      <ul>
+        <li>The first clear and concise exposition of the method of least squares was published by Legendre in 1805. The technique is described as an algebraic procedure for fitting linear equations to data and Legendre demonstrates the new method by analyzing the same data as Laplace for the shape of the Earth.
+        </ul></li>
+      <li>Jacob Bernoulli
+      <ul>
+        <li>Ars Conjectandi - the formalization of the mathematical theory of probability
+        </li>
+        <li>Law of large numbers - the greater the number of observations the less the uncertainty in the result
+        </ul></li>
+      <li>De Moivre - stated and proved the normal approximation to the Binomial distribution
+      </li>
+      <li>Simpson
+      <ul>
+        <li>Development of quantified uncertainty and mathematical theory of inference
+        </li>
+        <li>A new problem was to combine discordant observations, if five observers record five different times for the passage of a star past a crosshair in a telescope, how are these numbers reconciled?
+        </li>
+        <li>Introduces annuity tables (insurance)
+        </li>
+        <li>Wrote a letter on the advantage of taking the mean of a number of observation (astronomical)
+        </li>
+        <li>Distribution of errors accounts for small and large errors
+        </li>
+        <li>Simpson’s Paradox - a trend that appears in multiple groups may disappear when the groups are combined
+        </ul></li>
+      <li>Inverse Probability (Bayesian Inference, inferential statistics), probability distribution of an unobserved variable
+      </li>
+      <li>Fisher - fundamental paradox of inverse probability is the source of confusion between statistical terms  that refer to the true value to be estimated with the actual value arrived at by the estimation method, which is subject to error
+      </li>
+      <li>Choice of Means
+      </li>
+      <li>The Error Curve of 1777 - <a href="https://www.qualitydigest.com/inside/six-sigma-article/distribution-measurement-error-040323.html" target="_blank">https://www.qualitydigest.com/inside/six-sigma-article/distribution-measurement-error-040323.html</a>
+      </li>
+      <li>Bayes (Binomial) - <a href="https://en.wikipedia.org/wiki/Binomial_distribution" target="_blank">https://en.wikipedia.org/wiki/Binomial_distribution</a>
+      </li>
+      <li>Laplace (Central Limit Theorem)
+      </li>
+      <li>Gauss
+      <ul>
+        <li>The motion of planetoids are disturbed by the larger planets
+        </li>
+        <li><a href="https://www.actuaries.digital/2021/03/31/gauss-least-squares-and-the-missing-planet/" target="_blank">https://www.actuaries.digital/2021/03/31/gauss-least-squares-and-the-missing-planet/</a>
+        </ul></li>
+      <li>The Gaussian distribution came about from Laplace’s distribution of errors when sampling the mean, Gauss’ observation of measurement error and de Moivre’s attempt to approximate the binomial distribution with largeaN
+      </li></ul>
 
-    <h2>Additional Notes</h2>
-    <ul>
-        <li><strong>Installation:</strong> Ensure you have the necessary Python libraries installed, including <code>pandas</code>, <code>scikit-learn</code>, and <code>transformers</code>.</li>
-        <li><strong>Model:</strong> The Python notebook might utilize a specific pre-trained sentence transformer model. Feel free to experiment with different models from the Hugging Face Model Hub to observe their impact on the similarity search results.</li>
-        <li><strong>Customization:</strong> Tailor the code and parameters, such as the number of similar terms to return, to align with your specific requirements and preferences.</li>
-    </ul>
-
-    <p style="margin-top: 24px; font-style: italic; color: #586069;">This project offers a versatile and robust approach to exploring and analyzing glossary data. By combining the user-friendliness of a spreadsheet with the advanced capabilities of Python and sentence embeddings, users can gain a deeper understanding of terms, their definitions, and their relationships within the context of data science.</p>
 
 </body>
 </html>
