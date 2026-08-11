@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Module 06 - Astronomy and Statistics</title>
+    <title>Module 05 - EDA</title>
     <style>
         /* Base Configuration */
         body {
@@ -102,14 +102,7 @@
             border-radius: 3px;
             font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
         }
-        a {
-            color: #0366d6;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-
+        
         /* Directory Back-Link */
         .back-link {
             display: inline-block;
@@ -162,173 +155,57 @@
     <a href="./index.html" class="back-link">← Back to Modules Directory</a>
 
     <!-- Main Content -->
-    <h1>Module 06 - Astronomy and Statistics</h1>
-    <p class="intro-text">A curated set of astronomical tools and a historical timeline tracing the co-development of statistics and astronomy, drawn from <em>The History of Statistics: The Measurement of Uncertainty before 1900 by Stephen M. Stigler</em>.</p>
+    <h1>Module 05 - Exploratory Data Analysis</h1>
+    <p class="intro-text">Exploratory Data Analysis (EDA) serves as a critical diagnostic validation phase in the data engineering lifecycle. The primary objective is to cultivate a comprehensive structural understanding of an unverified matrix before introducing formal model optimization parameters or inferential hypothesis tests. This is achieved by combining summary analytics, multidimensional aggregations, and multi-angle data visualizations.</p>
 
-    <h2>1. Online Interactive Maps</h2>
+    <h2>1. Mathematical Summary &amp; Functional Aggregations</h2>
+    <ol>
+        <li><strong>Descriptive Statistics:</strong> Provides a concise parametric mathematical profile of a dataset's main structural features. This includes measures of central tendency (mean, median, mode), spread (variance, standard deviation, interquartile ranges), and shape parameters (skewness and kurtosis calculations) to isolate distribution rules and highlight initial data anomalies.</li>
+        <li><strong>GroupBy and CrossTab:</strong> 
+            <ul>
+                <li><code>GroupBy</code> splits data matrices across categorical features to compute distinct localized summary statistics for each row block, mapping variation profiles across classes.</li>
+                <li><code>CrossTab</code> generates explicit frequency contingency tables tracking the structural distribution of one categorical variable relative to another, isolating dependency patterns between parameters.</li>
+            </ul>
+        </li>
+        <li><strong>Pivot Tables:</strong> Offer programmatic flexibility to rearrange and compress matrices across multiple analytical dimensions, generating dynamic, aggregated views to expose subtle multi-feature interactions.</li>
+        <li><strong>Correlation:</strong> Measures the directional linear tracking strength between continuous variables on a standardized scale, mapping whether features scale together positively or inversely.</li>
+        <li><strong>Multicollinearity:</strong> A critical modeling risk manifesting when two or more independent predictor features are highly correlated with each other. This undermines ordinary least squares engines by inflating parameter variance bounds, making coefficient interpretation highly unstable. Detecting this via EDA is vital to design clean feature matrices.</li>
+    </ol>
+
+    <h2>2. Graphical Diagnostic Frameworks</h2>
+    <p>Visualizing features directly maps mathematical abstractions into clear topographical structures for error detection:</p>
     <ul>
-        <li><a href="https://nso.edu/for-public/eclipse-map-2024/" target="_blank">https://nso.edu/for-public/eclipse-map-2024/</a></li>
-        <li><a href="https://eclipse2024.org/eclipse_cities/statemap.php" target="_blank">https://eclipse2024.org/eclipse_cities/statemap.php</a></li>
-        <li><a href="https://stellarium-web.org/" target="_blank">https://stellarium-web.org/</a></li>
-        <li><a href="https://www.solarsystemscope.com/" target="_blank">https://www.solarsystemscope.com/</a></li>
-        <li><a href="https://earthobservatory.nasa.gov/features/OrbitsHistory" target="_blank">https://earthobservatory.nasa.gov/features/OrbitsHistory</a></li>
+        <li><strong>Histograms:</strong> To visualize the data density and underlying distribution shape of a single target variable.</li>
+        <li><strong>Scatter plots:</strong> To map structural relationships and directional coordinates linking two continuous variables.</li>
+        <li><strong>Box plots:</strong> To isolate interquartile ranges, median metrics, and explicit outlier boundary cuts across categorical groups.</li>
+        <li><strong>Violin plots:</strong> To combine boxplot parameters with a mirrored kernel density estimation curve to visualize accurate parameter density layers.</li>
+        <li><strong>Heatmaps:</strong> To construct graphical cross-correlation matrices across the entire feature catalog for instant multicollinearity filtering.</li>
+        <li><strong>Pair plots:</strong> To map high-dimensional matrix parameters into a complete pairwise scatter matrix tracking all continuous feature permutations.</li>
+        <li><strong>QQ (Quantile-Quantile) plots:</strong> To visually evaluate parametric normality requirements by plotting empirical sample quantiles against an idealized normal reference vector.</li>
     </ul>
 
-    <h2>2. Historical Timeline</h2>
-    <p>The following chronology, sourced from The History of Statistics: The Measurement of Uncertainty before 1900 by Stephen M. Stigler, traces how astronomical problems — from calendar reform to planetary orbit-fitting — drove the development of least squares, error theory, and probability.</p>
-    <ul>
-      <li><a href="https://www.britannica.com/science/astronomy/History-of-astronomy" target="_blank">https://www.britannica.com/science/astronomy/History-of-astronomy</a>
-      </li>
-      <li>Calendars - <a href="https://en.wikipedia.org/wiki/History_of_calendars" target="_blank">https://en.wikipedia.org/wiki/History_of_calendars</a>
-      <ul>
-        <li><a href="https://imagine.gsfc.nasa.gov/science/toolbox/timing_history.html" target="_blank">https://imagine.gsfc.nasa.gov/science/toolbox/timing_history.html</a>
-        </li>
-        <li>Antiquity were lunisolar, based on moon phase and position of the sun
-        </li>
-        <li>Julius Caesar made reforms (Julian calendar) based on an algorithm of introducing a leap day every four years but added an extra day every 128 years causing seasonal equinoxes to fall at wrong time of year
-        </li>
-        <li>Gregorian (Pope Gregory XIII 1582) is now defacto
-        </ul></li>
-      <li><a href="https://en.wikipedia.org/wiki/Least_squares#History" target="_blank">https://en.wikipedia.org/wiki/Least_squares#History</a>
-      </li>
-      <li>Astronomical Collections
-      <ul>
-        <li><a href="https://en.wikipedia.org/wiki/Tycho_Brahe" target="_blank">https://en.wikipedia.org/wiki/Tycho_Brahe</a>
-        </li>
-        <li><a href="https://observablehq.com/@christophe-yamahata/visualizing-tycho-brahe-s-astronomical-observations-mars" target="_blank">https://observablehq.com/@christophe-yamahata/visualizing-tycho-brahe-s-astronomical-observations-mars</a>
-        </li>
-        <li><a href="https://library.si.edu/digital-library/book/tychonisbraheas00braha" target="_blank">https://library.si.edu/digital-library/book/tychonisbraheas00braha</a>
-        </li>
-        <li><a href="https://library.si.edu/digital-library/book/tychonisbrahedan00brah" target="_blank">https://library.si.edu/digital-library/book/tychonisbrahedan00brah</a>
-        </li>
-        <li><a href="https://www.sciencephoto.com/media/720385/view/table-from-the-rudolphine-tables-1627-" target="_blank">https://www.sciencephoto.com/media/720385/view/table-from-the-rudolphine-tables-1627-</a>
-        </li>
-        <li><a href="https://early-astronomy.classics.lsa.umich.edu/western_rudolphine.php" target="_blank">https://early-astronomy.classics.lsa.umich.edu/western_rudolphine.php</a>
-        </li>
-        <li><a href="https://www.loc.gov/item/85194777/" target="_blank">https://www.loc.gov/item/85194777/</a>
-        </li>
-        <li><a href="https://www.loc.gov/resource/rbc0001.2013gen94777/?c=40&amp;sp=3&amp;st=gallery" target="_blank">https://www.loc.gov/resource/rbc0001.2013gen94777/?c=40&amp;sp=3&amp;st=gallery</a>
-        </li>
-        <li><a href="http://www.sites.hps.cam.ac.uk/starry/logarithms.html" target="_blank">http://www.sites.hps.cam.ac.uk/starry/logarithms.html</a>
-        </li>
-        <li><a href="http://www.sites.hps.cam.ac.uk/starry/keplertables.html" target="_blank">http://www.sites.hps.cam.ac.uk/starry/keplertables.html</a>
-        </li>
-        <li><a href="https://telescoper.blog/2015/08/29/statistics-in-astronomy/" target="_blank">https://telescoper.blog/2015/08/29/statistics-in-astronomy/</a>
-        </ul></li>
-      <li>Legendre (1805 - Least Squares)
-      <ul>
-        <li>New Methods for the Orbits of Comets (Least Squares)
-        </li>
-        <li>E = a + bx + cy + fz + &amp;c.,
-        </li>
-        <li>A, b, c, f, &amp;c known coefficients; the rest are unknown and determined by E (the error)
-        </li>
-        <li>Multiply terms by coefficient of the unknowns and add it all up
-        </li>
-        <li><a href="https://en.wikipedia.org/wiki/Least_squares" target="_blank">https://en.wikipedia.org/wiki/Least_squares</a>
-        </li>
-        <li><a href="https://www.cuemath.com/data/least-squares/" target="_blank">https://www.cuemath.com/data/least-squares/</a>
-        </ul></li>
-      <li>Cotes Rule
-      <ul>
-        <li>Errors decrease with aggregation rather than increase
-        </ul></li>
-      <li>Tobias Mayer and Euler
-      <ul>
-        <li>Method of averages - combination of different observations under same equations
-        </li>
-        <li>The inequalities of the motions of Jupiter and Saturn
-        </li>
-        <li>The librations (the moon’s face varies, wobbles) of the Moon
-        </li>
-        <li>Latitude measures angular elevation above horizon
-        </li>
-        <li>Longitude based on Moon features and position with stars
-        </li>
-        <li>Created a table of equations of condition
-        </li>
-        <li>Uses the symbol plus/minus x (margin of error?)
-        </li>
-        <li>Let error be the limit of accuracy for the mean
-        </li>
-        <li>Post 1750 mathematical astronomers averaged simple measurements, combining several days of observations into a single number, as well as doing the same with equations
-        </ul></li>
-      <li>Laplace
-      <ul>
-        <li>The Mechanics of the Planets
-        </li>
-        <li>Analytical Theory of Probability
-        </li>
-        <li>Mayer’s 27 equations of conditions of moon crater observations
-        </li>
-        <li>Laplace’s Saturn Data with residuals - <a href="https://www.britannica.com/biography/Pierre-Simon-marquis-de-Laplace" target="_blank">https://www.britannica.com/biography/Pierre-Simon-marquis-de-Laplace</a>
-        </li>
-        <li>To resolve inconsistencies he reduced the 24 equations by
+    <h2>3. Narrative Synthesis &amp; Analytical Storytelling</h2>
+    <p>Storytelling with data is the core professional capability required to distill raw computational insights into clear, actionable, and persuasive presentations that drive strategic organizational execution. Translating complex math into cohesive narratives is vital across diverse deployment environments:</p>
+
+    <div class="block-section">
+        <h3 class="block-title">Key Pillars of Narrative Value</h3>
         <ul>
-          <li>Sum of equations
-          </li>
-          <li>The difference of the sums
-          </li>
-          <li>Linear combinations of equations
-          </ul></li>
-        <li>Probability density for errors - Laplace distribution (two-sided exponential distribution)
-        </li>
-        <li><a href="https://en.wikipedia.org/wiki/System_of_linear_equations" target="_blank">https://en.wikipedia.org/wiki/System_of_linear_equations</a> 
+            <li><strong>Democratizes Complexity:</strong> Converts dense multidimensional matrices into scannable operational concepts for varied team members.</li>
+            <li><strong>Optimizes Insight Retention:</strong> Contextualizes numerical insights inside structured operational pathways, ensuring findings are retained far more effectively than isolated figures.</li>
+            <li><strong>Spurs Actionable Execution:</strong> Links computational observations to operational impacts, guiding decision-making frameworks by clearly articulating downstream trade-offs.</li>
+            <li><strong>Establishes Technical Credibility:</strong> Displays rigorous data analysis with complete transparency, driving systematic alignment across teams.</li>
+        </ul>
+    </div>
 
-
-Row reduction, Gaussian Elimination
-        </ul></li>
-      <li>Roger Boscovich
-      <ul>
-        <li>Least Absolute Deviation - the combination of different observations under different conditions
-        </ul></li>
-      <li>Legendre (Least Squares Method)
-      <ul>
-        <li>The first clear and concise exposition of the method of least squares was published by Legendre in 1805. The technique is described as an algebraic procedure for fitting linear equations to data and Legendre demonstrates the new method by analyzing the same data as Laplace for the shape of the Earth.
-        </ul></li>
-      <li>Jacob Bernoulli
-      <ul>
-        <li>Ars Conjectandi - the formalization of the mathematical theory of probability
-        </li>
-        <li>Law of large numbers - the greater the number of observations the less the uncertainty in the result
-        </ul></li>
-      <li>De Moivre - stated and proved the normal approximation to the Binomial distribution
-      </li>
-      <li>Simpson
-      <ul>
-        <li>Development of quantified uncertainty and mathematical theory of inference
-        </li>
-        <li>A new problem was to combine discordant observations, if five observers record five different times for the passage of a star past a crosshair in a telescope, how are these numbers reconciled?
-        </li>
-        <li>Introduces annuity tables (insurance)
-        </li>
-        <li>Wrote a letter on the advantage of taking the mean of a number of observation (astronomical)
-        </li>
-        <li>Distribution of errors accounts for small and large errors
-        </li>
-        <li>Simpson’s Paradox - a trend that appears in multiple groups may disappear when the groups are combined
-        </ul></li>
-      <li>Inverse Probability (Bayesian Inference, inferential statistics), probability distribution of an unobserved variable
-      </li>
-      <li>Fisher - fundamental paradox of inverse probability is the source of confusion between statistical terms  that refer to the true value to be estimated with the actual value arrived at by the estimation method, which is subject to error
-      </li>
-      <li>Choice of Means
-      </li>
-      <li>The Error Curve of 1777 - <a href="https://www.qualitydigest.com/inside/six-sigma-article/distribution-measurement-error-040323.html" target="_blank">https://www.qualitydigest.com/inside/six-sigma-article/distribution-measurement-error-040323.html</a>
-      </li>
-      <li>Bayes (Binomial) - <a href="https://en.wikipedia.org/wiki/Binomial_distribution" target="_blank">https://en.wikipedia.org/wiki/Binomial_distribution</a>
-      </li>
-      <li>Laplace (Central Limit Theorem)
-      </li>
-      <li>Gauss
-      <ul>
-        <li>The motion of planetoids are disturbed by the larger planets
-        </li>
-        <li><a href="https://www.actuaries.digital/2021/03/31/gauss-least-squares-and-the-missing-planet/" target="_blank">https://www.actuaries.digital/2021/03/31/gauss-least-squares-and-the-missing-planet/</a>
-        </ul></li>
-      <li>The Gaussian distribution came about from Laplace’s distribution of errors when sampling the mean, Gauss’ observation of measurement error and de Moivre’s attempt to approximate the binomial distribution with largeaN
-      </li></ul>
-
+    <div class="block-section">
+        <h3 class="block-title">Cross-Disciplinary Implementation Cases</h3>
+        <ul>
+            <li><strong>Business Engineering:</strong> Presenting a clear product pipeline performance review following an A/B split-test deployment to explain exactly how user behavior shifted conversion rate vectors.</li>
+            <li><strong>Clinical Operations:</strong> Documenting the exact performance profile and treatment significance parameters achieved by a new healthcare intervention suite.</li>
+            <li><strong>Academic Analytics:</strong> Breaking down student performance vectors to identify critical learning deltas and justify targeted diagnostic interventions.</li>
+            <li><strong>Nonprofit Strategy:</strong> Visualizing resource optimization models to demonstrate clear execution value parameters directly to impact donors.</li>
+        </ul>
+    </div>
 
 </body>
 </html>
